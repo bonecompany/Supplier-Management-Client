@@ -1,51 +1,88 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
-import { Link } from "react-router-dom";
+import Logo1 from "../../assets/Bone Logo.png";
 
 const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <div className=" h-screen flex items-center">
       <div className="h-[90%] w-[95%] mx-auto rounded-3xl shadow-lg lg:flex flex-col md:flex-row md:justify-between lg:bg-rubberTreeDesktop bg-rubberTreeMobile bg-no-repeat lg:bg-contain bg-cover bg-center lg:bg-left">
         <div className="flex-1"></div>
-        <div className="flex-1 bg-[#CCD1CD] rounded-r-3xl flex justify-center items-center">
-          <div className="w-96 bg-slate-50 p-4 rounded-2xl shadow-md">
-            <h1 className="text-3xl font-bold text-center text-cyan-900 border-b-2 border-cyan-900 p-2">
+        <div className="flex-1 lg:bg-[#CCD1CD] rounded-r-3xl flex justify-center items-center">
+          <div className="sm:w-[350px] bg-slate-50 p-4 rounded-2xl shadow-md">
+            <div className=" flex justify-center my-4">
+              <img src={Logo1} alt="B-One Rubbers Logo" className="w-36" />
+            </div>
+            <h1 className="text-3xl font-bold  text-cyan-900 border-b-2 border-cyan-900 p-2">
               Admin Login
             </h1>
-            <form className="my-4 p-2 flex flex-col justify-evenly ">
+            <form onSubmit={handleSubmit(onSubmit)} className="my-4 p-2 flex flex-col justify-evenly ">
               <label htmlFor="username" className="text-cyan-900 font-medium ">
                 Username
               </label>
               <input
-                className="px-2 py-1 border-2 outline-none rounded-md shadow appearance-none"
+                className={`px-2 py-1 border-2 outline-none rounded-md shadow appearance-none ${
+                  errors.username && "border-red-500"
+                }`}
                 type="text"
                 id="username"
                 placeholder="Username"
+                {...register("username", { required: "Username is required" })}
               />
+              {errors.username && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.username.message}
+                </p>
+              )}
               <label
                 htmlFor="password"
                 className="text-cyan-900 font-medium mt-2"
               >
                 Password
               </label>
-              <div className="flex justify-between items-center border-2 pr-2 rounded-md shadow appearance-none">
+              <div
+                className={`flex justify-between items-center border-2 pr-2 rounded-md shadow appearance-none ${
+                  errors.password && "border-red-500"
+                }`}
+              >
                 <input
                   className="px-2 py-1 outline-none rounded-md w-3/4 bg-slate-50"
                   type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder={showPassword ? "Password" : "*********"}
+                  {...register("password", { required: "Password is required" })}
                 />
-                <span className="text-2xl cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                <span
+                  className="text-2xl cursor-pointer hover:bg-slate-300 rounded-3xl"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
                   {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
                 </span>
               </div>
-              <button className="shadow w-full py-2 my-4 bg-cyan-900 text-white text-xl rounded-md font-medium">
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+              <button
+                type="submit"
+                className="shadow w-full py-2 my-4 bg-cyan-900 text-white text-xl rounded-md font-medium"
+              >
                 Login
               </button>
-              {/* <Link to={"#"}>Forgot Password</Link> */}
             </form>
           </div>
         </div>
