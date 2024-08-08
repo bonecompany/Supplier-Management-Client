@@ -3,18 +3,33 @@ import { useForm } from "react-hook-form";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import Logo1 from "../../assets/Bone Logo.png";
+import { Axios } from "../../MainRoute";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async(data) => {
+    try {
+      const response = await Axios.post("/admin/login", data);
+      const { message, adminToken } = response.data;
+      toast.success(message)
+      localStorage.setItem("admintoken", adminToken)
+      navigate("/admin")
+      reset()    
+    } catch (error) {
+      toast.error(error.response.data.error)
+      console.error("Login failed", error);
+    }
   };
 
   return (
@@ -29,7 +44,10 @@ const AdminLogin = () => {
             <h1 className="text-3xl font-bold  text-cyan-900 border-b-2 border-cyan-900 p-2">
               Admin Login
             </h1>
-            <form onSubmit={handleSubmit(onSubmit)} className="my-4 p-2 flex flex-col justify-evenly ">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="my-4 p-2 flex flex-col justify-evenly "
+            >
               <label htmlFor="username" className="text-cyan-900 font-medium ">
                 Username
               </label>
@@ -63,10 +81,12 @@ const AdminLogin = () => {
                   type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder={showPassword ? "Password" : "*********"}
-                  {...register("password", { required: "Password is required" })}
+                  {...register("password", {
+                    required: "Password is required",
+                  })}
                 />
                 <span
-                  className="text-2xl cursor-pointer hover:bg-slate-300 rounded-3xl"
+                  className="text-2xl cursor-pointer hover:bg-slate-300 rounded-3xl text-cyan-900"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
@@ -79,7 +99,7 @@ const AdminLogin = () => {
               )}
               <button
                 type="submit"
-                className="shadow w-full py-2 my-4 bg-cyan-900 text-white text-xl rounded-md font-medium"
+                className="shadow w-full py-1 my-4 bg-cyan-900 text-white text-xl rounded-md font-medium"
               >
                 Login
               </button>

@@ -11,7 +11,7 @@ import {
 import { SidebarItem } from "./SidebarItem";
 import Logo from "../../assets/Bone Logo.png";
 
-const Sidebar = () => {
+const AdminSidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleSidebar = () => {
@@ -57,7 +57,7 @@ const Sidebar = () => {
             />
             <SidebarItem
               icon={<FaBalanceScale />}
-              label="NRC"
+              label="DRC"
               isExpanded={isExpanded}
               onClick={() => console.log("NRC clicked")}
             />
@@ -81,4 +81,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default AdminSidebar;
