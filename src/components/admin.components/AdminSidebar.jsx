@@ -5,14 +5,14 @@ import {
   FaUserTie,
   FaTree,
   FaFlask,
-  FaUser,
   FaSignOutAlt,
+  FaBalanceScale,
 } from "react-icons/fa";
 import { SidebarItem } from "./SidebarItem";
 import Logo from "../../assets/Bone Logo.png";
 
-const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(true);
+const AdminSidebar = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
@@ -23,18 +23,14 @@ const Sidebar = () => {
       <div
         className={`flex flex-col ${
           isExpanded ? "w-52" : "w-16"
-        } bg-cyan-900 text-white h-screen transition-width duration-300`}
+        } bg-[#2d444e] text-white h-screen transition-width duration-300 absolute`}
       >
         <div className="bg-white flex items-center justify-evenly w-full py-3 border-r-4 border-cyan-900">
-          <button onClick={toggleSidebar}>
+          <button onClick={toggleSidebar} className="hover:bg-gray-300 p-2 rounded-full">
             <FaBars className="text-3xl text-cyan-900" />
           </button>
           <div className={` ${isExpanded ? "block" : "hidden"}`}>
-            <img
-              src={Logo}
-              alt="B One Rubbers"
-              className={`p-1 w-28`}
-            />
+            <img src={Logo} alt="B One Rubbers" className={`p-1 w-28`} />
           </div>
         </div>
         <div className="flex flex-col justify-between my-10 h-full">
@@ -60,8 +56,8 @@ const Sidebar = () => {
               isExpanded={isExpanded}
             />
             <SidebarItem
-              icon={<FaUser />}
-              label="NRC"
+              icon={<FaBalanceScale />}
+              label="DRC"
               isExpanded={isExpanded}
               onClick={() => console.log("NRC clicked")}
             />
@@ -85,4 +81,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default AdminSidebar;
