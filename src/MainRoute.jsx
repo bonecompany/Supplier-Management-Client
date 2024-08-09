@@ -1,4 +1,4 @@
-import { Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import AdminLogin from "../src/components/admin.components/AdminLogin";
 import AdminSidebar from "./components/admin.components/AdminSidebar";
 import AdminHome from "./pages/admin.pages/AdminHome";
@@ -13,7 +13,6 @@ export const Axios = axios.create({
 
 const MainRoute = () => {
   return (
-    // <Router>
     <>
       <ToastContainer />
       <Routes>
@@ -23,7 +22,6 @@ const MainRoute = () => {
           <Route path="home" element={<AdminHome />} />
         </Route>
       </Routes>
-      {/* // </Router> */}
     </>
   );
 };

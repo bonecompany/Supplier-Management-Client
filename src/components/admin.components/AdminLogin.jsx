@@ -77,7 +77,7 @@ const AdminLogin = () => {
                 }`}
               >
                 <input
-                  className="px-2 py-1 outline-none rounded-md w-3/4 bg-slate-50"
+                  className="px-2 py-1 outline-none rounded-md w-11/12 bg-slate-50"
                   type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder={showPassword ? "Password" : "*********"}
