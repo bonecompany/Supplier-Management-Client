@@ -9,6 +9,8 @@ export default {
     extend: {
       backgroundImage: {
         'logo2': "url('./src/assets/Logo2.png')",
+        'rubberTreeDesktop': "url('./src/assets/Rubber-tree-destop.jpeg')",
+        'rubberTreeMobile': "url('./src/assets/Rubber-tree-mobile.jpeg')",
       },
       boxShadow: {
         // 'custom-light': '0 2px 4px rgba(0, 0, 0, 0.1)',
