@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import daisyui from "daisyui"
 export default {
   content: [
     "./index.html",
@@ -9,8 +10,20 @@ export default {
       backgroundImage: {
         'logo2': "url('./src/assets/Logo2.png')",
       },
+      boxShadow: {
+        // 'custom-light': '0 2px 4px rgba(0, 0, 0, 0.1)',
+        'custom-dark': '0 4px 6px rgba(0, 0, 0, 0.3)',
+      },
+      borderWidth : {
+        "border-top":"1px"
+      }
     },
   },
-  plugins: [],
+  daisyui : {
+    themes: 'light',
+  },
+  plugins: [
+    daisyui
+  ],
 }
 
