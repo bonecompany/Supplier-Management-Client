@@ -23,10 +23,10 @@ const AdminSidebar = () => {
     <div className="flex h-screen">
       <div
         className={`flex flex-col ${
-          isExpanded ? "w-64" : "w-16"
-        } bg-gradient-to-b from-[#283E4A] to-[#0F2027] text-white h-full transition-width duration-300 ease-in-out shadow-lg`}
+          isExpanded ? "w-64 px-2" : "w-16"
+        } bg-gradient-to-b from-[#486777] to-[#0F2027] text-white h-full transition-width duration-300 ease-in-out shadow-lg `}
       >
-        <div className="flex items-center justify-between p-4">
+        <div className={`flex items-center justify-between p-4  ${isExpanded ? "bg-slate-50 border-4 rounded-xl mt-2" : ""} `}>
           <img
             src={Logo}
             alt="BOne Rubbers"
@@ -36,7 +36,7 @@ const AdminSidebar = () => {
           />
           <button
             onClick={toggleSidebar}
-            className="text-white p-2 hover:bg-gray-700 rounded-full transition-colors duration-300"
+            className={`${isExpanded ? "text-cyan-900 hover:bg-gray-200" : "text-white hover:bg-cyan-900"} p-2  rounded-full transition-colors duration-300`}
           >
             <FaBars className="text-xl" />
           </button>

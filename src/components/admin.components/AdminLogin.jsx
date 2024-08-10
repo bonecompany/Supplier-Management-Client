@@ -23,7 +23,7 @@ const AdminLogin = () => {
       const response = await Axios.post("/admin/login", data);
       const { message, adminToken } = response.data;
       toast.success(message)
-      localStorage.setItem("admintoken", adminToken)
+      sessionStorage.setItem("admintoken", adminToken)
       navigate("/admin")
       reset()    
     } catch (error) {

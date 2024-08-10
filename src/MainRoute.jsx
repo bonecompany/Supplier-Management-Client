@@ -20,7 +20,7 @@ const MainRoute = () => {
       <Routes>
         <Route path="/admin-login" element={<AdminLogin />} />
 
-        <Route path="/admin" element={<Assemble />}>
+        <Route path="/admin" element={<AdminSidebar />}>
           <Route index element={<StatusCards/>} />
         </Route>
       </Routes>
