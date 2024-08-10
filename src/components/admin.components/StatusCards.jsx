@@ -41,6 +41,7 @@ function StatusCards() {
         // Add more cards if needed
       ];
   return (
+    <>
     <div className="grid grid-cols-1 gap-5 mt-20 sm:grid-cols-2 lg:grid-cols-4 mx-8">
     {cards.map((card, index) => (
       <div key={index} className={`p-4 transition-shadow border border-gray-300 rounded-lg shadow-sm hover:shadow-lg ${card.bg}`}>
@@ -59,8 +60,10 @@ function StatusCards() {
         </div>
       </div>
     ))}
-    <Graph/>
+ 
   </div>
+  <Graph/>
+  </>
   )
 }
 

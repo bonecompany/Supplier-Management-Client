@@ -4,7 +4,7 @@ import { MdNotifications } from "react-icons/md";
 const Navbar = () => {
   return (
     <nav  className="fixed w-[83%] max-sm:w-[100%] flex justify-around px-4 mt-1  rounded-lg">
-      <form action="/search" className="max-w-[480px] w-[50%] px-4 ">
+      {/* <form action="/search" className="max-w-[480px] w-[50%] px-4 ">
         <div className="relative">
           <input
             type="text"
@@ -24,7 +24,7 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
-      </form>
+      </form> */}
       <div className="flex justify-between w-[50%]">
     <button>
     <MdNotifications/>
