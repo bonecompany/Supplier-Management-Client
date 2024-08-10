@@ -4,17 +4,19 @@ import Graph from './Graph'
 import Navbar from './Navbar'
 import Sidebar from './SideBar'
 import StatusCards from './StatusCards'
+import AdminSidebar from "./AdminSidebar";
 
 function Assemble() {
   return (
-    <div>
+    <div className=''>
         
-        <Sidebar/>
-        <div class="p-1 sm:ml-64 h-screen" style={{ backgroundColor: 'rgb(220, 220, 220)' }}>
+        {/* <Sidebar/> */}
+        <AdminSidebar/>
+        {/* <div className="p-1  h-screen dark:bg-slate-800 bg-slate-50">
           <Navbar/>
           <Outlet/>
     
-        </div>
+        </div> */}
    
     </div>
   )
