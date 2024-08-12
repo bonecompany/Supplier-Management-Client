@@ -8,8 +8,8 @@ import {
   FaSignOutAlt,
   FaBalanceScale,
 } from "react-icons/fa";
-import SidebarItem from "./SidebarItem"; // Ensure SidebarItem is the default export
-import Logo from "../../assets/Bone Logo.png";
+import SidebarItem from "./SidebarItem";
+import Logo from "../../assets/Bone-logo.png";
 import { Outlet } from "react-router-dom";
 
 const AdminSidebar = () => {
@@ -24,9 +24,13 @@ const AdminSidebar = () => {
       <div
         className={`flex flex-col ${
           isExpanded ? "w-64 px-2" : "w-16"
-        } bg-gradient-to-b from-[#486777] to-[#0F2027] text-white h-full transition-width duration-300 ease-in-out shadow-lg `}
+        } bg-gradient-to-b from-[#486777] to-[#0F2027] text-white h-full transition-width duration-300 ease-in-out shadow-lg`}
       >
-        <div className={`flex items-center justify-between p-4  ${isExpanded ? "bg-slate-50 border-4 rounded-xl mt-2" : ""} `}>
+        <div
+          className={`flex items-center justify-between p-4  ${
+            isExpanded ? "bg-slate-50 border-4 rounded-xl mt-2" : ""
+          } `}
+        >
           <img
             src={Logo}
             alt="BOne Rubbers"
@@ -36,9 +40,13 @@ const AdminSidebar = () => {
           />
           <button
             onClick={toggleSidebar}
-            className={`${isExpanded ? "text-cyan-900 hover:bg-gray-200" : "text-white hover:bg-cyan-900"} p-2  rounded-full transition-colors duration-300`}
+            className={`${
+              isExpanded
+                ? "text-cyan-900 hover:bg-gray-200"
+                : "text-white hover:bg-cyan-900"
+            } p-2  rounded-full transition-colors duration-300`}
           >
-            <FaBars className="text-xl" />
+            <FaBars className="text-2xl" />
           </button>
         </div>
         <nav className="flex flex-col justify-between flex-1">
@@ -67,26 +75,30 @@ const AdminSidebar = () => {
               icon={<FaBalanceScale />}
               label="DRC"
               isExpanded={isExpanded}
-              onClick={() => {console.log("DRC clicked");
-                setIsExpanded(false)
+              onClick={() => {
+                console.log("DRC clicked");
+                setIsExpanded(false);
               }}
             />
           </div>
           <div className={`px-1 mb-3 ${!isExpanded && ""}`}>
-
-          <SidebarItem
-            icon={<FaSignOutAlt />}
-            label="Logout"
-            isExpanded={isExpanded}
-          />
+            <SidebarItem
+              icon={<FaSignOutAlt />}
+              label="Logout"
+              isExpanded={isExpanded}
+            />
           </div>
         </nav>
-        <div className={`text-center p-4 text-sm text-gray-400 ${isExpanded ? "block" : "hidden"}`}>
+        <div
+          className={`text-center p-4 text-sm text-gray-400 ${
+            isExpanded ? "block" : "hidden"
+          }`}
+        >
           © 2024 B One Rubbers
         </div>
       </div>
       <div className="flex-1 bg-gray-50 p-6">
-       <Outlet/>
+        <Outlet />
       </div>
     </div>
   );
