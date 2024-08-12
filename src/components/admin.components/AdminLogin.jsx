@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
-import Logo1 from "../../assets/Bone Logo.png";
+import Logo1 from "../../assets/Bone-logo.png";
 import { Axios } from "../../MainRoute";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
