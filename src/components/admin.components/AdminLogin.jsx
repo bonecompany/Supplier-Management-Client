@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
-import Logo1 from "../../assets/Bone Logo.png";
+import Logo1 from "../../assets/Bone-logo.png";
 import { Axios } from "../../MainRoute";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const AdminLogin = () => {
       const response = await Axios.post("/admin/login", data);
       const { message, adminToken } = response.data;
       toast.success(message)
-      localStorage.setItem("admintoken", adminToken)
+      sessionStorage.setItem("admintoken", adminToken)
       navigate("/admin")
       reset()    
     } catch (error) {
@@ -77,7 +77,7 @@ const AdminLogin = () => {
                 }`}
               >
                 <input
-                  className="px-2 py-1 outline-none rounded-md w-3/4 bg-slate-50"
+                  className="px-2 py-1 outline-none rounded-md w-11/12 bg-slate-50"
                   type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder={showPassword ? "Password" : "*********"}

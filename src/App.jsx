@@ -1,11 +1,12 @@
-import { BrowserRouter } from "react-router-dom";
-import MainRoute from "./MainRoute";
+import Sidebar from "./components/admin.components/Sidebar";
+import Registration from "./components/supplier.components/Registration";
 
 function App() {
   return (
-    <BrowserRouter>
-      <MainRoute />
-    </BrowserRouter>
+    <>
+      <Sidebar />
+      <Registration/>
+    </>
   );
 }
 

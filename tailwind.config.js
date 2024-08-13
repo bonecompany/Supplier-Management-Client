@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import daisyui from "daisyui"
 export default {
   content: [
     "./index.html",
@@ -11,8 +12,20 @@ export default {
         'rubberTreeDesktop': "url('./src/assets/Rubber-tree-destop.jpeg')",
         'rubberTreeMobile': "url('./src/assets/Rubber-tree-mobile.jpeg')",
       },
+      boxShadow: {
+        // 'custom-light': '0 2px 4px rgba(0, 0, 0, 0.1)',
+        'custom-dark': '0 4px 6px rgba(0, 0, 0, 0.3)',
+      },
+      borderWidth : {
+        "border-top":"1px"
+      }
     },
   },
-  plugins: [],
+  daisyui : {
+    themes: 'light',
+  },
+  plugins: [
+    daisyui
+  ],
 }
 
