@@ -21,25 +21,25 @@ const MainRoute = () => {
         <Route
           path="/admin-login"
           element={
-            <RedirectIfAuthenticated>
+            // <RedirectIfAuthenticated>
               <AdminLogin />
-            </RedirectIfAuthenticated>
+            // </RedirectIfAuthenticated> 
           }
         />
         <Route
           path="/admin"
           element={
-            <ProtectedAdminRoute>
+            // <ProtectedAdminRoute>
               <AdminSidebar />
-            </ProtectedAdminRoute>
+            // </ProtectedAdminRoute>
           }
         >
           <Route
             index
             element={
-              <ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
                 <AdminHome />
-              </ProtectedAdminRoute>
+              // </ProtectedAdminRoute>
             }
           />
         </Route>
