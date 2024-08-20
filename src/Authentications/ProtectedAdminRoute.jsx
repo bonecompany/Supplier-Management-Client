@@ -2,14 +2,15 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedAdminRoute = ({ children }) => {
-  const adminToken = sessionStorage.getItem('adminToken'); 
-  
+  const isAuthenticated = !!sessionStorage.getItem('adminToken');
+  console.log("rout", isAuthenticated);
 
-  if (!adminToken) {
-    return <Navigate to="/admin-login" />; 
+
+  if (!isAuthenticated) {
+    return <Navigate to="/admin-login" />;
   }
 
-  return children; 
+  return children;
 };
 
 export default ProtectedAdminRoute;
