@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import AdminLogin from "./pages/admin.pages/AdminLogin";
 import AdminSidebar from "./components/admin.components/AdminSidebar";
 import AdminHome from "./pages/admin.pages/AdminHome";
-import ProtectedAdminRoute from "./Authentications/ProtectedAdminRoute";
-import AdminLoginProttect from "./Authentications/AdminLoginProttect";
+// import ProtectedAdminRoute from "./Authentications/ProtectedAdminRoute";
+// import AdminLoginProttect from "./Authentications/AdminLoginProttect";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -26,71 +26,111 @@ const MainRoute = () => {
         <Route
           path="/admin-login"
           element={
-            <AdminLoginProttect>
-              <AdminLogin />
-            </AdminLoginProttect>
+            // <AdminLoginProttect>
+            <AdminLogin />
+            // </AdminLoginProttect>
           }
         />
         <Route
           path="/admin"
           element={
-            <ProtectedAdminRoute>
-              <AdminSidebar />
-            </ProtectedAdminRoute>
+            // <ProtectedAdminRoute>
+            <AdminSidebar />
+            // </ProtectedAdminRoute>
           }
         >
           <Route
             index
             element={
-              <ProtectedAdminRoute>
-                <AdminHome />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <AdminHome />
+              // </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/latex-parchase"
             element={
-              <ProtectedAdminRoute>
-                <LatexParchase />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <LatexParchase />
+              // </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/drc-updation"
             element={
-              <ProtectedAdminRoute>
-                <DrcUpdation />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <DrcUpdation />
+              // </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/suppliers"
             element={
-              <ProtectedAdminRoute>
-                <Suppliers />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <Suppliers />
+              // {/* </ProtectedAdminRoute> */}
             }
           />
           <Route
             path="/admin/drivers"
             element={
-              <ProtectedAdminRoute>
-                <Drivers />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <Drivers />
+              // </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/tapers"
             element={
-              <ProtectedAdminRoute>
-                <Tapers />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <Tapers />
+              // </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/latex-parchase"
+            element={
+              // <ProtectedAdminRoute>
+              <LatexParchase />
+              // </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/drc-updation"
+            element={
+              // <ProtectedAdminRoute>
+              <DrcUpdation />
+              // {/* </ProtectedAdminRoute> */}
+            }
+          />
+          <Route
+            path="/admin/suppliers"
+            element={
+              // <ProtectedAdminRoute>
+              <Suppliers />
+              // </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/drivers"
+            element={
+              // <ProtectedAdminRoute>
+              <Drivers />
+              // </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/tapers"
+            element={
+              // <ProtectedAdminRoute>
+              <Tapers />
+              // </ProtectedAdminRoute>
             }
           />
         </Route>
 
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </Routes >
     </>
   );
 };

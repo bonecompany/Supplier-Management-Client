@@ -1,9 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
-const NotificationDropdown = ({ isOpen, notifications, onClose,state }) => {
+const NotificationDropdown = ({ isOpen, notifications, onClose, state }) => {
   const dropdownRef = useRef(null);
-
- 
 
   useEffect(() => {
 
