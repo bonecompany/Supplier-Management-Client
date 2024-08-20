@@ -15,7 +15,7 @@ const MessageDropdown = ({ isOpen, messages, onClose }) => {
     }
 
     return () => {
-      document.removeEventListener("mouseenter", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen, onClose]);
 
