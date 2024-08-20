@@ -1,12 +1,15 @@
 import React, { useEffect, useRef } from "react";
 
-const NotificationDropdown = ({ isOpen, notifications, onClose }) => {
+const NotificationDropdown = ({ isOpen, notifications, onClose,state }) => {
   const dropdownRef = useRef(null);
 
+ 
+
   useEffect(() => {
+
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        onClose();
+        state(false)
       }
     };
 
@@ -15,13 +18,16 @@ const NotificationDropdown = ({ isOpen, notifications, onClose }) => {
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   return (
     isOpen && (
-      <div ref={dropdownRef} className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg rounded-lg p-4 z-50">
+      <div
+        ref={dropdownRef}
+        className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg rounded-lg p-4 z-50"
+      >
         {notifications.length > 0 ? (
           <ul>
             {notifications.map((notification, index) => (

@@ -12,7 +12,8 @@ import { toast } from "react-toastify";
 
 const AdminNavbar = ({ toggleSidebar, isExpanded }) => {
   const [showMessageDropdown, setShowMessageDropdown] = useState(false);
-  const [showNotificationDropdown, setShowNotificationDropdown] = useState(false);
+  const [showNotificationDropdown, setShowNotificationDropdown] =
+    useState(false);
   const [showLogoutDropdown, setShowLogoutDropdown] = useState(false);
 
   const navigate = useNavigate();
@@ -20,11 +21,26 @@ const AdminNavbar = ({ toggleSidebar, isExpanded }) => {
   const messages = [
     { sender: "John Doe", text: "Meeting at 3 PM" },
     { sender: "Jane Smith", text: "New task assigned" },
+    { sender: "John Doe", text: "Meeting at 3 PM" },
+    { sender: "Jane Smith", text: "New task assigned" },
+    { sender: "John Doe", text: "Meeting at 3 PM" },
+    { sender: "Jane Smith", text: "New task assigned" },
     // Add more messages here
   ];
 
   const notifications = [
-    { title: "System Update", description: "System will be down at 12 AM" },
+    {
+      title: "System Update",
+      description: "System will be down at 12 AM",
+    },
+    {
+      title: "New Comment",
+      description: "You have a new comment on your post",
+    },
+    {
+      title: "System Update",
+      description: "System will be down at 12 AM",
+    },
     {
       title: "New Comment",
       description: "You have a new comment on your post",
@@ -118,16 +134,16 @@ const AdminNavbar = ({ toggleSidebar, isExpanded }) => {
 
       <div className="flex flex-grow justify-between items-center p-4">
         <div className="flex-1 flex justify-center gap-12 font-medium">
-          <Link to={"#"}>Employee</Link>
-          <Link to={"#"}>Vehicles</Link>
-          <Link to={"#"}>Latex Rate</Link>
+          <Link to={"#"} className="py-1 border-b-4 border-gray-100 hover:border-red-500 duration-500 ">Employee</Link>
+          <Link to={"#"} className="py-1 border-b-4 border-gray-100 hover:border-red-500 duration-500 ">Vehicles</Link>
+          <Link to={"#"} className="py-1 border-b-4 border-gray-100 hover:border-red-500 duration-500 ">Latex Rate</Link>
         </div>
         <div className="flex-1 flex gap-20 justify-center  relative">
           <span
             onClick={handleClickMessageIcon}
-            className="cursor-pointer relative hover:bg-slate-300 p-1 rounded-full"
+            className="cursor-pointer relative hover:bg-slate-300 duration-300 p-1 rounded-full"
           >
-            <MdMessage className="text-2xl"/>
+            <MdMessage className="text-2xl" />
             {messages.length > 0 && (
               <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-4 h-4 flex items-center justify-center">
                 {messages.length}
@@ -137,13 +153,14 @@ const AdminNavbar = ({ toggleSidebar, isExpanded }) => {
               isOpen={showMessageDropdown}
               messages={messages}
               onClose={closeMessageDropdown}
+              state={setShowNotificationDropdown}
             />
           </span>
           <span
             onClick={handleClickNotificationIcon}
-            className="cursor-pointer relative hover:bg-slate-300 p-1 rounded-full"
+            className="cursor-pointer relative hover:bg-slate-300 p-1 duration-300 rounded-full"
           >
-            <IoIosNotifications className="text-2xl"/>
+            <IoIosNotifications className="text-2xl" />
             {notifications.length > 0 && (
               <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs w-4 h-4 flex items-center justify-center">
                 {notifications.length}
@@ -155,13 +172,16 @@ const AdminNavbar = ({ toggleSidebar, isExpanded }) => {
               onClose={closeNotificationDropdown}
             />
           </span>
-          <span onClick={handleClickLogoutIcon} className="cursor-pointer relative hover:bg-slate-300 p-1 rounded-full">
-            <RiAdminLine className="text-2xl"/>
-            <LogoutDropdown 
-            isOpen={showLogoutDropdown} 
-            onClose={closeLogoutDropdown} 
-            onLogout={handleLogout} 
-          />
+          <span
+            onClick={handleClickLogoutIcon}
+            className="cursor-pointer relative hover:bg-slate-300 duration-300 p-1 rounded-full"
+          >
+            <RiAdminLine className="text-2xl" />
+            <LogoutDropdown
+              isOpen={showLogoutDropdown}
+              onClose={closeLogoutDropdown}
+              onLogout={handleLogout}
+            />
           </span>
         </div>
       </div>
