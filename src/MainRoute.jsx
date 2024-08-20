@@ -90,41 +90,41 @@ const MainRoute = () => {
           <Route
             path="/admin/latex-parchase"
             element={
-              <ProtectedAdminRoute>
-                <LatexParchase />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <LatexParchase />
+              // </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/drc-updation"
             element={
-              <ProtectedAdminRoute>
-                <DrcUpdation />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <DrcUpdation />
+              // {/* </ProtectedAdminRoute> */}
             }
           />
           <Route
             path="/admin/suppliers"
             element={
-              <ProtectedAdminRoute>
-                <Suppliers />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <Suppliers />
+              // </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/drivers"
             element={
-              <ProtectedAdminRoute>
-                <Drivers />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <Drivers />
+              // </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/tapers"
             element={
-              <ProtectedAdminRoute>
-                <Tapers />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <Tapers />
+              // </ProtectedAdminRoute>
             }
           />
         </Route>
