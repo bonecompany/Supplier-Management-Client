@@ -10,7 +10,7 @@ function StatusCards() {
       changeDescription: "from 2019",
       bgColor: "bg-blue-100",
       badgeColor: "bg-blue-500",
-      bg: "#22235F"
+      bg: "bg-gray-50"
     },
     {
       title: "New Signups",
