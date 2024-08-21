@@ -21,10 +21,9 @@ export default withMT({
       }
     },
   },
-  daisyui: {
-    themes: 'light',
-  },
+
   plugins: [
+
   ],
 })
 

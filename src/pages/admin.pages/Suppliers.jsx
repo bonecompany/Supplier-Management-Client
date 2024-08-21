@@ -1,8 +1,11 @@
 import React from 'react'
-
+import SupplierRegistration from '../../components/admin.components/Suppliers/SupplierRegistration'
 const Suppliers = () => {
   return (
-    <div>Suppliers</div>
+    <div>
+      <div>Suppliers</div>
+      <SupplierRegistration />
+    </div>
   )
 }
 
