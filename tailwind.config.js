@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-import withMT from "@material-tailwind/react/utils/withMT"
-export default withMT({
+
+export default {
   content: [
     "./index.html",
     "./src/**/*.{js,jsx}",
@@ -21,10 +21,9 @@ export default withMT({
       }
     },
   },
-  daisyui: {
-    themes: 'light',
-  },
+
   plugins: [
+
   ],
-})
+}
 
