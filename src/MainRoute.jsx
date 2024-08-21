@@ -58,25 +58,19 @@ const MainRoute = () => {
           <Route
             path="/admin/drc-updation"
             element={
-
               <DrcUpdation />
-
             }
           />
           <Route
             path="/admin/suppliers"
             element={
-
               <Suppliers />
-
             }
           />
           <Route
             path="/admin/drivers"
             element={
-
               <Drivers />
-
             }
           />
           <Route
