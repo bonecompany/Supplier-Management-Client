@@ -26,105 +26,59 @@ const MainRoute = () => {
         <Route
           path="/admin-login"
           element={
-            // <AdminLoginProttect>
+
             <AdminLogin />
-            // </AdminLoginProttect>
+
           }
         />
         <Route
           path="/admin"
           element={
-            // <ProtectedAdminRoute>
+
             <AdminSidebar />
-            // </ProtectedAdminRoute>
+
           }
         >
           <Route
             index
             element={
-              // <ProtectedAdminRoute>
+
               <AdminHome />
-              // </ProtectedAdminRoute>
+
             }
           />
           <Route
             path="/admin/latex-parchase"
             element={
-              // <ProtectedAdminRoute>
+
               <LatexParchase />
-              // </ProtectedAdminRoute>
+
             }
           />
           <Route
             path="/admin/drc-updation"
             element={
-              // <ProtectedAdminRoute>
               <DrcUpdation />
-              // </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/suppliers"
             element={
-              // <ProtectedAdminRoute>
               <Suppliers />
-              // {/* </ProtectedAdminRoute> */}
             }
           />
           <Route
             path="/admin/drivers"
             element={
-              // <ProtectedAdminRoute>
               <Drivers />
-              // </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/tapers"
             element={
-              // <ProtectedAdminRoute>
+
               <Tapers />
-              // </ProtectedAdminRoute>
-            }
-          />
-          <Route
-            path="/admin/latex-parchase"
-            element={
-              // <ProtectedAdminRoute>
-              <LatexParchase />
-              // </ProtectedAdminRoute>
-            }
-          />
-          <Route
-            path="/admin/drc-updation"
-            element={
-              // <ProtectedAdminRoute>
-              <DrcUpdation />
-              // {/* </ProtectedAdminRoute> */}
-            }
-          />
-          <Route
-            path="/admin/suppliers"
-            element={
-              // <ProtectedAdminRoute>
-              <Suppliers />
-              // </ProtectedAdminRoute>
-            }
-          />
-          <Route
-            path="/admin/drivers"
-            element={
-              // <ProtectedAdminRoute>
-              <Drivers />
-              // </ProtectedAdminRoute>
-            }
-          />
-          <Route
-            path="/admin/tapers"
-            element={
-              // <ProtectedAdminRoute>
-              <Tapers />
-              // </ProtectedAdminRoute>
+
             }
           />
         </Route>
