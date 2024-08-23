@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import AdminLogin from "./pages/admin.pages/AdminLogin";
 import AdminSidebar from "./components/admin.components/AdminSidebar";
 import AdminHome from "./pages/admin.pages/AdminHome";
-// import ProtectedAdminRoute from "./Authentications/ProtectedAdminRoute";
-// import AdminLoginProttect from "./Authentications/AdminLoginProttect";
+import ProtectedAdminRoute from "./Authentications/ProtectedAdminRoute";
+import AdminLoginProttect from "./Authentications/AdminLoginProttect";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -24,74 +24,25 @@ const MainRoute = () => {
     <>
       <ToastContainer />
       <Routes>
-        <Route
-          path="/admin-login"
-          element={
-
-            <AdminLogin />
-
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-
-            <AdminSidebar />
-
-          }
-        >
-          <Route
-            index
-            element={
-
-              <AdminHome />
-
-            }
-          />
-          <Route
-            path="/admin/latex-parchase"
-            element={
-
-              <LatexParchase />
-
-            }
-          />
-          <Route
-            path="/admin/drc-updation"
-            element={
-              <DrcUpdation />
-            }
-          />
-          <Route
-            path="/admin/suppliers"
-            element={
-              <Suppliers />
-            }
-          />
-          <Route
-            path="/admin/drivers"
-            element={
-              <Drivers />
-            }
-          />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminSidebar />}>
+          <Route index element={<AdminHome />} />
+          <Route path="/admin/latex-parchase" element={<LatexParchase />} />
+          <Route path="/admin/drc-updation" element={<DrcUpdation />} />
+          <Route path="/admin/suppliers" element={<Suppliers />} />
+          <Route path="/admin/drivers" element={<Drivers />} />
           <Route
             path="/admin/tapers"
             element={
-<<<<<<< HEAD
               <ProtectedAdminRoute>
                 <SupplierDetailsPage />
               </ProtectedAdminRoute>
-=======
-
-              <Tapers />
-
->>>>>>> 2d55139cf9eb0f1a3fa78860ca820bd398ce9ec1
             }
           />
         </Route>
 
         <Route path="*" element={<NotFound />} />
-      </Routes >
+      </Routes>
     </>
   );
 };
