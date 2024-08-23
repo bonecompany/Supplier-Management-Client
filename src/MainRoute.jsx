@@ -13,6 +13,7 @@ import LatexParchase from "./pages/admin.pages/LatexParchase";
 import DrcUpdation from "./pages/admin.pages/DrcUpdation";
 import Drivers from "./pages/admin.pages/Drivers";
 import Tapers from "./pages/admin.pages/Tapers";
+import SupplierDetailsPage from "./pages/admin.pages/SupplierDetailsPage";
 
 export const Axios = axios.create({
   baseURL: "http://localhost:3333/api",
@@ -23,67 +24,18 @@ const MainRoute = () => {
     <>
       <ToastContainer />
       <Routes>
-        <Route
-          path="/admin-login"
-          element={
-            <AdminLoginProttect>
-              <AdminLogin />
-            </AdminLoginProttect>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedAdminRoute>
-              <AdminSidebar />
-            </ProtectedAdminRoute>
-          }
-        >
-          <Route
-            index
-            element={
-              <ProtectedAdminRoute>
-                <AdminHome />
-              </ProtectedAdminRoute>
-            }
-          />
-          <Route
-            path="/admin/latex-parchase"
-            element={
-              <ProtectedAdminRoute>
-                <LatexParchase />
-              </ProtectedAdminRoute>
-            }
-          />
-          <Route
-            path="/admin/drc-updation"
-            element={
-              <ProtectedAdminRoute>
-                <DrcUpdation />
-              </ProtectedAdminRoute>
-            }
-          />
-          <Route
-            path="/admin/suppliers"
-            element={
-              <ProtectedAdminRoute>
-                <Suppliers />
-              </ProtectedAdminRoute>
-            }
-          />
-          <Route
-            path="/admin/drivers"
-            element={
-              <ProtectedAdminRoute>
-                <Drivers />
-              </ProtectedAdminRoute>
-            }
-          />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminSidebar />}>
+          <Route index element={<AdminHome />} />
+          <Route path="/admin/latex-parchase" element={<LatexParchase />} />
+          <Route path="/admin/drc-updation" element={<DrcUpdation />} />
+          <Route path="/admin/suppliers" element={<Suppliers />} />
+          <Route path="/admin/drivers" element={<Drivers />} />
           <Route
             path="/admin/tapers"
             element={
               <ProtectedAdminRoute>
-                <Tapers />
+                <SupplierDetailsPage />
               </ProtectedAdminRoute>
             }
           />
