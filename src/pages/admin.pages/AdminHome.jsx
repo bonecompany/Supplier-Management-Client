@@ -4,11 +4,9 @@ import Graph from "../../components/admin.components/Graph";
 
 const AdminHome = () => {
   return (
-    <div>
+    <div className="pt-6">
       <StatusCards />
-      <Graph/>
-      <Graph/>
-      
+      <Graph/>      
     </div>
   );
 };
