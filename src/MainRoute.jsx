@@ -31,8 +31,9 @@ const MainRoute = () => {
           <Route path="/admin/drc-updation" element={<DrcUpdation />} />
           <Route path="/admin/suppliers" element={<Suppliers />} />
           <Route path="/admin/drivers" element={<Drivers />} />
+          <Route path="/admin/tapers" element={<Tapers />} />
           <Route
-            path="/admin/tapers"
+            path="/admin/supplier/:supplierId"
             element={
               <ProtectedAdminRoute>
                 <SupplierDetailsPage />
