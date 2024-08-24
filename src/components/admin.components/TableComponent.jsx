@@ -5,24 +5,7 @@ import { Axios } from '../../MainRoute';
 function TableComponent() {
     const [users, setUsers] = useState([])
 
-    useEffect(() => {
-        const getSupplier = async () => {
-            try {
-                const response = await Axios.get('/admin/suppliers', {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                setUsers(response.data);
-
-
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        getSupplier();
-    },);
+    c
     // const users = [
     //     {
     //         id: 1,
@@ -139,27 +122,31 @@ function TableComponent() {
         <div>
 
             < div className="p-2" >
-                <div className="flex justify-between items-center mb-6">
-                    <div className="flex gap-3 w-[80%]">
-                        <div className="flex px-4 py-3 w-[60%] rounded-md bg-white  overflow-hidden max-w-md  font-[sans-serif] shadow-xl">
+                <div className="col-span-3 flex justify-end gap-4">
+                    <div className="grid grid-cols-3 gap-2">
+                        <div className="col-span-2 flex px-4 py-3 grow rounded-md border-2 bg-white border-blue-200 overflow-hidden max-w-md  font-[sans-serif]">
                             <input
                                 type="text"
-                                placeholder="Search Something....."
+                                placeholder="Search B one id or Supplier Name . . . "
                                 className="w-full outline-none bg-transparent text-gray-600  "
                             />
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 192.904 192.904"
-                                width="16px"
-                                className="fill-gray-600"
-                            >
-                                <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z"></path>
-                            </svg>
+                            <CiSearch className=" text-2xl fill-gray-600" />
                         </div>
-                        <select className="border rounded-md px-2">
-                            <option>Filter</option>
+                        <select className="col-span-1 border rounded-md p-2">
+                            <option value="All Suppliers">All Suppliers</option>
+                            <option value="Daily Collection">Daily Collection</option>
+                            <option value="Alternative Day Collection">
+                                Alternative Day Collection
+                            </option>
+                            <option value="Barrel Collection">Barrel Collection</option>
+                            <option value="Lease Plantation">Lease Plantation</option>
+                            <option value="Slaughter Plantation">Slaughter Plantation</option>
                         </select>
                     </div>
+                    <button className="p-2 bg-cyan-800 text-white font-medium rounded-md flex items-center gap-2">
+                        <IoMdAdd className="w-10 h-5" />
+                        <span>Add Supplier</span>
+                    </button>
                 </div>
 
 
@@ -205,7 +192,7 @@ function TableComponent() {
 
                                 <td className="py-2 px-4  ">
                                     <span className="bg-blue-100 text-black px-2 py-1 rounded-full">
-                                        {new Date(user.createdAt).toLocaleDateString()}
+                                        {user.Lupdate}
                                     </span>
                                 </td>
                                 <td className="py-2 px-4  text-gray-700">{user.phone}</td>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React from 'react'
 import Cardpages from '../../components/admin.components/Cardpages'
 import TableComponent from '../../components/admin.components/TableComponent'
 import SupplierRegistration from '../../components/admin.components/Suppliers/SupplierRegistration'
@@ -7,7 +7,7 @@ import SupplierRegistration from '../../components/admin.components/Suppliers/Su
 
 const Suppliers = () => {
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = React.useState(false)
 
   return (
     <div className='grid gap-3 p-3'>
@@ -20,6 +20,7 @@ const Suppliers = () => {
         open={open}
         onClose={() => setOpen(false)}
       />
+
       <Cardpages />
       <TableComponent />
 
