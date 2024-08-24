@@ -50,13 +50,12 @@ const initialData = [
   { name: "Saturday", latex: 60.7, date: "31-08-2024" },
 ];
 
-
 const LatexData = () => {
   const [data, setData] = useState(initialData);
   const [filter, setFilter] = useState("weekly");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 30;
+  const itemsPerPage = filter === "weekly" ? 7 : 30;
 
   // Handle filter changes
   const handleFilterChange = (e) => {
@@ -66,17 +65,15 @@ const LatexData = () => {
     // Apply filter logic
     let filteredData = [];
     if (filterValue === "weekly") {
-      filteredData = initialData.slice(-7); // Last 7 days for weekly
+      filteredData = initialData.slice(-7);
     } else if (filterValue === "monthly") {
-      // Filtering logic for monthly (use selected month from date picker or predefined month data)
-      filteredData = initialData; // Replace with actual monthly data
+      filteredData = initialData.slice(-31); // Use actual monthly data logic
     } else if (filterValue === "yearly") {
-      // Filtering logic for yearly (all data grouped by month)
-      filteredData = initialData; // Replace with actual yearly data
+      filteredData = initialData; // Use actual yearly data logic
     }
 
     setData(filteredData);
-    setCurrentPage(1); // Reset pagination when filter changes
+    setCurrentPage(1);
   };
 
   // Pagination logic
@@ -105,12 +102,12 @@ const LatexData = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-lg">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-2xl text-center font-semibold">Latex</h3>
+    <div className="p-6 bg-white shadow-lg rounded-lg">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-3xl text-center font-semibold text-gray-800">Latex Data</h3>
         <div className="flex gap-4 items-center">
           <select
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md bg-gray-100 text-gray-700"
             value={filter}
             onChange={handleFilterChange}
           >
@@ -122,62 +119,64 @@ const LatexData = () => {
             selected={selectedDate}
             onChange={handleDateChange}
             dateFormat="dd-MM-yyyy"
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md bg-gray-100 text-gray-700"
           />
         </div>
       </div>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={350}>
         <LineChart data={paginatedData}>
-          <Line type="monotone" dataKey="latex" stroke="#8884d8" />
-          <CartesianGrid stroke="#ccc" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
+          <Line type="monotone" dataKey="latex" stroke="#4f46e5" strokeWidth={2} />
+          <CartesianGrid stroke="#e2e8f0" />
+          <XAxis dataKey="name" tick={{ fill: "#4b5563" }} />
+          <YAxis tick={{ fill: "#4b5563" }} />
+          <Tooltip contentStyle={{ backgroundColor: "#f9fafb", borderColor: "#e5e7eb" }} />
         </LineChart>
       </ResponsiveContainer>
-      <div className="mt-4">
+      <div className="mt-6">
         {filter === "yearly" && (
-          <div className="flex justify-end items-center gap-5 mt-4">
+          <div className="flex justify-between items-center mt-4">
             <button
-              className="p-2 text-cyan-900  rounded-full cursor-pointer hover:bg-slate-300"
+              className="p-2 text-indigo-600 hover:text-indigo-800 rounded-full cursor-pointer"
               onClick={() => handlePageChange("prev")}
               disabled={currentPage === 1}
             >
-              <IoArrowBackOutline className="text-2xl font-medium" />
+              <IoArrowBackOutline className="text-2xl" />
             </button>
-            <p>{currentPage}</p>
+            <p className="text-gray-700">{currentPage}</p>
             <button
-              className="p-2 text-cyan-900  rounded-full cursor-pointer hover:bg-slate-300"
+              className="p-2 text-indigo-600 hover:text-indigo-800 rounded-full cursor-pointer"
               onClick={() => handlePageChange("next")}
               disabled={currentPage * itemsPerPage >= data.length}
             >
-              <IoArrowForwardOutline className="text-2xl font-medium" />
+              <IoArrowForwardOutline className="text-2xl" />
             </button>
           </div>
         )}
-        <table className="w-full text-left">
+        <table className="w-full text-left mt-4">
           <thead>
             <tr>
-              <th className="border p-2">Date</th>
-              <th className="border p-2">Day</th>
-              <th className="border p-2">Latex</th>
+              <th className="border-b-2 border-gray-200 p-4 text-gray-700">Date</th>
+              <th className="border-b-2 border-gray-200 p-4 text-gray-700">Date</th>
+              <th className="border-b-2 border-gray-200 p-4 text-gray-700">Day</th>
+              <th className="border-b-2 border-gray-200 p-4 text-gray-700">Latex</th>
             </tr>
           </thead>
           <tbody>
             {paginatedData.length > 0 ? (
-              paginatedData.map((entry) => {
+              paginatedData.map((entry, index) => {
                 const formattedDate = new Date(entry.date).toLocaleDateString("en-GB");
                 return (
-                  <tr key={entry.date}>
-                    <td className="border p-2">{formattedDate}</td>
-                    <td className="border p-2">{entry.name}</td>
-                    <td className="border p-2">{entry.latex}</td>
+                  <tr key={entry.date} className="hover:bg-gray-100 transition-colors">
+                    <td className="border-b border-gray-200 p-4 text-gray-600">{index + 1}</td>
+                    <td className="border-b border-gray-200 p-4 text-gray-600">{formattedDate}</td>
+                    <td className="border-b border-gray-200 p-4 text-gray-600">{entry.name}</td>
+                    <td className="border-b border-gray-200 p-4 text-gray-600">{entry.latex}</td>
                   </tr>
                 );
               })
             ) : (
               <tr>
-                <td colSpan="3" className="border p-2 text-center">
+                <td colSpan="3" className="border-b border-gray-200 p-4 text-center text-gray-600">
                   No data available
                 </td>
               </tr>

@@ -163,7 +163,7 @@ const Suppliers = () => {
 
   return (
     <div className="grid gap-3 bg-[#F1F5F8] py-3 px-4">
-      <div className="grid grid-cols-4 grid-rows-1 gap-4 bg-white z-50 sticky top-0 p-2 rounded-md">
+      <div className="grid grid-cols-4 grid-rows-1 gap-4 bg-white z-20 sticky top-0 p-2 rounded-md">
         <div className="col-span-1">
           <h1 className="text-4xl font-bold text-cyan-900">Suppliers List</h1>
         </div>

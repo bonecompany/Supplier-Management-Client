@@ -21,7 +21,7 @@ const MessageDropdown = ({ isOpen, messages, onClose }) => {
 
   return (
     isOpen && (
-      <div ref={dropdownRef} className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg rounded-lg p-4 z-50">
+      <div ref={dropdownRef} className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg rounded-lg p-4 z-auto">
         {messages.length > 0 ? (
           <ul>
             {messages.map((message, index) => (
