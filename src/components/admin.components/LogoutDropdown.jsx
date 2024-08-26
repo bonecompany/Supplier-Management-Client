@@ -4,23 +4,19 @@ import { IoMdSettings } from "react-icons/io";
 
 const LogoutDropdown = ({ isOpen, onClose, onLogout }) => {
   const dropdownRef = useRef(null);
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         onClose();
       }
     };
-
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen, onClose]);
-
   return (
     isOpen && (
       <div
@@ -29,11 +25,11 @@ const LogoutDropdown = ({ isOpen, onClose, onLogout }) => {
       >
         <ul className="">
           <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer border-b-2">
-             <span className="flex gap-4 items-center">
+            <span className="flex gap-4 items-center">
 
-            <IoMdSettings />
-            Settings
-             </span>
+              <IoMdSettings />
+              Settings
+            </span>
           </li>
           <li
             className="py-2 px-4 hover:bg-gray-100 cursor-pointer font-semibold text-red-600 "
@@ -49,5 +45,4 @@ const LogoutDropdown = ({ isOpen, onClose, onLogout }) => {
     )
   );
 };
-
 export default LogoutDropdown;

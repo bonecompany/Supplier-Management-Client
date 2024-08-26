@@ -13,6 +13,7 @@ import LatexParchase from "./pages/admin.pages/LatexParchase";
 import DrcUpdation from "./pages/admin.pages/DrcUpdation";
 import Drivers from "./pages/admin.pages/Drivers";
 import Tapers from "./pages/admin.pages/Tapers";
+import SupplierDetailsPage from "./pages/admin.pages/SupplierDetailsPage";
 
 export const Axios = axios.create({
   baseURL: "http://localhost:3333/api",
@@ -23,68 +24,20 @@ const MainRoute = () => {
     <>
       <ToastContainer />
       <Routes>
-        <Route
-          path="/admin-login"
-          element={
-      
-              <AdminLogin />
-          
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-          
-              <AdminSidebar />
-        
-          }
-        >
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminSidebar />}>
+          <Route index element={<AdminHome />} />
+          <Route path="/admin/latex-parchase" element={<LatexParchase />} />
+          <Route path="/admin/drc-updation" element={<DrcUpdation />} />
+          <Route path="/admin/suppliers" element={<Suppliers />} />
+          <Route path="/admin/drivers" element={<Drivers />} />
+          <Route path="/admin/tapers" element={<Tapers />} />
           <Route
-            index
+            path="/admin/supplier/:supplierId"
             element={
-            
-                <AdminHome />
-          
-            }
-          />
-          <Route
-            path="/admin/latex-parchase"
-            element={
-          
-                <LatexParchase />
-           
-            }
-          />
-          <Route
-            path="/admin/drc-updation"
-            element={
-          
-                <DrcUpdation />
-             
-            }
-          />
-          <Route
-            path="/admin/suppliers"
-            element={
-            
-                <Suppliers />
-            
-            }
-          />
-          <Route
-            path="/admin/drivers"
-            element={
-            
-                <Drivers />
-             
-            }
-          />
-          <Route
-            path="/admin/tapers"
-            element={
-            
-                <Tapers />
-            
+              <ProtectedAdminRoute>
+                <SupplierDetailsPage />
+              </ProtectedAdminRoute>
             }
           />
         </Route>
