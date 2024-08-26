@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { Axios } from '../../../MainRoute.jsx';
 
 
+
 const SupplierRegistration = ({ open, onClose }) => {
 
 
@@ -41,7 +42,7 @@ const SupplierRegistration = ({ open, onClose }) => {
     return (
         <div className={`fixed inset-0 flex justify-center items-center transition-colors z-50 ${open ? "visible bg-black/80" : "invisible"}`}>
 
-            <div className={`bg-gray-200 h-fit max-h-[80vh] overflow-y-auto rounded-xl shadow p-8 transition-all ${open ? "scale-100 opacity-100" : "scale-125 opacity-0"} scrollbar-hide`}>
+            <div className={`bg-gray-200 h-fit max-h-[80vh] overflow-y-auto rounded-xl shadow p-8  duration-500 ${open ? "scale-110 opacity-100" : "scale-125 opacity-0"} scrollbar-hide`}>
                 <div onClick={onClose} className='flex justify-end'>
                     <RxCross2 size={25} className='hover:text-red-500 hover:duration-300 hover:scale-125 cursor-pointer' />
                 </div>
@@ -137,7 +138,7 @@ const SupplierRegistration = ({ open, onClose }) => {
                                 <option>Daily Collection</option>
                                 <option>Alternative Day Collection</option>
                                 <option>Barrel Collection</option>
-                                <option>Lease plantation</option>
+                                <option>Lease Plantation</option>
                                 <option>Slaughter Plantation</option>
                             </select>
                             {errors.category && (
