@@ -80,7 +80,7 @@ const SupplierData = [
   },
 ];
 
-function Form() {
+function FormLLatex() {
   const [boneId, setBoneId] = useState('');
   const [selectedSupplier, setSelectedSupplier] = useState(null);
 
@@ -279,4 +279,4 @@ function Form() {
   );
 }
 
-export default Form;
+export default FormLLatex;
