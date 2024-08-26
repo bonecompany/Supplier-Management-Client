@@ -1,7 +1,12 @@
-const SidebarItem = ({ icon, label, isExpanded, onClick }) => {
+
+const SidebarItem = ({ icon, label, isExpanded, onClick, isMenu }) => {
+  const isActive = isMenu === label;
+  
   return (
     <div
-      className="flex items-center p-3 w-full hover:bg-gray-600 cursor-pointer transition-colors duration-300 ease-in-out rounded-lg"
+      className={`flex items-center p-3 w-full  cursor-pointer transition-colors duration-300 ease-in-out rounded-lg ${
+        isActive ? "bg-gray-600" : "hover:bg-gray-600"
+      }`}
       onClick={onClick}
     >
       <div className="text-2xl">{icon}</div>
