@@ -3,11 +3,13 @@ import { RxCross2 } from "react-icons/rx";
 import { useForm } from 'react-hook-form';
 import { toast } from "react-toastify";
 import { Axios } from '../../../MainRoute.jsx';
+import { useState } from 'react';
 
 
 
 const SupplierRegistration = ({ open, onClose }) => {
 
+    const [errorRes, setErrorRes] = useState([])
 
     const { register, formState: { errors }, handleSubmit } = useForm({
         defaultValues: {
@@ -34,8 +36,9 @@ const SupplierRegistration = ({ open, onClose }) => {
             console.log("API response:", response.data);
         } catch (error) {
             console.error("Error submitting data:", error.response?.data || error.message);
-            window.alert(error.response?.data.errors)
-            console.log(error.response?.data.errors)
+            setErrorRes(error.response?.data.errors)
+            window.alert(errorRes.map(ele => ele))
+
         }
     };
 

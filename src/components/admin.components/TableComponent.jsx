@@ -57,34 +57,40 @@ function TableComponent() {
                         {users.map((user, index) => (
                             <tr key={index} className="border-t">
                                 <td className="py-2 px-4  text-gray-700">
-                                    <span className="bg-yellow-100 text-black px-2 py-1 rounded-full ">
+                                    {user?.Bone_id ? <span className="bg-yellow-100 text-black px-2 py-1 rounded-full ">
                                         {user.Bone_id}
-                                    </span>
+                                    </span> : null}
+
                                 </td>
                                 <td className="py-2 px-4 flex items-center space-x-2  text-gray-700">
                                     <span>{user.name}</span>
                                 </td>
 
                                 <td className="py-2 px-4  ">
-                                    <span className="bg-blue-100 text-black px-2 py-1 rounded-full">
+                                    {user?.location ? <span className="bg-blue-100 text-black px-2 py-1 rounded-full">
                                         {user.location}
-                                    </span>
+                                    </span> : null}
+
                                 </td>
                                 <td className="py-2 px-4  ">
-                                    <span className="bg-blue-100 text-black px-2 py-1 rounded-full">
+                                    {user?.category ? <span className="bg-blue-100 text-black px-2 py-1 rounded-full">
                                         {user.category}
-                                    </span>
+                                    </span> : null}
+
                                 </td>
                                 <td className="py-2 px-4  text-gray-700">{user.phone}</td>
                                 <td className="py-2 px-4 ">
-                                    <span
-                                        className={`${user.status === "Approved"
-                                            ? "bg-gray-200 text-blue-800"
-                                            : "bg-gray-200 text-yellow-500"
-                                            } px-2 py-1 rounded-full text-xs`}
-                                    >
-                                        {new Date(user.createdAt).toLocaleDateString()}
-                                    </span>
+                                    {
+                                        user?.createdAt ?
+                                            < span
+                                                className={`${user.status === "Approved"
+                                                    ? "bg-gray-200 text-blue-800"
+                                                    : "bg-gray-200 text-yellow-500"
+                                                    } px-2 py-1 rounded-full text-xs`}
+                                            >
+                                                {new Date(user.createdAt).toLocaleDateString()}
+                                            </span>
+                                            : null}
                                 </td>
 
                             </tr>
