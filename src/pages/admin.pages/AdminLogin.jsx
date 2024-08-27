@@ -54,9 +54,8 @@ const AdminLogin = () => {
                 Username
               </label>
               <input
-                className={`px-2 py-1 border-2 outline-none rounded-md shadow appearance-none ${
-                  errors.username && "border-red-500"
-                }`}
+                className={`px-2 py-1 border-2 outline-none rounded-md shadow appearance-none ${errors.username && "border-red-500"
+                  }`}
                 type="text"
                 id="username"
                 placeholder="Username"
@@ -74,9 +73,8 @@ const AdminLogin = () => {
                 Password
               </label>
               <div
-                className={`flex justify-between items-center border-2 pr-2 rounded-md shadow appearance-none ${
-                  errors.password && "border-red-500"
-                }`}
+                className={`flex justify-between items-center border-2 pr-2 rounded-md shadow appearance-none ${errors.password && "border-red-500"
+                  }`}
               >
                 <input
                   className="px-2 py-1 outline-none rounded-md w-11/12 bg-slate-50"

@@ -13,7 +13,7 @@ import LatexParchase from "./pages/admin.pages/LatexParchase";
 import DrcUpdation from "./pages/admin.pages/DrcUpdation";
 import Drivers from "./pages/admin.pages/Drivers";
 import Tapers from "./pages/admin.pages/Tapers";
-import SupplierDetailsPage from "./pages/admin.pages/SupplierDetailsPage";
+import SupplierDetailsPage from "./pages/admin.pages/SupplierDetails";
 
 export const Axios = axios.create({
   baseURL: "http://localhost:3333/api",
@@ -35,15 +35,15 @@ const MainRoute = () => {
           <Route
             path="/admin/supplier/:supplierId"
             element={
-              <ProtectedAdminRoute>
-                <SupplierDetailsPage />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <SupplierDetailsPage />
+              // </ProtectedAdminRoute>
             }
           />
         </Route>
 
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </Routes >
     </>
   );
 };
