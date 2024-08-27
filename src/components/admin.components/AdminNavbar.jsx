@@ -134,9 +134,24 @@ const AdminNavbar = ({ toggleSidebar, isExpanded }) => {
 
       <div className="flex flex-grow justify-between items-center p-4">
         <div className="flex-1 flex justify-center gap-12 font-medium">
-          <Link to={"#"} className="py-1 border-b-4 border-gray-100 hover:border-red-500 duration-500 ">Employee</Link>
-          <Link to={"#"} className="py-1 border-b-4 border-gray-100 hover:border-red-500 duration-500 ">Vehicles</Link>
-          <Link to={"#"} className="py-1 border-b-4 border-gray-100 hover:border-red-500 duration-500 ">Latex Rate</Link>
+          <Link
+            to={"#"}
+            className="py-1 border-b-4 border-gray-100 hover:border-red-500 duration-500 "
+          >
+            Employee
+          </Link>
+          <Link
+            to={"#"}
+            className="py-1 border-b-4 border-gray-100 hover:border-red-500 duration-500 "
+          >
+            Vehicles
+          </Link>
+          <Link
+            to={"#"}
+            className="py-1 border-b-4 border-gray-100 hover:border-red-500 duration-500 "
+          >
+            Latex Rate
+          </Link>
         </div>
         <div className="flex-1 flex gap-20 justify-center  relative">
           <span

@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import SupplierProfile from "../../components/admin.components/Suppliers/SupplierProfile";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { useNavigate, useParams } from "react-router-dom";
+import LatexTable from "../../components/admin.components/Suppliers/LatexTable";
+import LatexChart from "../../components/admin.components/Suppliers/LatexChart";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { IoArrowBackOutline, IoArrowForwardOutline } from "react-icons/io5";
-import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+import { Axios } from "../../MainRoute";
+import Spinner from "../../components/Loding/Spinner";
 
 const initialData = [
   { name: "Sunday", latex: 34.5, date: "28-07-2024" },
@@ -50,33 +47,47 @@ const initialData = [
   { name: "Saturday", latex: 60.7, date: "31-08-2024" },
 ];
 
-const LatexData = () => {
+const SupplierDetailsPage = () => {
+  const { supplierId } = useParams();
   const [data, setData] = useState(initialData);
   const [filter, setFilter] = useState("weekly");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = filter === "weekly" ? 7 : 30;
+  const [supplier, setSupplier] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+  console.log(supplierId);
 
-  // Handle filter changes
+  useEffect(() => {
+    Axios.get(`/admin/supplier/${supplierId}`)
+      .then((response) => {
+        setSupplier(response.data);
+        setIsLoading(false);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("Supplier fetching error", error);
+      });
+  }, [supplierId]);
+
   const handleFilterChange = (e) => {
     const filterValue = e.target.value;
     setFilter(filterValue);
 
-    // Apply filter logic
     let filteredData = [];
     if (filterValue === "weekly") {
       filteredData = initialData.slice(-7);
     } else if (filterValue === "monthly") {
-      filteredData = initialData.slice(-31); // Use actual monthly data logic
+      filteredData = initialData.slice(-31);
     } else if (filterValue === "yearly") {
-      filteredData = initialData; // Use actual yearly data logic
+      filteredData = initialData;
     }
 
     setData(filteredData);
     setCurrentPage(1);
   };
 
-  // Pagination logic
   const handlePageChange = (direction) => {
     if (direction === "next") {
       setCurrentPage((prev) => prev + 1);
@@ -85,107 +96,97 @@ const LatexData = () => {
     }
   };
 
-  // Paginate the data if viewing by year
   const paginatedData =
     filter === "yearly"
       ? data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
       : data;
 
-  // Change date format to dd-mm-yyyy
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    const formattedDate = date.toLocaleDateString("en-GB").split('/').reverse().join('-');
+    const formattedDate = date
+      .toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+      .split("/")
+      .join("-");
     const filteredData = initialData.filter(
       (entry) => entry.date === formattedDate
     );
     setData(filteredData);
   };
 
-  return (
-    <div className="p-6 bg-white shadow-lg rounded-lg">
-      <div className="flex justify-between items-center mb-6">
-        <h3 className="text-3xl text-center font-semibold text-gray-800">Latex Data</h3>
-        <div className="flex gap-4 items-center">
-          <select
-            className="p-2 border rounded-md bg-gray-100 text-gray-700"
-            value={filter}
-            onChange={handleFilterChange}
-          >
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
-            <option value="yearly">Yearly</option>
-          </select>
-          <DatePicker
-            selected={selectedDate}
-            onChange={handleDateChange}
-            dateFormat="dd-MM-yyyy"
-            className="p-2 border rounded-md bg-gray-100 text-gray-700"
-          />
-        </div>
+  if (isLoading) {
+    return (
+      <div className="h-screen w-full fle">
+        <Spinner />
       </div>
-      <ResponsiveContainer width="100%" height={350}>
-        <LineChart data={paginatedData}>
-          <Line type="monotone" dataKey="latex" stroke="#4f46e5" strokeWidth={2} />
-          <CartesianGrid stroke="#e2e8f0" />
-          <XAxis dataKey="name" tick={{ fill: "#4b5563" }} />
-          <YAxis tick={{ fill: "#4b5563" }} />
-          <Tooltip contentStyle={{ backgroundColor: "#f9fafb", borderColor: "#e5e7eb" }} />
-        </LineChart>
-      </ResponsiveContainer>
-      <div className="mt-6">
-        {filter === "yearly" && (
-          <div className="flex justify-between items-center mt-4">
-            <button
-              className="p-2 text-indigo-600 hover:text-indigo-800 rounded-full cursor-pointer"
-              onClick={() => handlePageChange("prev")}
-              disabled={currentPage === 1}
+    );
+  }
+
+  // const supplier = {
+  //   Bone_id: 1,
+  //   name: "1-MOOSA HAJI N",
+  //   phone: "9539507184",
+  //   address: "NEDUMBA HOUSE, ODOMPATTA",
+  //   location: "Odompatta",
+  //   category: "Daily Collection",
+  //   account_no: "112345875462454",
+  //   IFCE_code: "FDRL0001120",
+  // };
+
+  return (
+    <div className="min-h-screen bg-[#F1F5F8] p-6 grid grid-cols-1 gap-4 md:grid-cols-12">
+      <div className="flex items-center gap-2 col-span-12">
+        <button
+          onClick={() => navigate(-1)}
+          className="text-2xl p-2 rounded-full hover:bg-slate-300 ml-[-10px]"
+        >
+          <IoMdArrowRoundBack />
+        </button>
+        <h1 className="text-3xl font-bold text-cyan-900">Supplier Profile</h1>
+      </div>
+
+      <div className="col-span-12 md:col-span-4">
+        <SupplierProfile supplier={supplier} />
+      </div>
+
+      <div className="col-span-12 md:col-span-8 bg-white rounded-lg shadow-lg py-3 pr-4">
+        <div className="flex justify-between items-center mb-4 ">
+          <h3 className="text-2xl font-semibold px-6">Latex</h3>
+          <div className="flex gap-4 items-center">
+            <select
+              className="p-2 border rounded-md"
+              value={filter}
+              onChange={handleFilterChange}
             >
-              <IoArrowBackOutline className="text-2xl" />
-            </button>
-            <p className="text-gray-700">{currentPage}</p>
-            <button
-              className="p-2 text-indigo-600 hover:text-indigo-800 rounded-full cursor-pointer"
-              onClick={() => handlePageChange("next")}
-              disabled={currentPage * itemsPerPage >= data.length}
-            >
-              <IoArrowForwardOutline className="text-2xl" />
-            </button>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+            <DatePicker
+              selected={selectedDate}
+              onChange={handleDateChange}
+              dateFormat="dd-MM-yyyy"
+              className="p-2 border rounded-md w-28"
+            />
           </div>
-        )}
-        <table className="w-full text-left mt-4">
-          <thead>
-            <tr>
-              <th className="border-b-2 border-gray-200 p-4 text-gray-700">Date</th>
-              <th className="border-b-2 border-gray-200 p-4 text-gray-700">Date</th>
-              <th className="border-b-2 border-gray-200 p-4 text-gray-700">Day</th>
-              <th className="border-b-2 border-gray-200 p-4 text-gray-700">Latex</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedData.length > 0 ? (
-              paginatedData.map((entry, index) => {
-                const formattedDate = new Date(entry.date).toLocaleDateString("en-GB");
-                return (
-                  <tr key={entry.date} className="hover:bg-gray-100 transition-colors">
-                    <td className="border-b border-gray-200 p-4 text-gray-600">{index + 1}</td>
-                    <td className="border-b border-gray-200 p-4 text-gray-600">{formattedDate}</td>
-                    <td className="border-b border-gray-200 p-4 text-gray-600">{entry.name}</td>
-                    <td className="border-b border-gray-200 p-4 text-gray-600">{entry.latex}</td>
-                  </tr>
-                );
-              })
-            ) : (
-              <tr>
-                <td colSpan="3" className="border-b border-gray-200 p-4 text-center text-gray-600">
-                  No data available
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        </div>
+        <LatexChart data={paginatedData} />
+      </div>
+
+      <div className="col-span-12">
+        <LatexTable
+          data={paginatedData}
+          filter={filter}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
+          itemsPerPage={itemsPerPage}
+        />
       </div>
     </div>
   );
 };
 
-export default LatexData;
+export default SupplierDetailsPage;

@@ -1,68 +1,98 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Axios } from "../../MainRoute";
 import { useNavigate } from "react-router-dom";
+import Skeleton from "../Loding/Skelton";
+function TableComponent() {
+  const [suppliers, setSuppliers] = useState([]);
+  const [isLoding, setIsLoading] = useState(true);
 
-function TableComponent({suppliers}) {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const getSupplier = async () => {
+      try {
+        const response = await Axios.get("/admin/suppliers", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setSuppliers(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    getSupplier();
+  }, []);
+
+  if (isLoding) {
+    return (
+      <div className="space-y-4">
+        <Skeleton width="w-full" height="h-8" />
+        <Skeleton width="w-full" height="h-8" />
+        <Skeleton width="w-full" height="h-8" />
+        <Skeleton width="w-full" height="h-8" />
+        <Skeleton width="w-full" height="h-8" />
+        <Skeleton width="w-full" height="h-8" />
+      </div>
+    );
+  }
 
   return (
     <div>
       <div className="p-2">
-       
-
-        <table className="min-w-full bg-white shadow-md rounded-md overflow-hidden mt-5">
+        <table className="min-w-full bg-white shadow-md rounded-md overflow-hidden mt-5 capitalize">
           <thead className="bg-gray-50">
             <tr>
-              <th className="py-2 px-4 text-left text-lg font-medium text-gray-500">
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
                 #
               </th>
-              <th className="py-2 px-4 text-left text-lg  font-medium text-gray-500">
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
                 B-one ID
               </th>
-              <th className="py-2 px-4 text-left text-lg  font-medium text-gray-500">
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
                 Name
               </th>
-
-              <th className="py-2 px-4 text-left text-lg font-medium text-gray-500">
-                Update
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                Location
               </th>
-              <th className="py-2 px-4 text-left text-lg  font-medium text-gray-500">
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                Supplier Category
+              </th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
                 Phone
               </th>
-              <th className="py-2 px-4 text-left text-lg  font-medium text-gray-500">
-                Activity
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                Active Date
               </th>
             </tr>
           </thead>
           <tbody>
             {suppliers.map((supplier, index) => (
-              <tr onClick={() => navigate(`/admin/supplier/${supplier.boneId}`)} key={supplier.id} className="border-t hover:bg-slate-200 duration-300 cursor-pointer">
-                <td className="py-2 px-4  text-gray-700">{index + 1}</td>
-                <td className="py-2 px-4  text-gray-700">
-                  <span className="bg-yellow-100 text-black px-2 py-1 rounded-full ">
-                    {supplier.boneId}
-                  </span>
+              <tr
+                key={index}
+                className="border-t hover:bg-slate-200 duration-300 cursor-pointer"
+                onClick={() => navigate(`/admin/supplier/${supplier?.Bone_id}`)}
+              >
+                <td className="py-2 px-2 flex items-center space-x-2 text-gray-700">
+                  <span>{index + 1}</span>
                 </td>
-                <td className="py-2 px-4 flex items-center space-x-2  text-gray-700">
-                  <span>{supplier.name}</span>
+                <td className="p-2 text-gray-700">
+                  <span>{supplier?.Bone_id}</span>
                 </td>
-
-                <td className="py-2 px-4  ">
-                  <span className="bg-blue-100 text-black px-2 py-1 rounded-full">
-                    {supplier.Lupdate}
-                  </span>
+                <td className="p-2 flex items-center space-x-2 ">
+                  <span>{supplier?.name}</span>
                 </td>
-                <td className="py-2 px-4  text-gray-700">{supplier.phone}</td>
-                <td className="py-2 px-4 ">
-                  <span
-                    className={`${
-                      supplier.status === "Approved"
-                        ? "bg-gray-200 text-blue-800"
-                        : "bg-gray-200 text-yellow-800"
-                    } px-2 py-1 rounded-full text-xs`}
-                  >
-                    {supplier.status}
-                  </span>
+                <td className="p-2">
+                  <span>{supplier?.location}</span>
+                </td>
+                <td className="p-2">
+                  <span>{supplier?.category}</span>
+                </td>
+                <td className="p-2  text-gray-700">{supplier?.phone}</td>
+                <td className="p-2">
+                  <span>{new Date(supplier?.createdAt).toLocaleDateString()}</span>
                 </td>
               </tr>
             ))}
