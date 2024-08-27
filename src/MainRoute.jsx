@@ -35,15 +35,15 @@ const MainRoute = () => {
           <Route
             path="/admin/supplier/:supplierId"
             element={
-              <ProtectedAdminRoute>
-                <SupplierDetailsPage />
-              </ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
+              <SupplierDetailsPage />
+              // </ProtectedAdminRoute>
             }
           />
         </Route>
 
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </Routes >
     </>
   );
 };
