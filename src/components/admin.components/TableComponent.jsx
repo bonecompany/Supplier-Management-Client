@@ -5,6 +5,7 @@ import { CiSearch } from "react-icons/ci";
 function TableComponent() {
     const [users, setUsers] = useState([])
 
+
     useEffect(() => {
         const getSupplier = async () => {
             try {
@@ -57,7 +58,7 @@ function TableComponent() {
                         {users.map((user, index) => (
                             <tr key={index} className="border-t">
                                 <td className="py-2 px-4  text-gray-700">
-                                    {user?.Bone_id ? <span className="bg-yellow-100 text-black px-2 py-1 rounded-full ">
+                                    {user?.Bone_id ? <span className="bg-yellow-600  text-black px-2 py-1 rounded-md ">
                                         {user.Bone_id}
                                     </span> : null}
 
@@ -73,7 +74,7 @@ function TableComponent() {
 
                                 </td>
                                 <td className="py-2 px-4  ">
-                                    {user?.category ? <span className="bg-blue-100 text-black px-2 py-1 rounded-full">
+                                    {user?.category ? <span className="bg-blue-100 text-black px-2 py-1  rounded-full">
                                         {user.category}
                                     </span> : null}
 

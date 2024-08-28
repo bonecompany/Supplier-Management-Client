@@ -1,6 +1,7 @@
 import { Phone } from '@mui/icons-material';
 import React, { useState } from 'react';
 import TableLatex from './TableLatex';
+import { Axios } from '../../MainRoute';
 
 const SupplierData = [
   {
@@ -82,7 +83,8 @@ const SupplierData = [
 
 function FormLLatex() {
   const [boneId, setBoneId] = useState('');
-  const [selectedSupplier, setSelectedSupplier] = useState(null);
+  const [selectedSupplier, setSelectedSupplier] = useState({});
+  const [jar,setJar] = useState('')
 
   const handleBoneIdChange = (event) => {
     const enteredBoneId = event.target.value;
@@ -93,7 +95,16 @@ function FormLLatex() {
       (supplier) => supplier.boneId.toString() === enteredBoneId
     );
     setSelectedSupplier(supplier);
+    setJar(supplier.Jars)
   };
+
+
+// const getLatex = async ()=> {
+
+//   const response = await Axios.get("")
+// }
+
+
 
   const handleClose = () => {
     setSelectedSupplier(null);
@@ -128,7 +139,7 @@ function FormLLatex() {
       </div>
 
       {selectedSupplier && (
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden flex mx-auto flex-col md:flex-row w-full   max-w-4xl">
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden flex mx-auto flex-col md:flex-row w-full  max-w-3xl xl:max-w-7xl">
                     <button
             className="absolute top-2 right-2 text-gray-700 font-bold"
             onClick={handleClose}
@@ -198,7 +209,7 @@ function FormLLatex() {
               <input
                 type="number"
                 className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                value={selectedSupplier.Jars}
+                value={jar}
               />
               </span>
               <span>
@@ -254,7 +265,7 @@ function FormLLatex() {
               />
               </span>
             </div>
-            <div className='flex items-center gap-2 mb-5'>
+            {/* <div className='flex items-center gap-2 mb-5'>
                 <label className=" text-sm font-medium text-gray-700">
                   Phone:-
                 </label>
@@ -263,7 +274,7 @@ function FormLLatex() {
                   className="mt-1 w-20% px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                   
                 />
-              </div>
+              </div> */}
             <button
               type="submit"
               className="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
