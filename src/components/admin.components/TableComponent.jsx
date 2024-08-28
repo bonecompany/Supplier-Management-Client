@@ -1,109 +1,106 @@
 import React, { useEffect, useState } from "react";
-import { Axios } from '../../MainRoute';
-import { IoMdAdd } from "react-icons/io";
-import { CiSearch } from "react-icons/ci";
+import { Axios } from "../../MainRoute";
+import { useNavigate } from "react-router-dom";
+import Skeleton from "../Loding/Skelton";
 function TableComponent() {
-    const [users, setUsers] = useState([])
+  const [suppliers, setSuppliers] = useState([]);
+  const [isLoding, setIsLoading] = useState(true);
 
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const getSupplier = async () => {
-            try {
-                const response = await Axios.get('/admin/suppliers', {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                setUsers(response.data);
+  useEffect(() => {
+    const getSupplier = async () => {
+      try {
+        const response = await Axios.get("/admin/suppliers", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setSuppliers(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+    getSupplier();
+  }, []);
 
-        getSupplier();
-    }, []);
-
+  if (isLoding) {
     return (
-        <div>
+      <div className="space-y-4">
+        <Skeleton width="w-full" height="h-8" />
+        <Skeleton width="w-full" height="h-8" />
+        <Skeleton width="w-full" height="h-8" />
+        <Skeleton width="w-full" height="h-8" />
+        <Skeleton width="w-full" height="h-8" />
+        <Skeleton width="w-full" height="h-8" />
+      </div>
+    );
+  }
 
-            < div className="p-2" >
-
-                <table className="min-w-full bg-white shadow-md rounded-md overflow-hidden mt-5">
-                    <thead className="bg-gray-50">
-                        <tr>
-                            <th className="py-2 px-4 text-left text-lg  font-medium text-gray-500">
-                                B-one ID
-                            </th>
-                            <th className="py-2 px-4 text-left text-lg  font-medium text-gray-500">
-                                Name
-                            </th>
-
-                            <th className="py-2 px-4 text-left text-lg font-medium text-gray-500">
-                                Location
-                            </th>
-                            <th className="py-2 px-4 text-left text-lg  font-medium text-gray-500">
-                                Supplier Category
-                            </th>
-                            <th className="py-2 px-4 text-left text-lg  font-medium text-gray-500">
-                                Phone
-                            </th>
-                            <th className="py-2 px-4 text-left text-lg  font-medium text-gray-500">
-                                Active Date
-                            </th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.map((user, index) => (
-                            <tr key={index} className="border-t">
-                                <td className="py-2 px-4  text-gray-700">
-                                    {user?.Bone_id ? <span className="bg-yellow-600  text-black px-2 py-1 rounded-md ">
-                                        {user.Bone_id}
-                                    </span> : null}
-
-                                </td>
-                                <td className="py-2 px-4 flex items-center space-x-2  text-gray-700">
-                                    <span>{user.name}</span>
-                                </td>
-
-                                <td className="py-2 px-4  ">
-                                    {user?.location ? <span className="bg-blue-100 text-black px-2 py-1 rounded-full">
-                                        {user.location}
-                                    </span> : null}
-
-                                </td>
-                                <td className="py-2 px-4  ">
-                                    {user?.category ? <span className="bg-blue-100 text-black px-2 py-1  rounded-full">
-                                        {user.category}
-                                    </span> : null}
-
-                                </td>
-                                <td className="py-2 px-4  text-gray-700">{user.phone}</td>
-                                <td className="py-2 px-4 ">
-                                    {
-                                        user?.createdAt ?
-                                            < span
-                                                className={`${user.status === "Approved"
-                                                    ? "bg-gray-200 text-blue-800"
-                                                    : "bg-gray-200 text-yellow-500"
-                                                    } px-2 py-1 rounded-full text-xs`}
-                                            >
-                                                {new Date(user.createdAt).toLocaleDateString()}
-                                            </span>
-                                            : null}
-                                </td>
-
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-        </div >
-    )
+  return (
+    <div>
+      <div className="p-2">
+        <table className="min-w-full bg-white shadow-md rounded-md overflow-hidden mt-5 capitalize">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                #
+              </th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                B-one ID
+              </th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                Name
+              </th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                Location
+              </th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                Supplier Category
+              </th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                Phone
+              </th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                Active Date
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {suppliers.map((supplier, index) => (
+              <tr
+                key={index}
+                className="border-t hover:bg-slate-200 duration-300 cursor-pointer"
+                onClick={() => navigate(`/admin/supplier/${supplier?.Bone_id}`)}
+              >
+                <td className="py-2 px-2 flex items-center space-x-2 text-gray-700">
+                  <span>{index + 1}</span>
+                </td>
+                <td className="p-2 text-gray-700">
+                  <span>{supplier?.Bone_id}</span>
+                </td>
+                <td className="p-2 flex items-center space-x-2 ">
+                  <span>{supplier?.name}</span>
+                </td>
+                <td className="p-2">
+                  <span>{supplier?.location}</span>
+                </td>
+                <td className="p-2">
+                  <span>{supplier?.category}</span>
+                </td>
+                <td className="p-2  text-gray-700">{supplier?.phone}</td>
+                <td className="p-2">
+                  <span>{new Date(supplier?.createdAt).toLocaleDateString()}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
-export default TableComponent
-
-
+export default TableComponent;

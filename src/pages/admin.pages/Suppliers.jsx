@@ -4,15 +4,13 @@ import TableComponent from "../../components/admin.components/TableComponent";
 import SupplierNavbar from "../../components/admin.components/Suppliers/SupplierNavbar";
 
 const Suppliers = () => {
-
   return (
-    <div className='grid gap-3 p-3'>
+    <div className="grid gap-3 p-3 bg-[#F1F5F8]">
       <SupplierNavbar />
       <Cardpages />
       <TableComponent />
+    </div>
+  );
+};
 
-    </div >
-  )
-}
-
-export default Suppliers
+export default Suppliers;
