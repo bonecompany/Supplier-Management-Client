@@ -125,7 +125,9 @@ function TableComponent({ suppliers, isLoding }) {
           breakLinkClassName={
             "px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"
           }
-          activeClassName={"bg-slate-300 text-slate-50 border-blue-600"}
+          activeClassName={
+            "bg-slate-300 text-slate-50 font-bold border-blue-600"
+          }
         />
       </div>
     </div>
