@@ -5,7 +5,8 @@ import {
   SystemUpdateAltOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-function Cardpages() {
+
+function Cardpages({suppliers, isLoding}) {
   return (
     <div className="grid grid-cols-12 gap-6 mt-5 ">
       <Link
@@ -15,13 +16,14 @@ function Cardpages() {
         <div className="p-5">
           <div className="flex justify-between">
             <PeopleAltTwoTone style={{ width: "40px", height: "40px" }} />
+            <div className="mt-1 text-xl text-gray-600">
+                Total Suppliers
+              </div>
           </div>
           <div className="ml-2 w-full flex-1">
             <div>
-              <div className="mt-3 text-3xl font-bold leading-8">4.510</div>
-              <div className="mt-1 text-base text-gray-600">
-                Total Suppliers
-              </div>
+              <div className="mt-3 text-3xl font-bold leading-8">{suppliers?.length}</div>
+              
             </div>
           </div>
         </div>

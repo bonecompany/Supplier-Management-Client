@@ -18,7 +18,7 @@ function Graph() {
             <BarChart
               series={[
                 { data: [35, 44, 24, 34], color: "#FF6384" }, // Series 1 - Red
-                { data: [51, 6, 49, 30], color: "#36A2EB" },  // Series 2 - Blue
+                { data: [51, 6, 49, 30], color: "#36A2EB" }, // Series 2 - Blue
                 { data: [15, 25, 30, 50], color: "#FFCE56" }, // Series 3 - Yellow
                 { data: [60, 50, 15, 25], color: "#4BC0C0" }, // Series 4 - Green
               ]}

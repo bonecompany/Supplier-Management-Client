@@ -24,7 +24,7 @@ const SupplierRegistration = ({ open, onClose }) => {
       account_no: "",
       state: "",
       remarks: "",
-      RDB: "",
+      RBD_no: "",
       ifsc: "",
       category: "",
     },
@@ -152,8 +152,8 @@ const SupplierRegistration = ({ open, onClose }) => {
             </label>
 
             <label className="col-span-3">
-              <p className={inputLabel}>RDB No</p>
-              <input className={inputStyle} {...register("RDB")} />
+              <p className={inputLabel}>RBD No</p>
+              <input className={inputStyle} {...register("RBD_no")} />
             </label>
 
             <label className="col-span-3">
