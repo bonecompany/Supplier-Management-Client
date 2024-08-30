@@ -5,6 +5,8 @@ import SupplierRegistration from "./SupplierRegistration";
 
 function SupplierNavbar() {
   const [open, setOpen] = React.useState(false);
+
+  
   return (
     <div>
       <div className="grid grid-cols-4 grid-rows-1 gap-2 bg-white p-2 rounded-md">

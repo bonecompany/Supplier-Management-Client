@@ -2,29 +2,29 @@ import React, { useEffect, useState } from "react";
 import { Axios } from "../../MainRoute";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "../Loding/Skelton";
-function TableComponent() {
-  const [suppliers, setSuppliers] = useState([]);
-  const [isLoding, setIsLoading] = useState(true);
+function TableComponent({suppliers, isLoding}) {
+  // const [suppliers, setSuppliers] = useState([]);
+  // const [isLoding, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getSupplier = async () => {
-      try {
-        const response = await Axios.get("/admin/suppliers", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        setSuppliers(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const getSupplier = async () => {
+  //     try {
+  //       const response = await Axios.get("/admin/suppliers", {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
+  //       setSuppliers(response.data);
+  //       setIsLoading(false);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    getSupplier();
-  }, []);
+  //   getSupplier();
+  // }, []);
 
   if (isLoding) {
     return (
@@ -66,6 +66,9 @@ function TableComponent() {
               <th className="p-2 text-left text-lg font-medium text-gray-500">
                 Active Date
               </th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                Status
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -90,10 +93,13 @@ function TableComponent() {
                 <td className="p-2">
                   <span>{supplier?.category}</span>
                 </td>
-                <td className="p-2  text-gray-700">{supplier?.phone}</td>
+                <td className="p-2">
+                  <span>{supplier?.phone}</span>
+                </td>
                 <td className="p-2">
                   <span>{new Date(supplier?.createdAt).toLocaleDateString()}</span>
                 </td>
+                <td className={`p-2 font-medium ${supplier?.isActive ? "text-green-700" : "text-red-500"}`}>{supplier?.isActive ? "Active" : "Inactive"}</td>
               </tr>
             ))}
           </tbody>
