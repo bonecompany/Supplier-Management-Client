@@ -5,7 +5,7 @@ import Skeleton from "../Loding/Skelton";
 function TableComponent() {
   const [suppliers, setSuppliers] = useState([]);
   const [isLoding, setIsLoading] = useState(true);
-
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,8 +21,7 @@ function TableComponent() {
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-    };
-
+    }; 
     getSupplier();
   }, []);
 
