@@ -8,7 +8,7 @@ const Suppliers = () => {
     <div className="grid gap-3 p-3 bg-[#F1F5F8]">
       <SupplierNavbar />
       <Cardpages />
-      <TableComponent />
+      {/* <TableComponent /> */}
     </div>
   );
 };

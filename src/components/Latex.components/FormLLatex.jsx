@@ -83,7 +83,7 @@ const SupplierData = [
 
 function FormLLatex() {
   const [boneId, setBoneId] = useState('');
-  const [selectedSupplier, setSelectedSupplier] = useState({});
+  const [selectedSupplier, setSelectedSupplier] = useState();
   const [jar,setJar] = useState('')
 
   const handleBoneIdChange = (event) => {
@@ -139,14 +139,14 @@ function FormLLatex() {
       </div>
 
       {selectedSupplier && (
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden flex mx-auto flex-col md:flex-row w-full  max-w-3xl xl:max-w-7xl">
+        <div className=" bg-gradient-to-b from-[#38505f] to-[#0c1c23] shadow-lg rounded-lg overflow-hidden mx-36  flex flex-col md:flex-row w-fit  max-w-3xl xl:max-w-7xl">
                     <button
-            className="absolute top-2 right-2 text-gray-700 font-bold"
+            className="absolute top-2 right-2  font-bold"
             onClick={handleClose}
           >
             &times;
           </button>
-        <div className="bg-green-500 text-white p-8 md:w-1/3 flex flex-col justify-between">
+        <div className=" bg-gradient-to-b from-[#0c1c23] to-[#38505f]  text-white p-8 md:w-1/3 flex flex-col justify-between">
           <div>
             <h2 className="text-2xl font-bold mb-4">Supplier Data</h2>
             <p className="text-sm ">
@@ -179,19 +179,19 @@ function FormLLatex() {
             </div>
           </div>
         </div>
-        <div className="p-8 md:w-2/3">
+        <div className="p-8 md:w-2/3 text-white">
           <h2 className="text-2xl font-bold mb-6">Update Data</h2>
           <form>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div className='flex items-center gap-3'>
-                <span className=" text-sm font-medium text-gray-700">
+                <span className=" text-sm font-medium ">
                   Full Name:-  
                 </span>
                 <span class="font-semibold text-lg">{selectedSupplier.name}</span>
          
               </div>
-              <div className='flex items-center gap-2'>
-                <label className=" text-sm font-medium text-gray-700">
+              <div className='flex items-center gap-2 '>
+                <label className=" text-sm font-medium ">
                   Total Wt:-
                 </label>
                 <input
@@ -203,7 +203,7 @@ function FormLLatex() {
             </div>
             <div className="mb-4 flex items-center justify-between gap-3">
               <span>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium ">
                 Jars
               </label>
               <input
@@ -213,7 +213,7 @@ function FormLLatex() {
               />
               </span>
               <span>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium ">
                 Jar Wt
               </label>
               <input
@@ -223,7 +223,7 @@ function FormLLatex() {
               />
               </span>
               <span>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium ">
                 Latex Wt
               </label>
               <input
@@ -235,7 +235,7 @@ function FormLLatex() {
             </div>
             <div className="mb-4 flex items-center justify-between gap-3">
             <span>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium ">
                 Film Wt
               </label>
               <input
@@ -245,7 +245,7 @@ function FormLLatex() {
               />
               </span>
               <span>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium ">
                 Drc %
               </label>
               <input
@@ -255,7 +255,7 @@ function FormLLatex() {
               />
               </span>
               <span>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium ">
                 Drc Qty
               </label>
               <input
@@ -266,7 +266,7 @@ function FormLLatex() {
               </span>
             </div>
             {/* <div className='flex items-center gap-2 mb-5'>
-                <label className=" text-sm font-medium text-gray-700">
+                <label className=" text-sm font-medium ">
                   Phone:-
                 </label>
                 <input
@@ -277,7 +277,7 @@ function FormLLatex() {
               </div> */}
             <button
               type="submit"
-              className="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+              className="w-full bg-[#38505f]  text-white font-bold py-2 px-4 rounded-md hover:bg-[#1b4151] duration-300 focus:outline-none focus:ring-2 focus:ring-[#0c1c23] focus:ring-opacity-50"
             >
               update
             </button>
