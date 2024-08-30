@@ -30,7 +30,7 @@ const LatexChart = () => {
         data: [60, 59, 80, 81, 56, 55, 70],
         fill: false,
         backgroundColor: "rgb(75, 192, 192)",
-        borderColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 0.5)",
       },
     ],
   };
