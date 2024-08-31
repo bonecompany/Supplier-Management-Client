@@ -1,7 +1,6 @@
-
 const SidebarItem = ({ icon, label, isExpanded, onClick, isMenu }) => {
   const isActive = isMenu === label;
-  
+
   return (
     <div
       className={`flex items-center p-3 w-full  cursor-pointer transition-colors duration-300 ease-in-out rounded-lg ${

@@ -1,10 +1,11 @@
-import React from "react";
+import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import SupplierRegistration from "./SupplierRegistration";
 
-function SupplierNavbar() {
-  const [open, setOpen] = React.useState(false);
+function SupplierNavbar({ setSearchTerm, setSelectedCategory }) {
+  const [open, setOpen] = useState(false);
+
   return (
     <div>
       <div className="grid grid-cols-4 grid-rows-1 gap-2 bg-white p-2 rounded-md">
@@ -19,11 +20,15 @@ function SupplierNavbar() {
               <input
                 type="text"
                 placeholder="Search B one id or Supplier Name . . . "
-                className="w-full outline-none bg-transparent text-gray-600  "
+                className="w-full outline-none bg-transparent text-gray-600"
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               <CiSearch className=" text-2xl fill-gray-600" />
             </div>
-            <select className="col-span-1 border rounded-md p-2">
+            <select
+              className="col-span-1 border rounded-md p-2"
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
               <option value="All Suppliers">All Suppliers</option>
               <option value="Daily Collection">Daily Collection</option>
               <option value="Alternative Day Collection">

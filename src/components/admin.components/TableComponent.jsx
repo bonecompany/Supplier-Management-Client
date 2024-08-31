@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { Axios } from "../../MainRoute";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "../Loding/Skelton";
-function TableComponent() {
-  const [suppliers, setSuppliers] = useState([]);
-  const [isLoding, setIsLoading] = useState(true);
-  
-  const navigate = useNavigate();
+import ReactPaginate from "react-paginate";
 
-  useEffect(() => {
-    const getSupplier = async () => {
-      try {
-        const response = await Axios.get("/admin/suppliers", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        setSuppliers(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }; 
-    getSupplier();
-  }, []);
+function TableComponent({ suppliers, isLoding }) {
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage] = useState(10); // Adjust per page items here
+
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected);
+  };
+
+  const paginatedSuppliers = suppliers.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
 
   if (isLoding) {
     return (
@@ -41,7 +33,7 @@ function TableComponent() {
   return (
     <div>
       <div className="p-2">
-        <table className="min-w-full bg-white shadow-md rounded-md overflow-hidden mt-5 capitalize">
+        <table className="min-w-full bg-white shadow-md rounded-md overflow-hidden mt-3 capitalize">
           <thead className="bg-gray-50">
             <tr>
               <th className="p-2 text-left text-lg font-medium text-gray-500">
@@ -65,22 +57,25 @@ function TableComponent() {
               <th className="p-2 text-left text-lg font-medium text-gray-500">
                 Active Date
               </th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">
+                Status
+              </th>
             </tr>
           </thead>
           <tbody>
-            {suppliers.map((supplier, index) => (
+            {paginatedSuppliers.map((supplier, index) => (
               <tr
                 key={index}
                 className="border-t hover:bg-slate-200 duration-300 cursor-pointer"
                 onClick={() => navigate(`/admin/supplier/${supplier?.Bone_id}`)}
               >
                 <td className="py-2 px-2 flex items-center space-x-2 text-gray-700">
-                  <span>{index + 1}</span>
+                  <span>{currentPage * itemsPerPage + index + 1}</span>
                 </td>
                 <td className="p-2 text-gray-700">
                   <span>{supplier?.Bone_id}</span>
                 </td>
-                <td className="p-2 flex items-center space-x-2 ">
+                <td className="p-2 flex items-center space-x-2">
                   <span>{supplier?.name}</span>
                 </td>
                 <td className="p-2">
@@ -89,14 +84,51 @@ function TableComponent() {
                 <td className="p-2">
                   <span>{supplier?.category}</span>
                 </td>
-                <td className="p-2  text-gray-700">{supplier?.phone}</td>
                 <td className="p-2">
-                  <span>{new Date(supplier?.createdAt).toLocaleDateString()}</span>
+                  <span>{supplier?.phone}</span>
+                </td>
+                <td className="p-2">
+                  <span>
+                    {new Date(supplier?.createdAt).toLocaleDateString()}
+                  </span>
+                </td>
+                <td
+                  className={`p-2 font-medium ${
+                    supplier?.isActive ? "text-green-700" : "text-red-500"
+                  }`}
+                >
+                  {supplier?.isActive ? "Active" : "Inactive"}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <ReactPaginate
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={Math.ceil(suppliers.length / itemsPerPage)}
+          onPageChange={handlePageClick}
+          containerClassName={"flex justify-center mt-4"}
+          pageClassName={"mx-1"}
+          pageLinkClassName={
+            "px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"
+          }
+          previousClassName={"mx-1"}
+          previousLinkClassName={
+            "px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"
+          }
+          nextClassName={"mx-1"}
+          nextLinkClassName={
+            "px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"
+          }
+          breakClassName={"mx-1"}
+          breakLinkClassName={
+            "px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"
+          }
+          activeClassName={
+            "bg-slate-300 text-slate-50 font-bold border-blue-600"
+          }
+        />
       </div>
     </div>
   );
