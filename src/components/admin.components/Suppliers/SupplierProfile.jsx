@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Axios } from "../../../MainRoute";
 import Spinner from "../../Loding/Spinner";
 import { toast } from "react-toastify";
@@ -12,11 +12,14 @@ const SupplierProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
   const [pendingChanges, setPendingChanges] = useState(null);
   const [changeType, setChangeType] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    Axios.get(`/admin/supplier/${supplierId}`)
+    Axios.get(`/admin/supplier/profile/${supplierId}`)
       .then((response) => {
         setSupplier(response.data);
         setIsLoading(false);
@@ -39,11 +42,16 @@ const SupplierProfile = () => {
     setIsConfirmationOpen(true);
   };
 
+  const handleDelete = () => {
+    setChangeType("delete");
+    setIsDeleteConfirmationOpen(true);
+  };
+
   const confirmSave = () => {
     if (pendingChanges) {
-      Axios.put(`/admin/supplier/${supplier?._id}`, pendingChanges)
+      Axios.put(`/admin/supplier/update/${supplier?._id}`, pendingChanges)
         .then((response) => {
-          const { message, data } = response.data;    
+          const { message, data } = response.data;
           setSupplier(data);
           setIsModalOpen(false);
           toast.success(message);
@@ -58,6 +66,23 @@ const SupplierProfile = () => {
           setChangeType(null);
         });
     }
+  };
+
+  const confirmDelete = () => {
+    Axios.delete(`/admin/supplier/delete/${supplier._id}`)
+      .then((response) => {
+        const { message } = response.data;
+        toast.success(message);
+        navigate("/admin/suppliers");
+      })
+      .catch((error) => {
+        console.log("Supplier updating error", error);
+        toast.error("Can't Update Profile");
+      })
+      .finally(() => {
+        setIsDeleteConfirmationOpen(false);
+        setChangeType(null);
+      });
   };
 
   if (isLoading) {
@@ -76,7 +101,9 @@ const SupplierProfile = () => {
         <div className="flex w-full justify-between">
           <p className="text-xl font-medium">Code: {supplier?.Bone_id}</p>
           <p
-            className={`text-xl font-medium ${supplier?.isActive ? "text-green-600" : "text-red-600"}`}
+            className={`text-xl font-medium ${
+              supplier?.isActive ? "text-green-600" : "text-red-600"
+            }`}
           >
             {supplier?.isActive ? "Active" : "Deactivated"}
           </p>
@@ -135,10 +162,20 @@ const SupplierProfile = () => {
         </button>
         <button
           onClick={handleStatusChange}
-          className={`py-2 px-4 rounded ${supplier?.isActive ? "bg-red-500" : "bg-green-500"} text-white`}
+          className={`py-2 px-4 rounded ${
+            supplier?.isActive ? "bg-red-500" : "bg-green-500"
+          } text-white`}
         >
           {supplier?.isActive ? "Deactivate" : "Activate"}
         </button>
+        {!supplier.isActive && (
+          <button
+            onClick={handleDelete}
+            className="bg-red-500 text-white py-2 px-4 rounded"
+          >
+            Delete
+          </button>
+        )}
       </div>
 
       {/* Edit Profile Modal */}
@@ -153,11 +190,26 @@ const SupplierProfile = () => {
       {/* Confirmation Modal */}
       {isConfirmationOpen && (
         <ConfirmationModal
+          title={changeType === "status" ? "Status Changing" : "Confirm Change"}
           onConfirm={confirmSave}
           onCancel={() => setIsConfirmationOpen(false)}
           message={
             changeType === "status"
-              ? `Are you sure you want to ${supplier?.isActive ? "deactivate" : "activate"} this supplier?`
+              ? `Are you sure you want to ${
+                  supplier?.isActive ? "deactivate" : "activate"
+                } this supplier?`
+              : "Are you sure you want to save these changes?"
+          }
+        />
+      )}
+      {isDeleteConfirmationOpen && (
+        <ConfirmationModal
+          title={changeType === "delete" ? "Confirm Delete" : "Confirm Change"}
+          onConfirm={confirmDelete}
+          onCancel={() => setIsConfirmationOpen(false)}
+          message={
+            changeType === "delete"
+              ? "Are you sure you want to delete this supplier"
               : "Are you sure you want to save these changes?"
           }
         />
