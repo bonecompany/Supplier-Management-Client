@@ -49,13 +49,13 @@ function TableComponent({ suppliers, isLoding }) {
                 Location
               </th>
               <th className="p-2 text-left text-lg font-medium text-gray-500">
-                Supplier Category
+                Category
               </th>
               <th className="p-2 text-left text-lg font-medium text-gray-500">
                 Phone
               </th>
               <th className="p-2 text-left text-lg font-medium text-gray-500">
-                Active Date
+                Created Date
               </th>
               <th className="p-2 text-left text-lg font-medium text-gray-500">
                 Status
