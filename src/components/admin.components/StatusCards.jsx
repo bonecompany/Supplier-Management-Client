@@ -1,5 +1,5 @@
-import React from 'react'
-import Graph from '../../components/admin.components/Graph';
+import React from "react";
+import Graph from "../../components/admin.components/Graph";
 
 function StatusCards() {
   const cards = [
@@ -10,7 +10,7 @@ function StatusCards() {
       changeDescription: "from 2019",
       bgColor: "bg-blue-100",
       badgeColor: "bg-blue-500",
-      bg: "bg-gray-50"
+      bg: "bg-gray-50",
     },
     {
       title: "New Signups",
@@ -19,7 +19,7 @@ function StatusCards() {
       changeDescription: "from last month",
       bgColor: "bg-blue-100",
       badgeColor: "bg-green-500",
-      bg: ""
+      bg: "",
     },
     {
       title: "Active Users",
@@ -28,7 +28,7 @@ function StatusCards() {
       changeDescription: "from last week",
       bgColor: "bg-blue-100",
       badgeColor: "bg-yellow-500",
-      bg: ""
+      bg: "",
     },
     {
       title: "Revenue",
@@ -37,34 +37,38 @@ function StatusCards() {
       changeDescription: "from last quarter",
       bgColor: "bg-blue-100",
       badgeColor: "bg-red-500",
-      bg: ""
-    }
+      bg: "",
+    },
   ];
-  
+
   return (
     <>
-    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mx-8">
-    {cards.map((card, index) => (
-      <div key={index} className={`p-4 transition-shadow border border-gray-300 rounded-lg shadow-sm hover:shadow-lg ${card.bg}`}>
-        <div className="flex items-start justify-between">
-          <div className="flex flex-col space-y-2">
-            <span className="text-gray-400">{card.title}</span>
-            <span className="text-lg font-semibold">{card.value}</span>
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mx-8">
+        {cards.map((card, index) => (
+          <div
+            key={index}
+            className={`p-4 transition-all border border-gray-300 rounded-lg shadow-sm hover:shadow-lg transform hover:scale-105  duration-300 ${card.bg}`}
+          >
+            <div className="flex items-start justify-between">
+              <div className="flex flex-col space-y-2">
+                <span className="text-gray-400">{card.title}</span>
+                <span className="text-lg font-semibold">{card.value}</span>
+              </div>
+              <div className={`p-10 ${card.bgColor} rounded-md`}></div>
+            </div>
+            <div>
+              <span
+                className={`inline-block px-2 mr-2 text-sm text-white ${card.badgeColor} rounded`}
+              >
+                {card.change}
+              </span>
+              <span>{card.changeDescription}</span>
+            </div>
           </div>
-          <div className={`p-10 ${card.bgColor} rounded-md`}></div>
-        </div>
-        <div>
-          <span className={`inline-block px-2 mr-2 text-sm text-white ${card.badgeColor} rounded`}>
-            {card.change}
-          </span>
-          <span>{card.changeDescription}</span>
-        </div>
+        ))}
       </div>
-    ))}
- 
-  </div>
-  </>
-  )
+    </>
+  );
 }
 
-export default StatusCards
+export default StatusCards;

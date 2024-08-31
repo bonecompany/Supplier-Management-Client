@@ -1,15 +1,12 @@
 import React, { useEffect, useRef } from "react";
 
-const NotificationDropdown = ({ isOpen, notifications, onClose,state }) => {
+const NotificationDropdown = ({ isOpen, notifications, onClose, state }) => {
   const dropdownRef = useRef(null);
 
- 
-
   useEffect(() => {
-
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        state(false)
+        state(false);
       }
     };
 
@@ -18,7 +15,7 @@ const NotificationDropdown = ({ isOpen, notifications, onClose,state }) => {
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
 
@@ -31,9 +28,14 @@ const NotificationDropdown = ({ isOpen, notifications, onClose,state }) => {
         {notifications.length > 0 ? (
           <ul>
             {notifications.map((notification, index) => (
-              <li key={index} className="py-2 px-3 hover:bg-gray-100 rounded border-b-2">
+              <li
+                key={index}
+                className="py-2 px-3 hover:bg-gray-100 rounded border-b-2"
+              >
                 <p className="font-semibold">{notification.title}</p>
-                <p className="text-sm text-gray-600">{notification.description}</p>
+                <p className="text-sm text-gray-600">
+                  {notification.description}
+                </p>
               </li>
             ))}
           </ul>
