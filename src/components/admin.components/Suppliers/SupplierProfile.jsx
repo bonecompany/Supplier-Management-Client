@@ -120,10 +120,22 @@ const SupplierProfile = () => {
 
       <div className="mb-4">
         <h3 className="text-lg font-semibold mb-1">Account Details</h3>
-        <div className="flex justify-between pr-5">
-          <p className="text-gray-800">A/C No: {supplier?.account_no}</p>
-          <p className="text-gray-800 uppercase">IFSC: {supplier?.ifsc}</p>
-        </div>
+        {supplier?.account_no ? (
+          <div className="flex justify-between pr-5">
+            <p className="text-gray-800">A/C No: {supplier?.account_no}</p>
+            <p className="text-gray-800 uppercase">IFSC: {supplier?.ifsc}</p>
+          </div>
+        ) : (
+          <p className="text-gray-800">No Account Details</p>
+        )}
+      </div>
+
+      <div className="mb-4">
+        <h3 className="text-lg font-semibold mb-1">Other Details</h3>
+          <div className="flex justify-between pr-5">
+            <p className="text-gray-800">GST: {supplier?.GST ? supplier?.GST : "No GST"}</p>
+            <p className="text-gray-800 ">RBD: {supplier?.RBD_no ? supplier?.RBD_no : "No RBD Number"}</p>
+          </div>
       </div>
 
       <div className="mb-4">
