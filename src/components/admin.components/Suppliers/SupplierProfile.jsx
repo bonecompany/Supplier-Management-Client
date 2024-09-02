@@ -5,6 +5,7 @@ import Spinner from "../../Loding/Spinner";
 import { toast } from "react-toastify";
 import EditSupplierProfile from "./EditSupplierProfile";
 import ConfirmationModal from "./ConfirmationModal";
+import axios from "axios";
 
 const SupplierProfile = () => {
   const { supplierId } = useParams();
@@ -21,7 +22,7 @@ const SupplierProfile = () => {
   useEffect(() => {
     Axios.get(`/admin/supplier/profile/${supplierId}`)
       .then((response) => {
-        setSupplier(response.data);
+        setSupplier(response.data.data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -48,8 +49,10 @@ const SupplierProfile = () => {
   };
 
   const confirmSave = () => {
-    if (pendingChanges) {
-      Axios.put(`/admin/supplier/update/${supplier?._id}`, pendingChanges)
+    // if (pendingChanges) {
+    console.log("123")
+console.log(supplier)
+      Axios.put(`/admin/supplier/update/${supplier?._id}`)
         .then((response) => {
           const { message, data } = response.data;
           setSupplier(data);
@@ -65,7 +68,7 @@ const SupplierProfile = () => {
           setPendingChanges(null);
           setChangeType(null);
         });
-    }
+    // }
   };
 
   const confirmDelete = () => {
@@ -101,7 +104,7 @@ const SupplierProfile = () => {
         <div className="flex w-full justify-between">
           <p className="text-xl font-medium">Code: {supplier?.Bone_id}</p>
           <p
-            className={`text-xl font-medium ${
+            className={`text-lg font-medium ${
               supplier?.isActive ? "text-green-600" : "text-red-600"
             }`}
           >
@@ -165,16 +168,16 @@ const SupplierProfile = () => {
       </div>
 
       {/* Edit and Change Status Buttons */}
-      <div className="flex space-x-4">
+      <div className="flex justify-between">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-blue-500 text-white py-2 px-4 rounded"
+          className="bg-blue-500 text-white p-2 rounded text-nowrap"
         >
           Edit Profile
         </button>
         <button
           onClick={handleStatusChange}
-          className={`py-2 px-4 rounded ${
+          className={`p-2 rounded ${
             supplier?.isActive ? "bg-red-500" : "bg-green-500"
           } text-white`}
         >
@@ -183,7 +186,7 @@ const SupplierProfile = () => {
         {!supplier.isActive && (
           <button
             onClick={handleDelete}
-            className="bg-red-500 text-white py-2 px-4 rounded"
+            className="bg-red-500 text-white p-2 rounded"
           >
             Delete
           </button>
