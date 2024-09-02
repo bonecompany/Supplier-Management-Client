@@ -8,13 +8,13 @@ const ConfirmationModal = ({title, onConfirm, onCancel, message }) => {
         <p className="mb-6">{message}</p>
         <div className="flex justify-end">
           <button
-            className="bg-gray-300 text-gray-700 py-2 px-4 rounded mr-2"
+            className="bg-gray-300 py-2 px-4 rounded mr-2 hover:bg-gray-400"
             onClick={onCancel}
           >
             Cancel
           </button>
           <button
-            className="bg-blue-500 text-white py-2 px-4 rounded"
+            className="bg-blue-700 text-white py-2 px-4 rounded hover:bg-blue-500"
             onClick={onConfirm}
           >
             Confirm

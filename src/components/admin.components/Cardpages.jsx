@@ -7,9 +7,9 @@ import {
 import { Link } from "react-router-dom";
 import Skeleton from "../Loding/Skelton";
 
-function Cardpages({ suppliers, isLoding }) {
+function Cardpages({ suppliers, isLoding }) {  
 
-  const activeSuppliers = suppliers.filter(supplier => supplier.isActive);
+  const activeSuppliers = suppliers?.filter(supplier => supplier?.isActive);
 
   return (
     <div className="grid grid-cols-12 gap-6 mt-3 px-2">
