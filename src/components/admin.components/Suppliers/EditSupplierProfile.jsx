@@ -184,14 +184,14 @@ const EditSupplierProfile = ({ supplier, onClose, onSave }) => {
           <div className="flex justify-end">
             <button
               type="button"
-              className="bg-gray-300 text-gray-700 py-2 px-4 rounded mr-2"
+              className="bg-gray-300 py-2 px-4 rounded mr-2 hover:bg-slate-400"
               onClick={onClose}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded"
+              className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-500"
             >
               Save Changes
             </button>

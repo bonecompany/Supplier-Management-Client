@@ -13,8 +13,7 @@ const SupplierProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
-  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
-    useState(false);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
   const [pendingChanges, setPendingChanges] = useState(null);
   const [changeType, setChangeType] = useState(null);
   const navigate = useNavigate();
@@ -97,9 +96,9 @@ console.log(supplier)
   }
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md max-w-lg mx-auto capitalize">
+    <div className="p-6 bg-white rounded-lg shadow-md max-w-lg mx-auto">
       {/* Supplier Details */}
-      <div className="mb-4">
+      <div className="mb-4 capitalize">
         <h2 className="text-3xl font-bold mb-2">{supplier?.name}</h2>
         <div className="flex w-full justify-between">
           <p className="text-xl font-medium">Code: {supplier?.Bone_id}</p>
@@ -115,13 +114,13 @@ console.log(supplier)
         <p className="text-gray-800">Category: {supplier?.category}</p>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 capitalize">
         <h3 className="text-lg font-semibold mb-1">Contact Information</h3>
         <p className="text-gray-800">Phone: {supplier?.phone}</p>
         <p className="text-gray-800">Address: {supplier?.address}</p>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 capitalize">
         <h3 className="text-lg font-semibold mb-1">Account Details</h3>
         {supplier?.account_no ? (
           <div className="flex justify-between pr-5">
@@ -133,15 +132,19 @@ console.log(supplier)
         )}
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 capitalize">
         <h3 className="text-lg font-semibold mb-1">Other Details</h3>
-          <div className="flex justify-between pr-5">
-            <p className="text-gray-800">GST: {supplier?.GST ? supplier?.GST : "No GST"}</p>
-            <p className="text-gray-800 ">RBD: {supplier?.RBD_no ? supplier?.RBD_no : "No RBD Number"}</p>
-          </div>
+        <div className="flex justify-between pr-5">
+          <p className="text-gray-800">
+            GST: {supplier?.GST ? supplier?.GST : "No GST"}
+          </p>
+          <p className="text-gray-800 ">
+            RBD: {supplier?.RBD_no ? supplier?.RBD_no : "No RBD Number"}
+          </p>
+        </div>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 capitalize">
         <h3 className="text-lg font-semibold mb-1">Drivers</h3>
         {supplier?.drivers?.length > 0 ? (
           <ul className="list-disc list-inside text-gray-800">
@@ -154,7 +157,7 @@ console.log(supplier)
         )}
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 capitalize">
         <h3 className="text-lg font-semibold mb-1">Tappers</h3>
         {supplier?.tappers?.length > 0 ? (
           <ul className="list-disc list-inside text-gray-800">
@@ -168,25 +171,43 @@ console.log(supplier)
       </div>
 
       {/* Edit and Change Status Buttons */}
+
       <div className="flex justify-between">
         <button
           onClick={() => setIsModalOpen(true)}
           className="bg-blue-500 text-white p-2 rounded text-nowrap"
+
+      <div className="flex space-x-4 capitalize">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-500"
+
         >
           Edit Profile
         </button>
         <button
           onClick={handleStatusChange}
+
           className={`p-2 rounded ${
             supplier?.isActive ? "bg-red-500" : "bg-green-500"
+
+          className={`py-2 px-4 rounded ${
+            supplier?.isActive
+              ? "bg-red-600 hover:bg-red-500"
+              : "bg-green-600 hover:bg-green-500"
+
           } text-white`}
         >
           {supplier?.isActive ? "Deactivate" : "Activate"}
         </button>
-        {!supplier.isActive && (
+          {!supplier.isActive && (
           <button
             onClick={handleDelete}
+
             className="bg-red-500 text-white p-2 rounded"
+
+            className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-500"
+
           >
             Delete
           </button>
@@ -221,7 +242,7 @@ console.log(supplier)
         <ConfirmationModal
           title={changeType === "delete" ? "Confirm Delete" : "Confirm Change"}
           onConfirm={confirmDelete}
-          onCancel={() => setIsConfirmationOpen(false)}
+          onCancel={() => setIsDeleteConfirmationOpen(false)}
           message={
             changeType === "delete"
               ? "Are you sure you want to delete this supplier"
