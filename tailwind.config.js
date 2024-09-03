@@ -15,10 +15,11 @@ export default {
       boxShadow: {
         // 'custom-light': '0 2px 4px rgba(0, 0, 0, 0.1)',
         'custom-dark': '0 4px 6px rgba(0, 0, 0, 0.3)',
+        'custom-dark-2': '0 3px 6px rgba(0, 0, 0, 0.5)',
       },
       borderWidth: {
         "border-top": "1px"
-      }
+      },
     },
   },
 
