@@ -5,7 +5,6 @@ import Spinner from "../../Loding/Spinner";
 import { toast } from "react-toastify";
 import EditSupplierProfile from "./EditSupplierProfile";
 import ConfirmationModal from "./ConfirmationModal";
-import axios from "axios";
 
 const SupplierProfile = () => {
   const { supplierId } = useParams();
@@ -48,10 +47,8 @@ const SupplierProfile = () => {
   };
 
   const confirmSave = () => {
-    // if (pendingChanges) {
-    console.log("123")
-console.log(supplier)
-      Axios.put(`/admin/supplier/update/${supplier?._id}`)
+    if (pendingChanges) {
+      Axios.put(`/admin/supplier/update/${supplier?._id}`, pendingChanges)
         .then((response) => {
           const { message, data } = response.data;
           setSupplier(data);
@@ -67,7 +64,7 @@ console.log(supplier)
           setPendingChanges(null);
           setChangeType(null);
         });
-    // }
+    }
   };
 
   const confirmDelete = () => {
@@ -172,42 +169,27 @@ console.log(supplier)
 
       {/* Edit and Change Status Buttons */}
 
-      <div className="flex justify-between">
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-blue-500 text-white p-2 rounded text-nowrap"
-
       <div className="flex space-x-4 capitalize">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-500"
-
+          className="bg-blue-600 text-white py-2 px-4 rounded text-nowrap hover:bg-blue-500"
         >
           Edit Profile
         </button>
         <button
           onClick={handleStatusChange}
-
-          className={`p-2 rounded ${
-            supplier?.isActive ? "bg-red-500" : "bg-green-500"
-
           className={`py-2 px-4 rounded ${
             supplier?.isActive
               ? "bg-red-600 hover:bg-red-500"
               : "bg-green-600 hover:bg-green-500"
-
           } text-white`}
         >
           {supplier?.isActive ? "Deactivate" : "Activate"}
         </button>
-          {!supplier.isActive && (
+        {!supplier.isActive && (
           <button
             onClick={handleDelete}
-
-            className="bg-red-500 text-white p-2 rounded"
-
             className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-500"
-
           >
             Delete
           </button>
