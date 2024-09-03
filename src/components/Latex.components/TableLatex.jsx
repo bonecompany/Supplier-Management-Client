@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 
-
-
 const users = [
     {
       id: 1,
@@ -105,7 +103,7 @@ function TableLatex() {
     <div className="flex justify-center items-center  bg-gradient-to-r p-4">
     <div className="overflow-x-auto w-full max-w-6xl">
       <table className="min-w-full bg-white shadow-md rounded-lg ">
-        <thead className="bg-purple-900 text-white">
+        <thead className=" bg-[#2e4452] text-white ">
           <tr>
             <th className="py-2 px-4 text-left">boneId</th>
             <th className="py-2 px-4 text-left">Supplier Name</th>

@@ -11,6 +11,9 @@ function Cardpages({ suppliers, isLoding }) {
 
   const activeSuppliers = suppliers?.filter(supplier => supplier?.isActive);
 
+  console.log(suppliers)
+
+
   return (
     <div className="grid grid-cols-12 gap-6 mt-3 px-2">
       <Link
@@ -55,7 +58,7 @@ function Cardpages({ suppliers, isLoding }) {
                 <div>
                   <div className="mt-2 text-3xl font-bold leading-8">
                     {activeSuppliers?.length}
-                  </div>
+               </div> 
                   <div className="mt-1 text-base text-gray-600">
                     Active Suppliers
                   </div>

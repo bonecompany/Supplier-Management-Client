@@ -100,7 +100,7 @@ const SupplierProfile = () => {
         <div className="flex w-full justify-between">
           <p className="text-xl font-medium">Code: {supplier?.Bone_id}</p>
           <p
-            className={`text-xl font-medium ${
+            className={`text-lg font-medium ${
               supplier?.isActive ? "text-green-600" : "text-red-600"
             }`}
           >
@@ -168,10 +168,11 @@ const SupplierProfile = () => {
       </div>
 
       {/* Edit and Change Status Buttons */}
+
       <div className="flex space-x-4 capitalize">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-500"
+          className="bg-blue-600 text-white py-2 px-4 rounded text-nowrap hover:bg-blue-500"
         >
           Edit Profile
         </button>
