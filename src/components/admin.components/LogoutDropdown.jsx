@@ -26,7 +26,6 @@ const LogoutDropdown = ({ isOpen, onClose, onLogout }) => {
         <ul className="">
           <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer border-b-2">
             <span className="flex gap-4 items-center">
-
               <IoMdSettings />
               Settings
             </span>
