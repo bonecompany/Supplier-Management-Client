@@ -11,9 +11,6 @@ function Cardpages({ suppliers, isLoding }) {
 
   const activeSuppliers = suppliers?.filter(supplier => supplier?.isActive);
 
-  console.log(suppliers)
-
-
   return (
     <div className="grid grid-cols-12 gap-6 mt-3 px-2">
       <Link

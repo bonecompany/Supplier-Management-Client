@@ -5,7 +5,6 @@ import SupplierRegistration from "./SupplierRegistration";
 
 function SupplierNavbar({ setSearchTerm, setSelectedCategory }) {
   const [open, setOpen] = useState(false);
-console.log("from nave")
   return (
     <div>
       <div className="grid grid-cols-4 grid-rows-1 gap-2 bg-white p-2 rounded-md">
