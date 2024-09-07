@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Axios } from "../../../MainRoute.jsx";
 import { useState } from "react";
-import TapperAdd from "../Tappers/TapperAdd.jsx";
+// import TapperAdd from "../Tappers/TapperAdd.jsx";
 
 const SupplierRegistration = ({ open, onClose }) => {
-  const [openTapper, setOpenTapper] = useState(true);
-  const [errorRes, setErrorRes] = useState([]);
+const [openTapper, setOpenTapper] = useState(true);
+const [errorRes, setErrorRes] = useState([]);
 
   const {
     register,
@@ -29,6 +29,9 @@ const SupplierRegistration = ({ open, onClose }) => {
       RBD_no: "",
       ifsc: "",
       category: "",
+      tappername: "",
+      tapperphone: "",
+      tapperplace: "",
     },
   });
 
@@ -68,10 +71,11 @@ const SupplierRegistration = ({ open, onClose }) => {
         <h1 className="text-center text-2xl font-bold mb-5 text-gray-700">
           Supplier Add Form
         </h1>
-        <div className="flex">
-        <form onSubmit={handleSubmit(onSubmit)}>
-         
-            <div className="grid grid-cols-6 gap-2">
+
+        <div className="flex justify-center " >
+          <form onSubmit={handleSubmit(onSubmit)}>
+
+            <div className="grid grid-cols-6 gap-2 ">
               <label className="col-span-4">
                 <p className={inputLabel}>Name *</p>
                 <input
@@ -175,12 +179,10 @@ const SupplierRegistration = ({ open, onClose }) => {
                   <p className={inputError}>{errors.category.message}</p>
                 )}
               </label>
-
               <label className="col-span-3">
                 <p className={inputLabel}>Remarks</p>
                 <input className={inputStyle} {...register("remarks")} />
               </label>
-
               <label className="col-span-3">
                 <p className={inputLabel}>State</p>
                 <input className={inputStyle} {...register("state")} />
@@ -188,59 +190,82 @@ const SupplierRegistration = ({ open, onClose }) => {
               {/* {errors.root && <p className={inputError}>{errors.root.message}</p>} */}
             </div>
 
-{/* {
-  openTapper?
-            <div className={`${openTapper ? "relative inset-5 mt-1 w-[40%] blur-none saturate-150" : ""}`}>
-  <div
-    className={`bg-gray-200 max-h-[60vh] overflow-y-auto rounded-xl shadow-custom-dark-2 px-4 py-2 duration-[2000ms] ${
-      openTapper ? "scale-100 opacity-100" : "scale-150 opacity-0"
-    } scrollbar-hide`}
-  >
-    <TapperAdd onCloseTapper={() => setOpenTapper(false)} />
-  </div>
-</div>
-:<div className="relative inset-6 mx-6">
-  <button className="p-2 w-fit bg-slate-600 font-medium text-white hover:duration-500 hover:scale-105 rounded-md shadow-custom-dark border-t-border-top outline-none" onClick={() => setOpenTapper(true)}>
-    Add Tapper</button>
-</div>
-} */}
+
+            <div className="flex justify-center">
+            {
+              openTapper ?
+                <div className={`${openTapper ? "relative inset-5 mt-1 w-[60%] " : ""}`}>
+                  <div
+                    className={`bg-gray-200 max-h-[60vh] overflow-y-auto rounded-xl shadow-custom-dark-2 px-4 py-2 duration-[2000ms] ${openTapper ? "scale-100 opacity-100" : "scale-150 opacity-0"
+                      } scrollbar-hide`}
+                  >
+
+                    <div>
+                    <div onClick={() => setOpenTapper(false)} className="flex justify-end">
+          <RxCross2
+            size={25}
+            className="hover:text-red-500 hover:duration-300 hover:scale-125 cursor-pointer"
+          />
+        </div>
+                      <h1 className="text-center text-2xl font-bold mb-5 text-gray-700">
+                        Add Tapper
+                      </h1>
+                      <div>
+                        <label>
+                          <p className={inputLabel}>Name *</p>
+                          <input className={inputStyle} {...register("tappername", {
+                            required: "Name is required",
+                          })} />
+                          {errors.name && (
+                            <p className={inputError}>{errors.name.message}</p>
+                          )}
+                        </label>
+                        <label>
+                          <p className={inputLabel}>Phone *</p>
+                          <input className={inputStyle} {...register("tapperphone", {
+                            required: "Phone is required",
+                          })} />
+                          {errors.phone && (
+                            <p className={inputError}>{errors.phone.message}</p>
+                          )}
+                        </label>
+                        <label>
+                          <p className={inputLabel}>Place</p>
+                          <input className={inputStyle} {...register("tapperplace")} />
+                        </label>
+                      </div>
+                    </div>
 
 
-          
+                  </div>
+                </div>
 
-          <div className="flex gap-5 m-3 text-lg text-white">
-            <button
-              type="reset"
-              onClick={onClose}
-              className="px-8 py-1 bg-slate-700 hover:bg-red-500 hover:duration-500 hover:text-white hover:scale-105 outline-none rounded-md shadow-custom-dark border-t-border-top"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-8 py-1 bg-slate-700 hover:duration-500 hover:bg-blue-500 hover:scale-105 rounded-md shadow-custom-dark border-t-border-top outline-none"
-            >
-              Save
-            </button>
-          </div>
-        </form>
-        {
-  openTapper?
-            <div className={`${openTapper ? "relative inset-5 mt-1 w-[40%] blur-none saturate-150" : ""}`}>
-  <div
-    className={`bg-gray-200 max-h-[60vh] overflow-y-auto rounded-xl shadow-custom-dark-2 px-4 py-2 duration-[2000ms] ${
-      openTapper ? "scale-100 opacity-100" : "scale-150 opacity-0"
-    } scrollbar-hide`}
-  >
-    <TapperAdd onCloseTapper={() => setOpenTapper(false)} />
-  </div>
-</div>
-:<div className="relative inset-6 mx-6">
-  <button className="p-2 w-fit bg-slate-600 font-medium text-white hover:duration-500 hover:scale-105 rounded-md shadow-custom-dark border-t-border-top outline-none" onClick={() => setOpenTapper(true)}>
-    Add Tapper</button>
-</div>
-}
-</div>
+                : <div className="flex justify-center mt-6">
+                  <button className="p-2 w-fit bg-slate-600 font-medium text-white hover:duration-500 hover:scale-105 rounded-md shadow-custom-dark outline-none" onClick={() => setOpenTapper(true)}>
+                    Add Tapper</button>
+                </div>
+            }
+            </div>
+
+            <div className="flex justify-center gap-5 m-10 text-lg text-white">
+              <button
+                type="reset"
+                onClick={onClose}
+                className="px-8 py-1 bg-slate-700 hover:bg-red-500 hover:duration-500 hover:text-white hover:scale-105 outline-none rounded-md shadow-custom-dark border-t-border-top"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-8 py-1 bg-slate-700 hover:duration-500 hover:bg-blue-500 hover:scale-105 rounded-md shadow-custom-dark border-t-border-top outline-none"
+              >
+                Save
+              </button>
+            </div>
+
+   
+          </form>
+        </div>
       </div>
     </div>
   );

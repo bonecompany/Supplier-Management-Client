@@ -1,20 +1,15 @@
 import React from "react";
 import { BarChart } from "@mui/x-charts";
-
+import PieChart from "../../components/admin.components/PieChart"
 function Graph() {
   return (
     <div className="py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
+        <div className="grid grid-cols-2 items-center gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
           {/* Image 1 - start */}
-          <a
-            href="#"
-            className="group relative flex h-48 max-sm:h-24 max-sm:w-40  items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80"
-          ></a>
-          {/* Image 1 - end */}
+          <div> <PieChart/></div>
 
-          {/* Image 2 - start */}
-          <div className="group relative flex h-48 max-sm:h-24 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80">
+          <div className="group relative flex h-48 max-sm:h-24 items-end overflow-hidden rounded-lg md:col-span-2 md:h-80">
             <BarChart
               series={[
                 { data: [35, 44, 24, 34], color: "#FF6384" }, // Series 1 - Red
@@ -27,7 +22,7 @@ function Graph() {
               margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
             />
           </div>
-          {/* Image 2 - end */}
+         
         </div>
       </div>
     </div>

@@ -51,23 +51,23 @@ const SupplierProfile = () => {
   const confirmSave = () => {
     // if (pendingChanges) {
     console.log("123")
-console.log(supplier)
-      Axios.put(`/admin/supplier/update/${supplier?._id}`)
-        .then((response) => {
-          const { message, data } = response.data;
-          setSupplier(data);
-          setIsModalOpen(false);
-          toast.success(message);
-        })
-        .catch((error) => {
-          console.log("Supplier updating error", error);
-          toast.error("Can't Update Profile");
-        })
-        .finally(() => {
-          setIsConfirmationOpen(false);
-          setPendingChanges(null);
-          setChangeType(null);
-        });
+    console.log(supplier)
+    Axios.put(`/admin/supplier/update/${supplier?._id}`)
+      .then((response) => {
+        const { message, data } = response.data;
+        setSupplier(data);
+        setIsModalOpen(false);
+        toast.success(message);
+      })
+      .catch((error) => {
+        console.log("Supplier updating error", error);
+        toast.error("Can't Update Profile");
+      })
+      .finally(() => {
+        setIsConfirmationOpen(false);
+        setPendingChanges(null);
+        setChangeType(null);
+      });
     // }
   };
 
@@ -104,9 +104,8 @@ console.log(supplier)
         <div className="flex w-full justify-between">
           <p className="text-xl font-medium">Code: {supplier?.Bone_id}</p>
           <p
-            className={`text-lg font-medium ${
-              supplier?.isActive ? "text-green-600" : "text-red-600"
-            }`}
+            className={`text-lg font-medium ${supplier?.isActive ? "text-green-600" : "text-red-600"
+              }`}
           >
             {supplier?.isActive ? "Active" : "Deactivated"}
           </p>
@@ -135,10 +134,10 @@ console.log(supplier)
 
       <div className="mb-4">
         <h3 className="text-lg font-semibold mb-1">Other Details</h3>
-          <div className="flex justify-between pr-5">
-            <p className="text-gray-800">GST: {supplier?.GST ? supplier?.GST : "No GST"}</p>
-            <p className="text-gray-800 ">RBD: {supplier?.RBD_no ? supplier?.RBD_no : "No RBD Number"}</p>
-          </div>
+        <div className="flex justify-between pr-5">
+          <p className="text-gray-800">GST: {supplier?.GST ? supplier?.GST : "No GST"}</p>
+          <p className="text-gray-800 ">RBD: {supplier?.RBD_no ? supplier?.RBD_no : "No RBD Number"}</p>
+        </div>
       </div>
 
       <div className="mb-4">
@@ -177,9 +176,8 @@ console.log(supplier)
         </button>
         <button
           onClick={handleStatusChange}
-          className={`p-2 rounded ${
-            supplier?.isActive ? "bg-red-500" : "bg-green-500"
-          } text-white`}
+          className={`p-2 rounded ${supplier?.isActive ? "bg-red-500" : "bg-green-500"
+            } text-white`}
         >
           {supplier?.isActive ? "Deactivate" : "Activate"}
         </button>
@@ -210,9 +208,8 @@ console.log(supplier)
           onCancel={() => setIsConfirmationOpen(false)}
           message={
             changeType === "status"
-              ? `Are you sure you want to ${
-                  supplier?.isActive ? "deactivate" : "activate"
-                } this supplier?`
+              ? `Are you sure you want to ${supplier?.isActive ? "deactivate" : "activate"
+              } this supplier?`
               : "Are you sure you want to save these changes?"
           }
         />
