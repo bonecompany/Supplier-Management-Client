@@ -7,7 +7,7 @@ const SupplierData = [
   {
     id: 1,
     name: "Rajan Raju",
-    boneId: 2134128,
+    boneId: 213,
     TotalWt: 10,
     Jars: 2,
     JarWt: 4.80,
@@ -22,7 +22,7 @@ const SupplierData = [
   {
     id: 2,
     name: "Unias Ubaid",
-    boneId: 2141248,
+    boneId: 214,
     TotalWt: 11.5,
     Jars: 1,
     JarWt: 5.80,
@@ -37,7 +37,7 @@ const SupplierData = [
   {
     id: 3,
     name: "Jabar Kareem",
-    boneId: 4677427,
+    boneId: 467,
     TotalWt: 555.00,
     Jars: 3,
     JarWt: 8.5,
