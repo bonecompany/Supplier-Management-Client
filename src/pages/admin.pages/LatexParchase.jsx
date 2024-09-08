@@ -6,7 +6,7 @@ import LatexInputTable from '../../components/admin.components/Latex/LatexInputT
 
 const LatexParchase = () => {
   return (
-    <div>
+    <div className='bg-[#F1F5F8]'>
       <LatexInputTable/>
       {/* <FormLLatex/>
       <TableLatex/> */}
