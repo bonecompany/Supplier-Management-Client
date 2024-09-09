@@ -27,7 +27,7 @@ const SupplierDetails = () => {
         <LatexChart />
       </div>
       <div className="col-span-12">
-        <LatexTable />
+        <LatexTable supplier={"from supplier"} />
       </div>
     </div>
   );
