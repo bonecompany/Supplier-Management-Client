@@ -7,9 +7,9 @@ import {
 import { Link } from "react-router-dom";
 import Skeleton from "../Loding/Skelton";
 
-function Cardpages({ suppliers, isLoding }) {
+function Cardpages({ suppliers, isLoding }) {  
 
-  const activeSuppliers = suppliers.filter(supplier => supplier.isActive);
+  const activeSuppliers = suppliers?.filter(supplier => supplier?.isActive);
 
   console.log(suppliers)
 

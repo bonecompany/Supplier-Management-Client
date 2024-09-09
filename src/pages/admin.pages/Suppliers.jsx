@@ -37,7 +37,7 @@ const Suppliers = () => {
         supplier.Bone_id.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredSuppliers(filtered);
-  }, [searchTerm, suppliers]);
+  }, [searchTerm, suppliers]);  
 
   useEffect(() => {
     const filterSuppliers = suppliers.filter((supplier) =>
