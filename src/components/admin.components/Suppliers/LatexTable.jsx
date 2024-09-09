@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const LatexTable = () => {
+const LatexTable = (props) => {
+
+
+const [data,setData] = useState('')
 
   const latexData = [
     { date: '01-08-2024', quantity: 65 },
@@ -10,7 +13,12 @@ const LatexTable = () => {
     { date: '05-08-2024', quantity: 56 },
     { date: '06-08-2024', quantity: 55 },
     { date: '07-08-2024', quantity: 40 },
-  ];
+  ];  
+
+  
+
+// setData(props)
+console.log(props)
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">

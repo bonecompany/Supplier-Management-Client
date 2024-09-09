@@ -49,7 +49,7 @@ const Suppliers = () => {
   }, [selectedCategory, suppliers]);
 
   return (
-    <div className="grid gap-3 p-3 bg-gradient-to-b from-[#F1F5F8] to-[#fcfcfc]">
+    <div className="grid gap-3 p-3 bg-gradient-to-b from-[#F1F5F8] to-[#fcfcfc] ">
       <SupplierNavbar
         setSearchTerm={setSearchTerm}
         setSelectedCategory={setSelectedCategory}
