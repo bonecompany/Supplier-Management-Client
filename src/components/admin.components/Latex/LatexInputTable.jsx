@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Axios } from "../../../MainRoute";
 import { toast } from "react-toastify";
 
 const LatexInputTable = () => {
-    const [selectedDate, setSelectedDate] = useState(
-      () => new Date().toISOString().split("T")[0]
-    ); // Default to today
+  const [selectedDate, setSelectedDate] = useState(
+    () => new Date().toISOString().split("T")[0]
+  ); // Default to today
   const [suppliers, setSuppliers] = useState([
     {
       date: selectedDate,
@@ -20,19 +20,39 @@ const LatexInputTable = () => {
   ]);
   const [bigJarWeight, setBigJarWeight] = useState(2.4); // Default weight for big jar (kg)
   const [smallJarWeight, setSmallJarWeight] = useState(1.4); // Default weight for small jar (kg)
+  const grossWeightInputRefs = useRef([]); // Ref to focus on gross weight input after fetching supplier name
 
   // Fetch supplier name by supplier code
   const fetchSupplierName = async (index) => {
     const { supplierCode } = suppliers[index];
+
     if (supplierCode) {
+      // Check for duplicate supplier codes
+      const isDuplicate = suppliers.some(
+        (supplier, idx) => idx !== index && supplier.supplierCode === supplierCode
+      );
+
+      if (isDuplicate) {
+        toast.error("Supplier already entered.");
+        return;
+      }
+
       try {
         const response = await Axios.get(`/admin/supplier/${supplierCode}`);
         const newSuppliers = [...suppliers];
         newSuppliers[index].supplierName = response.data.data.name;
         setSuppliers(newSuppliers);
+
+        // Focus on gross weight input after fetching supplier name
+        if (grossWeightInputRefs.current[index]) {
+          grossWeightInputRefs.current[index].focus();
+        }
       } catch (error) {
         console.error("Error fetching supplier data:", error);
+        toast.error("Supplier not found. Please check the supplier code.");
       }
+    } else {
+      toast.warn("Please enter a supplier code.");
     }
   };
 
@@ -70,15 +90,15 @@ const LatexInputTable = () => {
   // Handle form submission
   const handleSubmit = async () => {
     // Check if all suppliers have required fields
-    const isValid = suppliers.every((supplier) =>
-      supplier.supplierCode && supplier.date && supplier.grossWeight
+    const isValid = suppliers.every(
+      (supplier) => supplier.supplierCode && supplier.date && supplier.grossWeight
     );
-  
+
     if (!isValid) {
       alert("Please fill in all required fields.");
       return;
     }
-  
+
     try {
       const response = await Axios.post("/admin/latex-purchase", suppliers);
       console.log("Latex data submitted: ", response.data);
@@ -86,7 +106,6 @@ const LatexInputTable = () => {
       console.error("Error submitting latex data:", error);
     }
   };
-  
 
   // Handle form cancel
   const handleCancel = () => {
@@ -103,7 +122,7 @@ const LatexInputTable = () => {
     ]);
   };
 
-  // Handle Enter key press to fetch supplier name
+  // Handle Enter key press to fetch supplier name and move focus
   const handleKeyDown = (index, e) => {
     if (e.key === "Enter") {
       fetchSupplierName(index);
@@ -130,9 +149,7 @@ const LatexInputTable = () => {
               />
             </div>
             <div>
-              <label className="block text-gray-700">
-                Small Jar Weight (kg)
-              </label>
+              <label className="block text-gray-700">Small Jar Weight (kg)</label>
               <input
                 className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 w-32"
                 type="number"
@@ -174,12 +191,8 @@ const LatexInputTable = () => {
               <th className="border border-gray-300 p-4 text-left">
                 Small Jars Count
               </th>
-              <th className="border border-gray-300 p-4 text-left">
-                Jars Weight
-              </th>
-              <th className="border border-gray-300 p-4 text-left">
-                Latex Weight
-              </th>
+              <th className="border border-gray-300 p-4 text-left">Jars Weight</th>
+              <th className="border border-gray-300 p-4 text-left">Latex Weight</th>
             </tr>
           </thead>
           <tbody>
@@ -188,19 +201,20 @@ const LatexInputTable = () => {
                 <td className="border border-gray-300 p-4">{index + 1}</td>
                 <td className="border border-gray-300 p-4">
                   <input
-                    className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 w-32"
+                    className={`p-2 border ${
+                      !supplier.supplierCode ? "border-red-500" : "border-gray-300"
+                    } rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 w-32`}
                     type="text"
                     value={supplier.supplierCode}
                     onChange={(e) =>
-                      handleSupplierChange(
-                        index,
-                        "supplierCode",
-                        e.target.value
-                      )
+                      handleSupplierChange(index, "supplierCode", e.target.value)
                     }
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     placeholder="Enter Supplier Code"
                   />
+                  {!supplier.supplierCode && (
+                    <span className="text-red-500 text-sm">Required</span>
+                  )}
                 </td>
                 <td className="border border-gray-300 p-4">
                   <span
@@ -213,7 +227,8 @@ const LatexInputTable = () => {
                 </td>
                 <td className="border border-gray-300 p-4">
                   <input
-                    className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 w-40"
+                    ref={(el) => (grossWeightInputRefs.current[index] = el)} // Store reference to gross weight input
+                    className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 w-32"
                     type="number"
                     value={supplier.grossWeight}
                     onChange={(e) =>
@@ -224,66 +239,59 @@ const LatexInputTable = () => {
                 </td>
                 <td className="border border-gray-300 p-4">
                   <input
-                    className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 w-32"
+                    className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 w-24"
                     type="number"
                     value={supplier.bigJarsCount}
                     onChange={(e) =>
-                      handleSupplierChange(
-                        index,
-                        "bigJarsCount",
-                        e.target.value
-                      )
+                      handleSupplierChange(index, "bigJarsCount", e.target.value)
                     }
                     placeholder="Big Jars Count"
                   />
                 </td>
                 <td className="border border-gray-300 p-4">
                   <input
-                    className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 w-32"
+                    className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 w-24"
                     type="number"
                     value={supplier.smallJarsCount}
                     onChange={(e) =>
-                      handleSupplierChange(
-                        index,
-                        "smallJarsCount",
-                        e.target.value
-                      )
+                      handleSupplierChange(index, "smallJarsCount", e.target.value)
                     }
                     placeholder="Small Jars Count"
                   />
                 </td>
                 <td className="border border-gray-300 p-4">
                   <span className="block p-2 bg-gray-100 rounded">
-                    {supplier.jarsWeight.toFixed(2)} kg
+                    {supplier.jarsWeight.toFixed(2)}
                   </span>
                 </td>
                 <td className="border border-gray-300 p-4">
                   <span className="block p-2 bg-gray-100 rounded">
-                    {supplier.latexWeight.toFixed(2)} kg
+                    {supplier.latexWeight.toFixed(2)}
                   </span>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <div className="flex justify-end mt-4">
+
+        <div className="flex justify-end space-x-4 mt-4">
           <button
-            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-            onClick={handleSubmit}
+            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            onClick={addSupplierRow}
           >
-            Submit
+            Add Supplier
           </button>
           <button
-            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded ml-4"
+            className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
             onClick={handleCancel}
           >
             Cancel
           </button>
           <button
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ml-4"
-            onClick={addSupplierRow}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={handleSubmit}
           >
-            Add Supplier
+            Submit
           </button>
         </div>
       </div>
