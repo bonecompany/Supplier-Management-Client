@@ -51,10 +51,10 @@ function StatusCards() {
           >
             <div className="flex items-start justify-between">
               <div className="flex flex-col space-y-2">
-                <span className="text-gray-400">{card.title}</span>
+                <span className="text-gray-600">{card.title}</span>
                 <span className="text-lg font-semibold">{card.value}</span>
               </div>
-              <div className={`p-10 ${card.bgColor} rounded-md`}></div>
+              {/* <div className={`p-10 ${card.bgColor} rounded-md`}></div> */}
             </div>
             <div>
               <span
