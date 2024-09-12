@@ -22,6 +22,20 @@ const LatexInputTable = () => {
   const [smallJarWeight, setSmallJarWeight] = useState(1.4); // Default weight for small jar (kg)
   const grossWeightInputRefs = useRef([]); // Ref to focus on gross weight input after fetching supplier name
 
+  useEffect(() => {
+    // Handle page refresh confirmation
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = ""; // Show a browser-specific confirmation dialog
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   // Fetch supplier name by supplier code
   const fetchSupplierName = async (index) => {
     const { supplierCode } = suppliers[index];
@@ -89,6 +103,9 @@ const LatexInputTable = () => {
 
   // Handle form submission
   const handleSubmit = async () => {
+    const confirmSubmit = window.confirm("Are you sure you want to submit?");
+    if (!confirmSubmit) return;
+
     // Check if all suppliers have required fields
     const isValid = suppliers.every(
       (supplier) => supplier.supplierCode && supplier.date && supplier.grossWeight
@@ -109,6 +126,11 @@ const LatexInputTable = () => {
 
   // Handle form cancel
   const handleCancel = () => {
+    const confirmCancel = window.confirm(
+      "Are you sure you want to cancel? This will reset all data."
+    );
+    if (!confirmCancel) return;
+
     setSuppliers([
       {
         supplierCode: "",
