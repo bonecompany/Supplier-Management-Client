@@ -5,7 +5,6 @@ const Tapers = () => {
   const [tappers,setTappers] = useState([])
 
   useEffect(() => {
-    console.log("123")
     const getTapper = async () => {
       try {
         const response = await Axios.get("/admin/tappers", {
@@ -16,7 +15,6 @@ const Tapers = () => {
         console.error("Error fetching data:", error);
       }
     };
-
     getTapper();
   }, []);
   return (

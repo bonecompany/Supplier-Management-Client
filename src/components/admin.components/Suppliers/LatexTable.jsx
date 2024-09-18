@@ -21,20 +21,25 @@ const [data,setData] = useState('')
 console.log(props)
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md">
+    <div className="p-4 rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-2">Latex Purchase Table</h2>
-      <table className="min-w-full bg-white">
+      <table className="min-w-full  ">
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b-2 border-gray-200">Date</th>
-            <th className="py-2 px-4 border-b-2 border-gray-200">Quantity (Kg)</th>
+            <th className=" border border-black 0">Date</th>
+            <th className=" border border-black 0">Quantity (Kg)</th>
+            <th className=" border border-black 0">Quantity (Kg)</th>
+            <th className=" border border-black 0">Quantity (Kg)</th>
           </tr>
         </thead>
         <tbody>
           {latexData.map((entry, index) => (
-            <tr key={index}>
-              <td className="py-2 px-4 border-b border-gray-200">{entry.date}</td>
-              <td className="py-2 px-4 border-b border-gray-200">{entry.quantity}</td>
+            <tr key={index} className='text-center'>
+              
+              <td className=" border border-black ">{entry.date}</td>
+              <td className=" border border-black ">{entry.quantity}</td>
+              <td className=" border border-black ">{entry.quantity}</td>
+              <td className=" border border-black ">{entry.quantity}</td>
             </tr>
           ))}
         </tbody>
