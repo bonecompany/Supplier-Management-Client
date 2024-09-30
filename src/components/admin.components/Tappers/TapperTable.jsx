@@ -6,6 +6,10 @@ function TapperTable({ tappers }) {
 
     console.log(tappers)
 
+    const handleRowClick = (tapper) => {
+         navigate(`/admin/tapper/${tapper.phone}`,{state:{tapper}})
+    }
+
     return (
         <div>
             <table className="min-w-full bg-white shadow-md rounded-md overflow-hidden mt-3 capitalize">
@@ -39,8 +43,7 @@ function TapperTable({ tappers }) {
                       
                         <tr
                             className="border-t hover:bg-slate-200 duration-300 cursor-pointer"
-                            // onClick={() => navigate(`/admin/tapper/${Math.round(Math.random() * tapper.phone)}`)}
-                            onClick={() => navigate(`/admin/tapper/${tapper.phone}`)}
+                            onClick={() => handleRowClick(tapper)}
                         >
                             <td className="py-2 px-2 flex items-center space-x-2 text-gray-700">
                                 <p>{index + 1}</p>
