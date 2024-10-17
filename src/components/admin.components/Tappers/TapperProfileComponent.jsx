@@ -1,3 +1,18 @@
+
+import React, { useEffect,useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import TapperEdit from './TapperEdit'
+function TapperProfileComponent() {
+
+  const [openEdit,setOpenEdit] = useState(false)
+
+  console.log("-----------------------------")
+  const location = useLocation()
+  console.log(location)
+  const tapper = location.state?.tapper
+  console.log("-----------------------------")
+
+
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Axios } from "../../../MainRoute"; // Ensure Axios is correctly imported
@@ -25,29 +40,44 @@ function TapperProfile() {
     getActivity();
   }, [tapper]);
 
+
   if (!tapper) {
     return <div>Loading Tapper Data...</div>; // Handle case where tapper is undefined
   }
 
   return (
-    <div className="bg-[#F0F8FF] max-w-[50vw] max-h-fit overflow-auto text-white">
-      {/* Tapper Info Section */}
-      <div className="bg-[#091d27c6] p-8 rounded-t-2xl flex flex-col gap-1">
-        <h1 className="font-semibold text-2xl relative right-3">Tapper</h1>
-        <h1 className="font-medium text-lg">Name: {tapper.name}</h1>
-        <h1>Phone: {tapper.phone}</h1>
-        <h1>Place: {tapper.place}</h1>
-      </div>
 
-      {/* Supplier Info Section */}
-      <div className="bg-[#686f70] rounded-b-2xl p-8 flex flex-col gap-1">
-        <h1 className="font-semibold text-2xl relative right-3">Supplier</h1>
-        <h1>Name: {tapper?.supplier?.name || "N/A"}</h1>
-        <h1>Bone ID: {tapper?.supplier?.Bone_id || "N/A"}</h1>
-        <h1>Phone: {tapper?.supplier?.phone || "N/A"}</h1>
-        <h1>Category: {tapper?.supplier?.category || "N/A"}</h1>
-        <h1>Place: {tapper?.supplier?.location || "N/A"}</h1>
+    <div className='lg:ml-28 mt-10'>
+      <div className='bg-[#F0F8FF] w-full  max-w-[60vw]  overflow-auto text-white scrollbar-hide'>
+    <div className='relative bg-[#4391a4]   rounded-t-2xl flex flex-col gap-1'>
+      <div className= 'bg-[#1a3258] p-3 rounded-t-2xl flex flex-col gap-1'> 
+      <h1 className='font-semibold text-2xl'>Tapper</h1>
+      <h1 className='font-medium text-lg relative left-5'>Name : {tapper.name}</h1>
       </div>
+        <div className=' rounded-b-2xl px-8 flex flex-col gap-1'>
+        <h1>Phone : {tapper.phone}</h1>
+        <h1>Place : {tapper.place}</h1>
+        </div>
+      
+       <button className=' absolute right-6 top-24 mt-3 text-xl font-bold w-fit hover:scale-110 duration-200'onClick={() => setOpenEdit(true)} >EDIT</button>
+    </div>   
+    {
+      openEdit&&(
+        <TapperEdit
+        tapper={tapper}
+        onClose={() => setOpenEdit(false)}
+        />
+      )
+    }
+    <div className='bg-[#1a3258] rounded-b-2xl p-8 flex flex-col gap-1'> 
+        <h1 className='font-semibold text-2xl relative right-3'>supplier</h1>
+       <h1>Name : {tapper?.supplier?.name}</h1>
+       <h1>Bone ID : {tapper?.supplier?.Bone_id}</h1>
+       <h1>Phone: {tapper?.supplier?.phone}</h1>
+       <h1>Category : {tapper?.supplier?.category}</h1>
+       <h1>Place : {tapper?.supplier?.location}</h1>
+    </div>
+
 
       {/* Additional Tapper Details */}
       {tapperDetails && (
@@ -62,4 +92,5 @@ function TapperProfile() {
   );
 }
 
-export default TapperProfile;
+export default TapperProfileComponent
+

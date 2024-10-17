@@ -1,15 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 function TapperTable({ tappers }) {
-
     const navigate = useNavigate()
-
     console.log(tappers)
-
     const handleRowClick = (tapper) => {
          navigate(`/admin/tapper/${tapper.phone}`,{state:{tapper}})
     }
-
     return (
         <div>
             <table className="min-w-full bg-white shadow-md rounded-md overflow-hidden mt-3 capitalize">
