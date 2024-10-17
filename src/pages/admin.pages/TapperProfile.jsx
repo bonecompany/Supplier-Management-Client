@@ -4,7 +4,6 @@ import LatexTable from "../../components/admin.components/Suppliers/LatexTable";
 import ActivityCheck from "../../components/admin.components/Tappers/ActivityCheck"
 import PieChart from "../../components/admin.components/PieChart"
 import TapperProfileComponent from '../../components/admin.components/Tappers/TapperProfileComponent';
-import async_handler from '../../../../Supplier-Management-Server/src/utils/asyncHandler';
 import { Axios } from '../../MainRoute';
 import EditProfile from '../../components/admin.components/EditProfile';
 function TapperProfile() {
