@@ -8,6 +8,7 @@ import ConfirmationModal from "./ConfirmationModal";
 
 const SupplierProfile = () => {
   const { supplierId } = useParams();
+  
   const [supplier, setSupplier] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);

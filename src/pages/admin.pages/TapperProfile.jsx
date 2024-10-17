@@ -13,17 +13,16 @@ function TapperProfile() {
 
     
   return (
-    <div>
-      <div className='flex h-fit justify-around m-9'>
-      {/* <div className='mt-10'><PieChart /></div> */}
-    <div><ActivityCheck/></div>
+    <div >
+      <div className=' grid grid-cols-1 lg:grid-cols-2 m-10 '>
+      
+    <ActivityCheck/>
      <TapperProfileComponent/>
 
       </div>
-    {/* <LatexChart/>  */}
+
     <LatexTable tapper={"from tapper"}/>
     
-    {/* <EditProfile/> */}
     </div>
   )
 }

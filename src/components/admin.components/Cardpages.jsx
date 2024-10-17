@@ -106,7 +106,7 @@ function Cardpages({ suppliers, isLoding }) {
             </div>
           </div>
         </div>
-      </Link>
+      </Link> 
     </div>
   );
 }

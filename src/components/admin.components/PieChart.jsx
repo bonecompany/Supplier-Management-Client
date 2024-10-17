@@ -12,12 +12,16 @@ const ApexChart = () => {
   return (
     <>
    
-        <ReactApexChart
+   <ReactApexChart
           options={chartState.options}
           series={chartState.series}
           type="pie"
-          width={340}
+          width="100%"
+          className="max-w-[300px] sm:max-w-[500px]"
         />
+
+
+ 
 
       </>
  
