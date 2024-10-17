@@ -87,7 +87,7 @@ const AdminNavbar = ({ toggleSidebar, isExpanded }) => {
   return (
     <div className="flex items-center justify-between w-full bg-slate-100 shadow-md">
       <div
-        className={`flex items-center p-4 transition-all duration-500 ease-in-out delay-150 ${
+        className={`flex items-center p-4  ${
           isExpanded ? "w-64 justify-between" : "justify-start gap-4"
         }`}
       >

@@ -19,8 +19,8 @@ const Suppliers = () => {
             "Content-Type": "application/json",
           },
         });
-        setSuppliers(response.data);
-        setFilteredSuppliers(response.data);
+        setSuppliers(response.data.data);
+        setFilteredSuppliers(response.data.data);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -37,7 +37,7 @@ const Suppliers = () => {
         supplier.Bone_id.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredSuppliers(filtered);
-  }, [searchTerm, suppliers]);
+  }, [searchTerm, suppliers]);  
 
   useEffect(() => {
     const filterSuppliers = suppliers.filter((supplier) =>
@@ -49,7 +49,7 @@ const Suppliers = () => {
   }, [selectedCategory, suppliers]);
 
   return (
-    <div className="grid gap-3 p-3 bg-gradient-to-b from-[#F1F5F8] to-[#fcfcfc]">
+    <div className="grid gap-3 p-3 bg-gradient-to-b from-[#F1F5F8] to-[#fcfcfc] ">
       <SupplierNavbar
         setSearchTerm={setSearchTerm}
         setSelectedCategory={setSelectedCategory}

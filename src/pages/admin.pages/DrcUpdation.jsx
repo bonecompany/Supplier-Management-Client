@@ -1,8 +1,14 @@
 import React from 'react'
-
+import UpdatingTableComponents from '../../components/UpdatingTableComponents'
 const DrcUpdation = () => {
+
   return (
-    <div>DrcUpdation</div>
+    <div>
+
+      <UpdatingTableComponents />
+
+    </div>
+
   )
 }
 

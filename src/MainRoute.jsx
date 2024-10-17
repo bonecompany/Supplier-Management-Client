@@ -14,7 +14,8 @@ import DrcUpdation from "./pages/admin.pages/DrcUpdation";
 import Drivers from "./pages/admin.pages/Drivers";
 import Tapers from "./pages/admin.pages/Tapers";
 import SupplierDetails from "./pages/admin.pages/SupplierDetails";
-
+import TapperProfile from "./pages/admin.pages/TapperProfile";
+import DriverProfile from "./pages/admin.pages/DriverProfile";
 
 
 export const Axios = axios.create({
@@ -39,6 +40,22 @@ const MainRoute = () => {
             element={
               // <ProtectedAdminRoute>
               <SupplierDetails />
+              // </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/tapper/:id"
+            element={
+              // <ProtectedAdminRoute>
+              <TapperProfile />
+              // </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/driver/:id"
+            element={
+              // <ProtectedAdminRoute>
+              <DriverProfile />
               // </ProtectedAdminRoute>
             }
           />
