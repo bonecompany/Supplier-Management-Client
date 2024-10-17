@@ -1,3 +1,4 @@
+
 import React, { useEffect,useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import TapperEdit from './TapperEdit'
@@ -12,8 +13,40 @@ function TapperProfileComponent() {
   console.log("-----------------------------")
 
 
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Axios } from "../../../MainRoute"; // Ensure Axios is correctly imported
+
+function TapperProfile() {
+  const location = useLocation();
+  const tapper = location.state?.tapper;
+  const [tapperDetails, setTapperDetails] = useState(null);
+
+  useEffect(() => {
+    const getActivity = async () => {
+      if (tapper && tapper._id) {
+        try {
+          const id = tapper._id;
+          console.log("Fetching tapper ID:", id);
+          const response = await Axios.get(`/admin/tappers/${id}`);
+          setTapperDetails(response?.data?.data);
+          console.log("Fetched tapper details:", response?.data?.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
+
+    getActivity();
+  }, [tapper]);
+
+
+  if (!tapper) {
+    return <div>Loading Tapper Data...</div>; // Handle case where tapper is undefined
+  }
 
   return (
+
     <div className='lg:ml-28 mt-10'>
       <div className='bg-[#F0F8FF] w-full  max-w-[60vw]  overflow-auto text-white scrollbar-hide'>
     <div className='relative bg-[#4391a4]   rounded-t-2xl flex flex-col gap-1'>
@@ -44,8 +77,20 @@ function TapperProfileComponent() {
        <h1>Category : {tapper?.supplier?.category}</h1>
        <h1>Place : {tapper?.supplier?.location}</h1>
     </div>
-      </div>
+
+
+      {/* Additional Tapper Details */}
+      {tapperDetails && (
+        <div className="bg-[#d9d9d9] p-6 mt-4 rounded-2xl">
+          <h2 className="font-semibold text-xl">Activity Details</h2>
+          {/* Render additional tapper details if available */}
+          <p>Latex Collected: {tapperDetails?.latexCollected || "N/A"}</p>
+          {/* Add more activity-related fields if needed */}
+        </div>
+      )}
     </div>
-  )
+  );
 }
+
 export default TapperProfileComponent
+

@@ -13,7 +13,8 @@ const SupplierProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
-  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
   const [pendingChanges, setPendingChanges] = useState(null);
   const [changeType, setChangeType] = useState(null);
   const navigate = useNavigate();
@@ -48,28 +49,24 @@ const SupplierProfile = () => {
   };
 
   const confirmSave = () => {
-
-    // if (pendingChanges) {
-    console.log("123")
-    console.log(supplier)
-    Axios.put(`/admin/supplier/update/${supplier?._id}`)
-      .then((response) => {
-        const { message, data } = response.data;
-        setSupplier(data);
-        setIsModalOpen(false);
-        toast.success(message);
-      })
-      .catch((error) => {
-        console.log("Supplier updating error", error);
-        toast.error("Can't Update Profile");
-      })
-      .finally(() => {
-        setIsConfirmationOpen(false);
-        setPendingChanges(null);
-        setChangeType(null);
-      });
-    // }
-
+    if (pendingChanges) {
+      Axios.put(`/admin/supplier/update/${supplier?._id}`, pendingChanges)
+        .then((response) => {
+          const { message, data } = response.data;
+          setSupplier(data);
+          setIsModalOpen(false);
+          toast.success(message);
+        })
+        .catch((error) => {
+          console.log("Supplier updating error", error);
+          toast.error("Can't Update Profile");
+        })
+        .finally(() => {
+          setIsConfirmationOpen(false);
+          setPendingChanges(null);
+          setChangeType(null);
+        });
+    }
   };
 
   const confirmDelete = () => {
@@ -80,8 +77,8 @@ const SupplierProfile = () => {
         navigate("/admin/suppliers");
       })
       .catch((error) => {
-        console.log("Supplier updating error", error);
-        toast.error("Can't Update Profile");
+        console.log("Supplier deleting error", error);
+        toast.error("Can't Delete Profile");
       })
       .finally(() => {
         setIsDeleteConfirmationOpen(false);
@@ -105,8 +102,9 @@ const SupplierProfile = () => {
         <div className="flex w-full justify-between">
           <p className="text-xl font-medium">Code: {supplier?.Bone_id}</p>
           <p
-            className={`text-lg font-medium ${supplier?.isActive ? "text-green-600" : "text-red-600"
-              }`}
+            className={`text-lg font-medium ${
+              supplier?.isActive ? "text-green-600" : "text-red-600"
+            }`}
           >
             {supplier?.isActive ? "Active" : "Deactivated"}
           </p>
@@ -136,10 +134,12 @@ const SupplierProfile = () => {
       <div className="mb-4 capitalize">
         <h3 className="text-lg font-semibold mb-1">Other Details</h3>
         <div className="flex justify-between pr-5">
-
-          <p className="text-gray-800">GST: {supplier?.GST ? supplier?.GST : "No GST"}</p>
-          <p className="text-gray-800 ">RBD: {supplier?.RBD_no ? supplier?.RBD_no : "No RBD Number"}</p>
-
+          <p className="text-gray-800">
+            GST: {supplier?.GST ? supplier?.GST : "No GST"}
+          </p>
+          <p className="text-gray-800">
+            RBD: {supplier?.RBD_no ? supplier?.RBD_no : "No RBD Number"}
+          </p>
         </div>
       </div>
 
@@ -170,7 +170,6 @@ const SupplierProfile = () => {
       </div>
 
       {/* Edit and Change Status Buttons */}
-
       <div className="flex space-x-4 capitalize">
         <button
           onClick={() => setIsModalOpen(true)}
@@ -180,12 +179,9 @@ const SupplierProfile = () => {
         </button>
         <button
           onClick={handleStatusChange}
-
-
-          className={`p-2 rounded ${supplier?.isActive ? "bg-red-500" : "bg-green-500"
-            } text-white`}
-
-
+          className={`p-2 rounded ${
+            supplier?.isActive ? "bg-red-500" : "bg-green-500"
+          } text-white`}
         >
           {supplier?.isActive ? "Deactivate" : "Activate"}
         </button>
@@ -216,8 +212,9 @@ const SupplierProfile = () => {
           onCancel={() => setIsConfirmationOpen(false)}
           message={
             changeType === "status"
-              ? `Are you sure you want to ${supplier?.isActive ? "deactivate" : "activate"
-              } this supplier?`
+              ? `Are you sure you want to ${
+                  supplier?.isActive ? "deactivate" : "activate"
+                } this supplier?`
               : "Are you sure you want to save these changes?"
           }
         />
@@ -229,7 +226,7 @@ const SupplierProfile = () => {
           onCancel={() => setIsDeleteConfirmationOpen(false)}
           message={
             changeType === "delete"
-              ? "Are you sure you want to delete this supplier"
+              ? "Are you sure you want to delete this supplier?"
               : "Are you sure you want to save these changes?"
           }
         />
