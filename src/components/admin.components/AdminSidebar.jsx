@@ -30,10 +30,10 @@ const AdminSidebar = () => {
       <div className="flex h-full pt-[72px] ">
         <aside
           className={`flex flex-col ${isExpanded ? "w-64 px-2" : "w-16"
-            } bg-gradient-to-b from-[#303b53] to-[#172131] text-white h-full transition-width duration-300 shadow-lg`}
+            } bg-gradient-to-b from-[#303b53] to-[#172131] text-white h-full transition-width duration-200 shadow-lg`}
         >
-          <nav className="flex flex-col justify-between flex-1">
-            <div className="flex flex-col space-y-2 mt-4 px-1">
+          <nav className="flex flex-col justify-between flex-1 ">
+            <div className="flex flex-col space-y-2 mt-4 px-1 ">
               <SidebarItem
                 icon={<FaHome />}
                 label="Home"
@@ -109,7 +109,7 @@ const AdminSidebar = () => {
             © 2024 B One Rubbers
           </div>
         </aside>
-        <main className="flex-1 bg-gray-50 overflow-auto">
+        <main className="w-[100vh] h-full flex-1 bg-gray-50 overflow-auto ">
           <Outlet />
         </main>
       </div>

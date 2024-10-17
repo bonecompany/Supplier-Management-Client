@@ -8,7 +8,6 @@ const LatexInputTable = () => {
   ); // Default to today
   const [suppliers, setSuppliers] = useState([
     {
-      date: selectedDate,
       supplierCode: "",
       supplierName: "",
       grossWeight: 0,
@@ -38,6 +37,7 @@ const LatexInputTable = () => {
 
   // Fetch supplier name by supplier code
   const fetchSupplierName = async (index) => {
+
     const { supplierCode } = suppliers[index];
 
     if (supplierCode) {
@@ -56,7 +56,7 @@ const LatexInputTable = () => {
         const newSuppliers = [...suppliers];
         newSuppliers[index].supplierName = response.data.data.name;
         setSuppliers(newSuppliers);
-
+        console.log(suppliers);
         // Focus on gross weight input after fetching supplier name
         if (grossWeightInputRefs.current[index]) {
           grossWeightInputRefs.current[index].focus();
@@ -78,7 +78,7 @@ const LatexInputTable = () => {
       const totalJarsWeight =
         newSuppliers[index].bigJarsCount * bigJarWeight +
         newSuppliers[index].smallJarsCount * smallJarWeight;
-      newSuppliers[index].jarsWeight = totalJarsWeight;
+      newSuppliers[index].jarsWeight = totalJarsWeight
     }
     newSuppliers[index].latexWeight =
       newSuppliers[index].grossWeight - newSuppliers[index].jarsWeight;
@@ -103,27 +103,27 @@ const LatexInputTable = () => {
 
   // Handle form submission
   const handleSubmit = async () => {
+
+    console.log(suppliers)
     const confirmSubmit = window.confirm("Are you sure you want to submit?");
     if (!confirmSubmit) return;
-
-    // Check if all suppliers have required fields
     const isValid = suppliers.every(
-      (supplier) => supplier.supplierCode && supplier.date && supplier.grossWeight
+      (supplier) => supplier.supplierCode  && supplier.grossWeight
     );
-
     if (!isValid) {
       alert("Please fill in all required fields.");
       return;
     }
-
     try {
-      const response = await Axios.post("/admin/latex-purchase", suppliers);
-      console.log("Latex data submitted: ", response.data);
+      suppliers.unshift(selectedDate)
+      console.log(suppliers)
+      const response = await Axios.post("/admin/supplier/latex",{data:suppliers});
+      console.log(response);
     } catch (error) {
       console.error("Error submitting latex data:", error);
     }
   };
-
+  
   // Handle form cancel
   const handleCancel = () => {
     const confirmCancel = window.confirm(
@@ -146,6 +146,7 @@ const LatexInputTable = () => {
 
   // Handle Enter key press to fetch supplier name and move focus
   const handleKeyDown = (index, e) => {
+    
     if (e.key === "Enter") {
       fetchSupplierName(index);
     }
@@ -221,7 +222,10 @@ const LatexInputTable = () => {
             {suppliers.map((supplier, index) => (
               <tr className="bg-white hover:bg-gray-50" key={index}>
                 <td className="border border-gray-300 p-4">{index + 1}</td>
-                <td className="border border-gray-300 p-4">
+                <td className="border border-gray-300 p-3 w-full flex flex-col">
+                {!supplier.supplierCode && (
+                    <span className="text-red-500 text-sm">Required</span>
+                  )}
                   <input
                     className={`p-2 border ${
                       !supplier.supplierCode ? "border-red-500" : "border-gray-300"
@@ -232,19 +236,17 @@ const LatexInputTable = () => {
                       handleSupplierChange(index, "supplierCode", e.target.value)
                     }
                     onKeyDown={(e) => handleKeyDown(index, e)}
-                    placeholder="Enter Supplier Code"
+                    placeholder="Enter B-one ID "
                   />
-                  {!supplier.supplierCode && (
-                    <span className="text-red-500 text-sm">Required</span>
-                  )}
+
                 </td>
                 <td className="border border-gray-300 p-4">
                   <span
                     className={`block p-2 bg-gray-100 rounded ${
-                      !supplier.supplierName && "text-red-500"
+                      !supplier.supplierName && "text-gray-400 select-none"
                     }`}
                   >
-                    {supplier.supplierName ? supplier.supplierName : "N/A"}
+                    {supplier.supplierName ? supplier.supplierName : "name"}
                   </span>
                 </td>
                 <td className="border border-gray-300 p-4">

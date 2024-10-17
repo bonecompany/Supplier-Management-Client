@@ -16,6 +16,7 @@ function CalendarApp({ id }) {
     const [activeDates, setActiveDates] = useState([]);
 
     // Fetch active dates on mount or when `id` changes
+    
     useEffect(() => {
         const getActivity = async () => {
             if (id && id._id) {
@@ -39,8 +40,8 @@ function CalendarApp({ id }) {
     const activeFormattedDates = formatActiveDates();
 
     return (
-        <div className="flex gap-10 justify-end mr-9 ">
-            <div className="w-96 h-60  ">
+
+            <div className="w-96 h-60 ">
                 <div className="flex justify-between items-center">
                     <h1 className="select-none font-semibold">
                         {months[today.month()]}, {today.year()}
@@ -121,7 +122,7 @@ function CalendarApp({ id }) {
                     )}
                 </div>
             </div>
-        </div>
+
     );
 }
 
