@@ -19,7 +19,7 @@ import DriverProfile from "./pages/admin.pages/DriverProfile";
 
 
 export const Axios = axios.create({
-  baseURL: "http://localhost:3333/api",
+  baseURL: "https://supplier-management-server.onrender.com/api",
 });
 
 const MainRoute = () => {
