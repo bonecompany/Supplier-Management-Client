@@ -12,7 +12,7 @@ const NotFound = () => {
           Sorry, the page you're looking for doesn't exist.
         </p>
         <Link
-          to="/"
+          to="/admin-login"
           className="inline-block bg-cyan-900 text-white px-6 py-2 rounded-full hover:bg-cyan-700 transition-colors duration-200"
         >
           Go Home
