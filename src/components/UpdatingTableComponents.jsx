@@ -33,6 +33,7 @@ function UpdatingTableComponents() {
     }
   };
 
+  
   const handleFilm = (e, index) => {
     const updatedValue = e.target.value;
   
