@@ -22,6 +22,7 @@ export const Axios = axios.create({
   baseURL: "https://supplier-management-server.onrender.com/api",
 });
 
+
 const MainRoute = () => {
   return (
     <>
@@ -39,24 +40,24 @@ const MainRoute = () => {
             path="/admin/supplier/:supplierId"
             element={
               <ProtectedAdminRoute>
-                <SupplierDetails />
+              <SupplierDetails />
               </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/tapper/:id"
             element={
-
+              <ProtectedAdminRoute>
               <TapperProfile />
-
+               </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/driver/:id"
             element={
-
+              <ProtectedAdminRoute>
               <DriverProfile />
-
+              </ProtectedAdminRoute>
             }
           />
         </Route>
