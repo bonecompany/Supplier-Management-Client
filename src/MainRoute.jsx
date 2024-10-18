@@ -28,7 +28,7 @@ const MainRoute = () => {
       <ToastContainer />
       <Routes>
         <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/" element={<AdminSidebar />}>
+        <Route path="/admin" element={<AdminSidebar />}>
           <Route index element={<AdminHome />} />
           <Route path="/admin/latex-parchase" element={<LatexParchase />} />
           <Route path="/admin/drc-updation" element={<DrcUpdation />} />
@@ -39,20 +39,24 @@ const MainRoute = () => {
             path="/admin/supplier/:supplierId"
             element={
               <ProtectedAdminRoute>
-              <SupplierDetails />
+                <SupplierDetails />
               </ProtectedAdminRoute>
             }
           />
           <Route
             path="/admin/tapper/:id"
             element={
+
               <TapperProfile />
+
             }
           />
           <Route
             path="/admin/driver/:id"
             element={
+
               <DriverProfile />
+
             }
           />
         </Route>
