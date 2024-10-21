@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import AdminLogin from "./pages/admin.pages/AdminLogin";
 import AdminSidebar from "./components/admin.components/AdminSidebar";
 import AdminHome from "./pages/admin.pages/AdminHome";
-import ProtectedAdminRoute from "./Authentications/ProtectedAdminRoute";
-import AdminLoginProttect from "./Authentications/AdminLoginProttect";
+// import ProtectedAdminRoute from "./Authentications/ProtectedAdminRoute";
+// import AdminLoginProttect from "./Authentications/AdminLoginProttect";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -42,25 +42,25 @@ const MainRoute = () => {
           <Route
             path="/admin/supplier/:supplierId"
             element={
-              <ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
               <SupplierDetails />
-              </ProtectedAdminRoute>
+              // {/* </ProtectedAdminRoute> */}
             }
           />
           <Route
             path="/admin/tapper/:id"
             element={
-              <ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
               <TapperProfile />
-               </ProtectedAdminRoute>
+              //  {/* </ProtectedAdminRoute> */}
             }
           />
           <Route
             path="/admin/driver/:id"
             element={
-              <ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
               <DriverProfile />
-              </ProtectedAdminRoute>
+              // </ProtectedAdminRoute>
             }
           />
         </Route>
