@@ -1,29 +1,25 @@
-import React, { useEffect } from 'react'
-import LatexChart from "../../components/admin.components/Suppliers/LatexChart";
-import LatexTable from "../../components/admin.components/Suppliers/LatexTable";
-import ActivityCheck from "../../components/admin.components/Tappers/ActivityCheck"
-import PieChart from "../../components/admin.components/PieChart"
+import React from 'react';
+import ActivityCheck from "../../components/admin.components/Tappers/ActivityCheck";
 import TapperProfileComponent from '../../components/admin.components/Tappers/TapperProfileComponent';
-import { Axios } from '../../MainRoute';
-import EditProfile from '../../components/admin.components/EditProfile';
+import LatexTable from "../../components/admin.components/Suppliers/LatexTable";
+
 function TapperProfile() {
-
-
-
-    
   return (
-    <div >
-      <div className=' grid grid-cols-1 lg:grid-cols-2 m-10 '>
-      
-    <ActivityCheck/>
-     <TapperProfileComponent/>
-
+    <div className="p-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 m-10">
+        <div className="col-span-1">
+          <ActivityCheck />
+        </div>
+        <div className="col-span-1">
+          <TapperProfileComponent />
+        </div>
       </div>
 
-    <LatexTable tapper={"from tapper"}/>
-    
+      <LatexTable tapper={"from tapper"} />
     </div>
-  )
+  );
 }
 
-export default TapperProfile
+
+export default TapperProfile;
+
