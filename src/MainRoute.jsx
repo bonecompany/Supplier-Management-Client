@@ -17,13 +17,13 @@ import SupplierDetails from "./pages/admin.pages/SupplierDetails";
 import TapperProfile from "./pages/admin.pages/TapperProfile";
 import DriverProfile from "./pages/admin.pages/DriverProfile";
 
-export const Axios = axios.create({
-  baseURL: "https://supplier-management-server.onrender.com/api",
-});
-
 // export const Axios = axios.create({
-//   baseURL: "http://localhost:3333/api",
+//   baseURL: "https://supplier-management-server.onrender.com/api",
 // });
+
+export const Axios = axios.create({
+  baseURL: "http://localhost:3333/api",
+});
 
 
 const MainRoute = () => {
