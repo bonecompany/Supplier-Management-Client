@@ -3,7 +3,7 @@ import ReactApexChart from 'react-apexcharts';
 
 const ApexChart = () => {
   const [chartState] = useState({
-    series: [70, 65, 90, 20],
+    series: [70, 65, 90, 50, 89],
     options: {
       labels: ['Supplier', 'Tapper', 'Latex', 'Driver'],
       chart: {

@@ -68,7 +68,7 @@ const AdminSidebar = () => {
                 isExpanded={isExpanded}
                 isMenu={isMenu}
                 onClick={() => {
-                  navigate("/admin/latex-purchase");
+                  navigate("/admin/latex-parchase");
                   setIsExpanded(false);
                   setIsMenu("Latex Purchase");
                 }}
