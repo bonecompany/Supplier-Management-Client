@@ -20,4 +20,6 @@ function TapperProfile() {
   );
 }
 
+
 export default TapperProfile;
+
