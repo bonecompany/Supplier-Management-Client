@@ -57,7 +57,7 @@ const AdminSidebar = () => {
                 isExpanded={isExpanded}
                 isMenu={isMenu}
                 onClick={() => {
-                  navigate("/admin");
+                  navigate("/");
                   setIsExpanded(!isExpanded);
                   setIsMenu("Home");
                 }}

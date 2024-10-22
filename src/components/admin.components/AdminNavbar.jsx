@@ -56,7 +56,7 @@ const AdminNavbar = ({ toggleSidebar, isExpanded, screen }) => {
     sessionStorage.removeItem("adminToken");
     toast.success("Successfully logged out!");
     setTimeout(() => {
-      navigate("/admin-login");
+      navigate("/login");
     }, 1000);
   };
 
