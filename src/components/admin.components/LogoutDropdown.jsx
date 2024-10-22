@@ -21,7 +21,7 @@ const LogoutDropdown = ({ isOpen, onClose, onLogout }) => {
     isOpen && (
       <div
         ref={dropdownRef}
-        className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-lg p-2 z-50 "
+        className="absolute right-2 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-lg p-2 z-50 "
       >
         <ul className="">
           <li className="py-2 px-4 hover:bg-gray-100 cursor-pointer border-b-2">

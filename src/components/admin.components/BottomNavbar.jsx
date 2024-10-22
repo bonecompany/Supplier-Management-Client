@@ -9,7 +9,8 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const BottomNavbar = ({ isMenu, setIsMenu }) => {
+const BottomNavbar = ({ isMenu, setIsMenu,screen }) => {
+  console.log(screen)
   const navigate = useNavigate();
 
   return (
