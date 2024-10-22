@@ -19,7 +19,7 @@ const BottomNavbar = ({ isMenu, setIsMenu,screen }) => {
         <button
           className={`flex flex-col items-center ${isMenu === "Home" ? "text-yellow-500" : ""}`}
           onClick={() => {
-            navigate("/admin");
+            navigate("/");
             setIsMenu("Home");
           }}
         >
