@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import AdminLogin from "./pages/admin.pages/AdminLogin";
 import AdminSidebar from "./components/admin.components/AdminSidebar";
 import AdminHome from "./pages/admin.pages/AdminHome";
-import ProtectedAdminRoute from "./Authentications/ProtectedAdminRoute";
-import AdminLoginProttect from "./Authentications/AdminLoginProttect";
+// import ProtectedAdminRoute from "./Authentications/ProtectedAdminRoute";
+// import AdminLoginProttect from "./Authentications/AdminLoginProttect";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -16,14 +16,16 @@ import Tapers from "./pages/admin.pages/Tapers";
 import SupplierDetails from "./pages/admin.pages/SupplierDetails";
 import TapperProfile from "./pages/admin.pages/TapperProfile";
 import DriverProfile from "./pages/admin.pages/DriverProfile";
-
-export const Axios = axios.create({
-  baseURL: "https://supplier-management-server.onrender.com/api",
-});
+import Billing from "./pages/admin.pages/Billing";
 
 // export const Axios = axios.create({
-//   baseURL: "http://localhost:3333/api",
+//   baseURL: "https://supplier-management-server.onrender.com/api",
 // });
+
+export const Axios = axios.create({
+  baseURL: "http://localhost:3333/api",
+});
+
 
 
 const MainRoute = () => {
@@ -31,7 +33,8 @@ const MainRoute = () => {
     <>
       <ToastContainer />
       <Routes>
-        {/* <Route path="/" element={<AdminLogin />} /> */}
+        <Route path="/login" element={<AdminLogin />} />
+
         <Route path="/" element={<AdminSidebar />}>
           <Route index element={<AdminHome />} />
           <Route path="/admin/latex-parchase" element={<LatexParchase />} />
@@ -39,28 +42,29 @@ const MainRoute = () => {
           <Route path="/admin/suppliers" element={<Suppliers />} />
           <Route path="/admin/drivers" element={<Drivers />} />
           <Route path="/admin/tapers" element={<Tapers />} />
+          <Route path="/admin/billing" element={<Billing />} />
           <Route
             path="/admin/supplier/:supplierId"
             element={
-              <ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
               <SupplierDetails />
-              </ProtectedAdminRoute>
+              // {/* </ProtectedAdminRoute> */}
             }
           />
           <Route
             path="/admin/tapper/:id"
             element={
-              <ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
               <TapperProfile />
-               </ProtectedAdminRoute>
+              //  {/* </ProtectedAdminRoute> */}
             }
           />
           <Route
             path="/admin/driver/:id"
             element={
-              <ProtectedAdminRoute>
+              // <ProtectedAdminRoute>
               <DriverProfile />
-              </ProtectedAdminRoute>
+              // </ProtectedAdminRoute>
             }
           />
         </Route>

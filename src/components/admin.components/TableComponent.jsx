@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "../Loding/Skelton";
 import ReactPaginate from "react-paginate";
@@ -31,35 +31,19 @@ function TableComponent({ suppliers, isLoding }) {
   }
 
   return (
-    <div>
+    <div className="overflow-x-auto">
       <div className="p-2">
         <table className="min-w-full bg-white shadow-md rounded-md overflow-hidden mt-3 capitalize">
           <thead className="bg-gray-50">
             <tr>
-              <th className="p-2 text-left text-lg font-medium text-gray-500">
-                #
-              </th>
-              <th className="p-2 text-left text-lg font-medium text-gray-500">
-                B-one ID
-              </th>
-              <th className="p-2 text-left text-lg font-medium text-gray-500">
-                Name
-              </th>
-              <th className="p-2 text-left text-lg font-medium text-gray-500">
-                Location
-              </th>
-              <th className="p-2 text-left text-lg font-medium text-gray-500">
-                Category
-              </th>
-              <th className="p-2 text-left text-lg font-medium text-gray-500">
-                Phone
-              </th>
-              <th className="p-2 text-left text-lg font-medium text-gray-500">
-                Created Date
-              </th>
-              <th className="p-2 text-left text-lg font-medium text-gray-500">
-                Status
-              </th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">#</th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">B-one ID</th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">Name</th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">Location</th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">Category</th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">Phone</th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">Created Date</th>
+              <th className="p-2 text-left text-lg font-medium text-gray-500">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -88,21 +72,16 @@ function TableComponent({ suppliers, isLoding }) {
                   <span>{supplier?.phone}</span>
                 </td>
                 <td className="p-2">
-                  <span>
-                    {new Date(supplier?.createdAt).toLocaleDateString()}
-                  </span>
+                  <span>{new Date(supplier?.createdAt).toLocaleDateString()}</span>
                 </td>
-                <td
-                  className={`p-2 font-medium ${
-                    supplier?.isActive ? "text-green-700" : "text-red-500"
-                  }`}
-                >
+                <td className={`p-2 font-medium ${supplier?.isActive ? "text-green-700" : "text-red-500"}`}>
                   {supplier?.isActive ? "Active" : "Inactive"}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+
         <ReactPaginate
           previousLabel={"Previous"}
           nextLabel={"Next"}
@@ -110,24 +89,14 @@ function TableComponent({ suppliers, isLoding }) {
           onPageChange={handlePageClick}
           containerClassName={"flex justify-center mt-4"}
           pageClassName={"mx-1"}
-          pageLinkClassName={
-            "px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"
-          }
+          pageLinkClassName={"px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"}
           previousClassName={"mx-1"}
-          previousLinkClassName={
-            "px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"
-          }
+          previousLinkClassName={"px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"}
           nextClassName={"mx-1"}
-          nextLinkClassName={
-            "px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"
-          }
+          nextLinkClassName={"px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"}
           breakClassName={"mx-1"}
-          breakLinkClassName={
-            "px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"
-          }
-          activeClassName={
-            "bg-slate-300 text-slate-50 font-bold border-blue-600"
-          }
+          breakLinkClassName={"px-3 py-1 border border-gray-300 rounded text-blue-600 hover:bg-gray-200"}
+          activeClassName={"bg-slate-300 text-slate-50 font-bold border-blue-600"}
         />
       </div>
     </div>

@@ -3,28 +3,48 @@ import ReactApexChart from 'react-apexcharts';
 
 const ApexChart = () => {
   const [chartState] = useState({
-    series: [70, 65,90,20],
+    series: [70, 65, 90, 50, 89],
     options: {
-      labels: ['Supplier', 'Tapper','latex','driver'],
+      labels: ['Supplier', 'Tapper', 'Latex', 'Driver'],
+      chart: {
+        width: '100%',
+      },
+      responsive: [
+        {
+          breakpoint: 640,
+          options: {
+            chart: {
+              width: "100%",
+            },
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+        {
+          breakpoint: 1024,
+          options: {
+            chart: {
+              width: "100%",
+            },
+            legend: {
+              position: 'right',
+            },
+          },
+        },
+      ],
     },
   });
 
   return (
-    <>
-   
-   <ReactApexChart
-          options={chartState.options}
-          series={chartState.series}
-          type="pie"
-          width="100%"
-          className="max-w-[300px] sm:max-w-[500px]"
-        />
-
-
- 
-
-      </>
- 
+    <div className="w-full sm:w-[500px] xl:w-[700px] max-w-full">
+      <ReactApexChart
+        options={chartState.options}
+        series={chartState.series}
+        type="pie"
+        width="100%"
+      />
+    </div>
   );
 };
 
