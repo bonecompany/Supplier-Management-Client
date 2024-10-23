@@ -7,6 +7,7 @@ import {
   FaFlask,
   FaBalanceScale,
 } from "react-icons/fa";
+import { RiBillFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 const BottomNavbar = ({ isMenu, setIsMenu,screen }) => {
@@ -76,6 +77,19 @@ const BottomNavbar = ({ isMenu, setIsMenu,screen }) => {
           <FaTree size={24} />
           <span className="text-xs">Tapers</span>
         </button>
+
+        <button
+          className={`flex flex-col items-center ${isMenu === "Billing" ? "text-yellow-500" : ""}`}
+          onClick={() => {
+            navigate("/admin/billing");
+            setIsMenu("Billing");
+          }}
+        >
+          <RiBillFill size={24} />
+          <span className="text-xs">Billing</span>
+        </button>
+
+
       </div>
     </nav>
   );

@@ -11,7 +11,7 @@ function DriverProfile() {
   return (
     <div className="p-5 md:p-10">
       <div className="flex flex-col md:flex-row justify-between gap-5">
-        <div className="w-full md:w-1/2 h-fit px-5 py-3 bg-gradient-to-r from-[#212e48] to-[#143c82] rounded-sm text-white">
+        <div className="w-full md:w-1/3 h-fit px-5 py-3 bg-gradient-to-r from-[#212e48] to-[#143c82] rounded-sm text-white">
           <p className="text-3xl font-bold">{driver?.name}</p>
           <p className="mt-5 text-xl font-semibold">Contact</p>
           <div className="m-1">
