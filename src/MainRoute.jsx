@@ -16,6 +16,7 @@ import Tapers from "./pages/admin.pages/Tapers";
 import SupplierDetails from "./pages/admin.pages/SupplierDetails";
 import TapperProfile from "./pages/admin.pages/TapperProfile";
 import DriverProfile from "./pages/admin.pages/DriverProfile";
+import Billing from "./pages/admin.pages/Billing";
 
 export const Axios = axios.create({
   baseURL: "https://supplier-management-server.onrender.com/api",
@@ -24,6 +25,7 @@ export const Axios = axios.create({
 // export const Axios = axios.create({
 //   baseURL: "http://localhost:3333/api",
 // });
+
 
 
 const MainRoute = () => {
@@ -40,6 +42,7 @@ const MainRoute = () => {
           <Route path="/admin/suppliers" element={<Suppliers />} />
           <Route path="/admin/drivers" element={<Drivers />} />
           <Route path="/admin/tapers" element={<Tapers />} />
+          <Route path="/admin/billing" element={<Billing />} />
           <Route
             path="/admin/supplier/:supplierId"
             element={

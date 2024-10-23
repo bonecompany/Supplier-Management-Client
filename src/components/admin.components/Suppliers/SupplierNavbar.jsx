@@ -22,7 +22,7 @@ function SupplierNavbar({ setSearchTerm, setSelectedCategory }) {
                 className="w-full p-2 outline-none bg-transparent text-gray-600"
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <CiSearch className="text-2xl fill-gray-600 p-2" />
+              {/* <CiSearch className="text-2xl fill-gray-600 p-2" /> */}
             </div>
             <select
               className="border rounded-md p-2 mt-2 lg:mt-0"

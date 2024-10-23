@@ -7,6 +7,7 @@ import {
   FaSignOutAlt,
   FaBalanceScale,
 } from "react-icons/fa";
+import { RiBillFill } from "react-icons/ri";
 import SidebarItem from "./SidebarItem";
 import AdminNavbar from "./AdminNavbar";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -115,6 +116,17 @@ const AdminSidebar = () => {
                   navigate("/admin/tapers");
                   setIsExpanded(false);
                   setIsMenu("Tapers");
+                }}
+              />
+              <SidebarItem
+                icon={<RiBillFill />}
+                label="Billing"
+                isExpanded={isExpanded}
+                isMenu={isMenu}
+                onClick={() => {
+                  navigate("/admin/billing");
+                  setIsExpanded(false);
+                  setIsMenu("Billing");
                 }}
               />
             </div>
