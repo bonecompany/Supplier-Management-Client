@@ -59,7 +59,8 @@
       console.log(drcData)
       try {
         const response = await Axios.post(`/admin/suppliers/drcupdation`, drcData);
-        setLatexData(response.data.data.latex);
+
+        // setLatexData(response.data.data.latex);
         setDrcData(
           latexData.map(({ _id, owner, date, latex_weight,supplierName,supplierCode }) => ({
             latexId: _id,
