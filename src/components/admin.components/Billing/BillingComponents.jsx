@@ -16,9 +16,10 @@ function BillingComponents() {
     const [drcData, setDrcData] = useState([]);
 
     const handleSearch = async () => {
+
         try {
             const response = await Axios.get(
-                `/admin/suppliers/latexdata?supplierId=${boneId}&start=${startDate}&end=${endDate}`
+                `/admin/suppliers/drcdata?supplierId=${boneId}&start=${startDate}&end=${endDate}`
             );
             setLatexData(response.data.data.latex);
             setDrcData(
@@ -69,12 +70,12 @@ function BillingComponents() {
         }
     };
     return (
-        <div className="p-4 bg-[#F1F5F8] min-h-screen flex flex-col items-center">
+        <div className="p-4 m-2 bg-[#F1F5F8] min-h-screen flex flex-col items-center">
             <div className="bg-white shadow-lg rounded-lg p-4 w-full max-w-screen-lg">
                 <div className="flex flex-col lg:flex-row justify-between mb-4">
                     <div>
                         <h2 className="p-2 text-2xl font-bold text-gray-800 text-center lg:text-left">
-                         Latex Billing
+                            Latex Billing
                         </h2>
                         <div className="p-2 px-5 font-semibold text-lg">
                             Name: {latexData[0]?.supplierName}
@@ -132,7 +133,7 @@ function BillingComponents() {
                                     Dry Quantity
                                 </th>
                                 <th className="border border-gray-300 p-3 text-center">
-                                   Rate
+                                    Rate
                                 </th>
                                 <th className="border border-gray-300 p-3 text-center">Amount</th>
                             </tr>
@@ -182,6 +183,38 @@ function BillingComponents() {
                         Submit
                     </button>
                 </div>
+                {
+                    drcData.length == 0 && (
+
+                        <div className="my-5 p-2 border-t-2 w-full grid justify-center grid-cols-1 sm:grid-cols-2 gap-x-32">
+                        <div className="flex justify-between gap-5 w-full p-2 rounded-sm m-2 shadow-custom-dark">
+                          <span className="font-semibold">TOTAL</span>
+                          <div>34653</div>
+                        </div>
+                        <div className="flex justify-between gap-5 w-full p-2 rounded-sm m-2 shadow-custom-dark">
+                          <span className="font-semibold">PR CHARGE</span>
+                          <div className="flex gap-2 sm:gap-10">
+                          <div>1356</div>
+                          =
+                          <div>77 x 15</div>
+                          </div>
+                        </div>
+                        <div className="flex justify-between gap-5 w-full p-2 rounded-sm m-2 shadow-custom-dark">
+                          <span className="font-semibold">TRANSPORT</span>
+                          <div>34653</div>
+                        </div>
+                        <div className="flex justify-between gap-5 w-full p-2 rounded-sm m-2 shadow-custom-dark">
+                          <span className="font-semibold">OTHERS</span>
+                          <div>34653</div>
+                        </div>
+                      </div>
+                      
+                    )
+                }
+
+
+
+
             </div>
         </div>
     )
