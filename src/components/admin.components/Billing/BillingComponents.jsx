@@ -13,80 +13,64 @@ function BillingComponents() {
     const [name, setName] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [latexData, setLatexData] = useState([]);
+    // const [latexData, setLatexData] = useState([]);
     const [drcData, setDrcData] = useState([]);
+    const [submitData, setSubmitData] = useState({})
+    const [pdfPreview, setPdfPreview] = useState(null);
 
 
     const handleSearch = async () => {
-
-        console.log("search button clicked")
-
-
         try {
             const response = await Axios.get(
                 `/admin/suppliers/drcdata?supplierId=${boneId}&start=${startDate}&end=${endDate}`
             );
-            console.log(response.data.data)
-            setName(response.data.data.name)
-            setLatexData(response.data.data.drcdata);
-            setDrcData(
-                latexData
-                // map(({ _id, owner, date, latex_weight }) => ({
-                //     latexId: _id,
-                //     owner,
-                //     date,
-                //     latex_weight,
-                // }))
-            );
+            setName(response.data.data.name);
+            setDrcData(response.data.data.drcdata);
+            console.log(response.data.data);
+            toast.success("Data fetched successfully");
         } catch (err) {
+            toast.error("Error fetching data");
             console.error("Error fetching latex data:", err);
         }
     };
 
-    const handleFilm = (e, index) => {
-        const updatedValue = e.target.value;
-
-        const updatedDrcData = drcData.map((item, ind) => {
-            if (ind === index) {
-                return {
-                    ...item,
-                    filWeight: updatedValue,
-                    drcPercentage: updatedValue * 5,
-                    dryQuantity: (item.latex_weight * updatedValue * 5) / 100,
-                };
-            }
-            return item;
-        });
-
-        setDrcData(updatedDrcData);
-    };
 
     const handleSubmit = async () => {
+        console.log(drcData);
+        const preparedSubmitData = drcData.map((ele) => ({
+            drcdata: ele._id,
+            owner:ele.owner,
+            date: ele.date,
+            wetWeight: ele.latexId?.latex_weight || 0,
+            drcPercentage: ele.drcPercentage || 0,
+            dryQuantity: ele.dryQuantity || 0,
+            rate: ele.latexId?.daily_latex_rate || 0,
+        }));
+        console.log(preparedSubmitData);
+
         try {
-            const response = await Axios.get(`/admin/suppliers/drcupdation`, drcData);
-            setLatexData(response.data.data.latex);
-            setDrcData(
-                latexData.map(({ _id, owner, date, latex_weight }) => ({
-                    latexId: _id,
-                    owner,
-                    date,
-                    latex_weight,
-                }))
+            const response = await Axios.post(
+                '/admin/suppliers/billing',
+                preparedSubmitData
             );
+            console.log(response);       
+            const { pdf } = response.data; 
+            setPdfPreview(pdf);
+            toast.success("Submission successful");
         } catch (err) {
-            console.error("Error fetching latex data:", err);
+            console.error("Error submitting data:", err);
+            toast.error("Error during submission");
         }
     };
-    console.log(drcData);
 
     const totalAmount = drcData?.reduce((acc, element) => {
         const amount = (element.dryQuantity || 0) * (element.latexId?.daily_latex_rate || 0);
         return acc + amount;
-    }, 0) || 0; 
+    }, 0) || 0;
     const totalWetWeight = drcData?.reduce((acc, element) => {
-        const amount = element.dryQuantity || 0 ;
+        const amount = element.dryQuantity || 0;
         return acc + amount;
-    }, 0) || 0; 
+    }, 0) || 0;
 
     return (
         <div className="p-4 m-2 bg-[#F1F5F8] min-h-screen flex flex-col items-center">
@@ -160,7 +144,7 @@ function BillingComponents() {
                         <tbody>
                             {drcData?.map((element, index) => {
                                 const amount = ((element.dryQuantity || 0) * (element.latexId?.daily_latex_rate || 0)).toFixed(2);
-                               
+
                                 return (
                                     <tr className="bg-white hover:bg-gray-50 text-center" key={index}>
                                         <td className="border border-gray-300 p-3">{index + 1}</td>
@@ -205,7 +189,7 @@ function BillingComponents() {
                             </div>
                             <div className="flex justify-between gap-5 w-full p-2 rounded-sm m-2 shadow-custom-dark">
                                 <span className="font-semibold">PR Charge</span>
-                                <div className="flex gap-2 sm:gap-10">
+                                <div className="flex gap-2 sm:gap-10" >
                                     <div>{(totalWetWeight) * 15}</div>
                                     =
                                     <div>{totalWetWeight} x 15</div>
@@ -215,15 +199,21 @@ function BillingComponents() {
                                 <span className="font-semibold">Net Amount</span>
                                 <div>{((totalAmount) - (totalWetWeight) * 15).toFixed(2)}</div>
                             </div>
-                           
+
                         </div>
 
                     )
                 }
-
-
-
-
+            </div>
+            <div>
+            {pdfPreview && (
+        <embed
+          src={`data:application/pdf;base64,${pdfPreview}`}
+          width="100%"
+          height="600px"
+          type="application/pdf"
+        />
+      )}
             </div>
         </div>
     )
