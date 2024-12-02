@@ -39,7 +39,7 @@ console.log(data)
   return (
     <div className="p-4 rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-2">Latex Purchase Table</h2>
-      <table className="min-w-full  ">
+      <table className="w-full">
         <thead>
           <tr>
             <th className=" border border-black 0">SL No</th>

@@ -59,8 +59,9 @@ const [errorRes, setErrorRes] = useState([]);
       }`}
   >
     <div
-      className={`bg-gray-200 w-11/12 max-w-lg h-[90vh] max-h-[90vh] overflow-y-auto rounded-xl shadow p-8 transition-transform duration-500 ${open ? "scale-110 opacity-100" : "scale-125 opacity-0"
+ className={`bg-gray-200 w-[60%] max-h-[80vh] overflow-y-auto rounded-xl shadow p-8  duration-500 ${open ? "scale-110 opacity-100" : "scale-125 opacity-0"
         } scrollbar-hide`}
+        
     >
         <div onClick={onClose} className="flex justify-end">
           <RxCross2

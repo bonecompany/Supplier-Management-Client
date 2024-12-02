@@ -36,9 +36,7 @@
 
 
     const handleFilm = (e, index) => {
-
       const updatedValue = e.target.value;
-
       const updatedDrcData = drcData.map((item, ind) => {
         if (ind === index) {
           return {
@@ -50,16 +48,14 @@
         }
         return item;
       });
-
       setDrcData(updatedDrcData)
-
     };
 
     const handleSubmit = async () => {
       console.log(drcData)
       try {
         const response = await Axios.post(`/admin/suppliers/drcupdation`, drcData);
-
+        console.log(response);
         setDrcData(
           latexData.map(({ _id, owner, date, latex_weight,supplierName,supplierCode }) => ({
             latexId: _id,
@@ -74,7 +70,6 @@
         console.error("Error fetching latex data:", err);
       }
     };
-
 
     return (
       <div className="p-4 bg-[#F1F5F8] min-h-screen flex flex-col items-center">

@@ -38,7 +38,7 @@ function SupplierNavbar({ setSearchTerm, setSelectedCategory }) {
           </div>
           <button
             onClick={() => setOpen(true)}
-            className="p-2 bg-cyan-800 text-white font-medium rounded-md flex items-center gap-1"
+            className="p-2 bg-cyan-800 text-white font-medium rounded-md flex items-center "
           >
             <IoMdAdd className="w-6 h-6" />
             <span>Add Supplier</span>

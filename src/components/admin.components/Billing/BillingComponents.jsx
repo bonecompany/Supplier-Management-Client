@@ -20,17 +20,18 @@ function BillingComponents() {
 
 
     const handleSearch = async () => {
+        console.log(boneId)
         try {
             const response = await Axios.get(
                 `/admin/suppliers/drcdata?supplierId=${boneId}&start=${startDate}&end=${endDate}`
             );
             setName(response.data.data.name);
             setDrcData(response.data.data.drcdata);
-            console.log(response.data.data);
+            console.log(response.data);
             toast.success("Data fetched successfully");
         } catch (err) {
-            toast.error("Error fetching data");
-            console.error("Error fetching latex data:", err);
+
+            toast.error(err.response.data.errors[0]);
         }
     };
 
@@ -44,8 +45,9 @@ function BillingComponents() {
             wetWeight: ele.latexId?.latex_weight || 0,
             drcPercentage: ele.drcPercentage || 0,
             dryQuantity: ele.dryQuantity || 0,
-            rate: ele.latexId?.daily_latex_rate || 0,
+            rate: ele.latexId?.daily_latex_rate || 0 ,
         }));
+
         console.log(preparedSubmitData);
 
         try {
@@ -53,8 +55,9 @@ function BillingComponents() {
                 '/admin/suppliers/billing',
                 preparedSubmitData
             );
+            console.log("response");       
             console.log(response);       
-            const { pdf } = response.data; 
+            const { pdf } = response.data;  
             setPdfPreview(pdf);
             toast.success("Submission successful");
         } catch (err) {
