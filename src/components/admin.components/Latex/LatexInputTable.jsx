@@ -114,6 +114,7 @@ const LatexInputTable = () => {
       alert("Please fill in all required fields.");
       return;
     }
+    console.log("0000000033222")
     try {
       suppliers.unshift(selectedDate)
       console.log(suppliers)

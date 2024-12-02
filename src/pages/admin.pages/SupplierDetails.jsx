@@ -2,6 +2,7 @@ import React from "react";
 import SupplierProfile from "../../components/admin.components/Suppliers/SupplierProfile";
 import LatexChart from "../../components/admin.components/Suppliers/LatexChart";
 import LatexTable from "../../components/admin.components/Suppliers/LatexTable";
+import BillingDataTable from "../../components/admin.components/Suppliers/BillingDataTable";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
@@ -28,6 +29,9 @@ const SupplierDetails = () => {
       </div>
       <div className="col-span-12">
         <LatexTable supplier={"from supplier"} />
+      </div>
+      <div className="col-span-12">
+        <BillingDataTable supplier={"from supplier"} />
       </div>
     </div>
   );

@@ -36,6 +36,7 @@ const AdminLogin = () => {
 
   return (
     <div className=" h-screen flex items-center">
+      <p className="bg-red-600 p-4 "> </p>
       <div className="h-[90%] w-[95%] mx-auto rounded-3xl shadow-lg lg:flex flex-col md:flex-row md:justify-between lg:bg-rubberTreeDesktop bg-rubberTreeMobile bg-no-repeat lg:bg-contain bg-cover bg-center lg:bg-left">
         <div className="flex-1"></div>
         <div className="flex-1 lg:bg-[#CCD1CD] rounded-r-3xl flex justify-center items-center">

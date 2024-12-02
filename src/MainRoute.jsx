@@ -33,9 +33,8 @@ const MainRoute = () => {
     <>
       <ToastContainer />
       <Routes>
-        <Route path="/login" element={<AdminLogin />} />
-
-        <Route path="/" element={<AdminSidebar />}>
+          <Route path="/login" element={<AdminLogin />} />
+          <Route path="/" element={<AdminSidebar />}>
           <Route index element={<AdminHome />} />
           <Route path="/admin/latex-parchase" element={<LatexParchase />} />
           <Route path="/admin/drc-updation" element={<DrcUpdation />} />

@@ -30,6 +30,8 @@ const Suppliers = () => {
     getSupplier();
   }, []);
 
+  
+
   useEffect(() => {
     const filtered = suppliers.filter(
       (supplier) =>
